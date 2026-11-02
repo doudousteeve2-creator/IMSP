@@ -1,11 +1,12 @@
 {
   "id": "/",
-  "name": "IMSP – Réussir, Apprendre, Progresser",
+  "name": "IMSP – Espace Prépa 1",
   "short_name": "IMSP",
-  "description": "Espace de ressources et de travail pour les étudiants de l'IMSP.",
+  "description": "Espace de travail IMSP : emploi du temps, fiches de cours et auto-tests.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#080B25",
   "theme_color": "#080B25",
   "icons": [

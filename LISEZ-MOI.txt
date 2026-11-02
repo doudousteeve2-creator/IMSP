@@ -1,0 +1,18 @@
+IMSP – PACK PWA POUR GITHUB / VERCEL
+
+1. Décompresse ce ZIP.
+2. Dans ton dépôt GitHub IMSP, ajoute/remplace index.html à la racine.
+3. Ajoute aussi manifest.webmanifest, sw.js et le dossier icons (avec les deux PNG).
+4. Ne supprime pas tes autres pages : emploi-du-temps.html, electrocinetique.html,
+   mecanique.html et algebre.html doivent rester à la racine si les liens actuels les utilisent.
+5. Valide les changements (Commit changes). Vercel redéploiera automatiquement.
+
+Après déploiement :
+- Ouvre https://imsp-nine.vercel.app dans Chrome sur Android.
+- Actualise la page, puis ouvre le menu ⋮.
+- Choisis « Installer l'application » ou « Ajouter à l'écran d'accueil ».
+- Si une ancienne icône est déjà installée, supprime d'abord l'ancien raccourci puis installe à nouveau.
+
+Important : ce pack rend la page d'accueil installable et met en cache certains fichiers.
+Pour que les quatre fiches fonctionnent aussi hors connexion, il faut les ajouter à la liste
+CORE_FILES dans sw.js. Les autres pages doivent être conservées dans le dépôt.
