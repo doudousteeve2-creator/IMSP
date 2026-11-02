@@ -1,0 +1,32 @@
+À AJOUTER DANS LE <head> DE TON index.html :
+
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#080B25">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+À AJOUTER JUSTE AVANT </body> DANS index.html :
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js")
+        .catch((error) => console.error("Erreur Service Worker :", error));
+    });
+  }
+</script>
+
+STRUCTURE À RESPECTER À LA RACINE DU DÉPÔT GITHUB :
+
+index.html                 (ton fichier actuel, à conserver et modifier avec les extraits ci-dessus)
+manifest.webmanifest
+sw.js
+icons/
+  icon-192.png
+  icon-512.png
+
+IMPORTANT :
+- Téléverse les fichiers manifest.webmanifest, sw.js et le dossier icons à la racine du dépôt, au même niveau que index.html.
+- Ne remplace pas ton index.html par un nouveau fichier : ajoute seulement les deux extraits aux emplacements indiqués.
+- Le site doit être publié en HTTPS (Vercel le fournit).
+- Après le déploiement, ouvre le site dans Chrome Android puis utilise « Installer l'application » ou « Ajouter à l'écran d'accueil » si l'option est proposée.
+- Le cache hors connexion fourni ici est minimal : il met en cache la page d'accueil et les ressources visitées. Il ne garantit pas que toutes les pages fonctionneront hors connexion dès la première visite.
