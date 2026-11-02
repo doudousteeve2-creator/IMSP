@@ -1,0 +1,329 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Fiches de structures algébriques</title>
+</head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+/* Layout: en-tête, barre de chapitres collante, puis par chapitre : fiche, exercices corrigés, auto-test. */
+:root{
+  --bg:#F6F5F9; --panel:#FFFFFF; --ink:#1B1A26; --muted:#615F73; --line:#DDDAE8;
+  --accent:#4A40B0; --accent-soft:#ECEAFA; --ok:#0F7B4F; --ok-soft:#DFF3E9; --redo:#B4440E; --redo-soft:#FBE9DD;
+  --serif:"IBM Plex Serif",Georgia,serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#13121B; --panel:#1C1B28; --ink:#E6E4F0; --muted:#9C9AB0; --line:#32304A;
+  --accent:#A9A1F2; --accent-soft:#25223D; --ok:#59C896; --ok-soft:#14302A; --redo:#F29B6B; --redo-soft:#3A2418; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13121B; --panel:#1C1B28; --ink:#E6E4F0; --muted:#9C9AB0; --line:#32304A;
+  --accent:#A9A1F2; --accent-soft:#25223D; --ok:#59C896; --ok-soft:#14302A; --redo:#F29B6B; --redo-soft:#3A2418; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:0 56px}
+.wrap{max-width:900px;margin-inline:auto}
+header{padding-block:28px 8px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,5vw,36px);line-height:1.15;margin:6px 0 10px;text-wrap:balance}
+.lead{max-width:62ch;color:var(--muted);margin:0}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-block:20px 14px}
+.method div{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:10px 12px;font-size:13.5px}
+.method b{display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px}
+nav .row{max-width:900px;margin-inline:auto;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+nav a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px;white-space:nowrap}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);outline:none}
+nav a span{font-family:var(--mono);color:var(--accent);margin-right:5px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-block:16px}
+.prog{flex:1 1 220px;min-width:0}
+.prog .pt{font-size:13px;color:var(--muted);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.meter .a{background:var(--ok)} .meter .b{background:var(--redo)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 12px;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,.rev:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+section.ch{padding-top:34px;scroll-margin-top:56px}
+.chh{display:flex;gap:14px;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:6px}
+.num{font-family:var(--mono);font-size:13px;color:var(--accent);flex:none}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,4vw,26px);margin:0;line-height:1.2;text-wrap:balance}
+.src{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 14px}
+h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px 8px;min-width:0}
+.f.meth{border-style:dashed;border-color:var(--accent)}
+.fh{font-weight:600;font-size:14px;margin-bottom:2px}
+.fm{min-width:0;overflow-x:auto;overflow-y:hidden;font-size:14px;color:var(--ink)}
+.fm p{margin:.3em 0;color:var(--muted);font-size:13.5px}
+.fm ol,.fm ul{margin:.3em 0;padding-left:1.2em;color:var(--muted);font-size:13.5px}
+mjx-container[display="true"]{margin:.35em 0 !important;text-align:left !important}
+.testmode .fiche{display:none}
+.t{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;padding:12px 14px;margin-bottom:10px;min-width:0}
+.t[data-s="ok"]{border-left-color:var(--ok)} .t[data-s="redo"]{border-left-color:var(--redo)}
+.only-redo .t:not([data-s="redo"]){display:none}
+.qh{display:flex;gap:10px;align-items:flex-start}
+.qn{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px;flex:none;min-width:2.6em}
+.q{flex:1;min-width:0}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+.t[data-s="ok"] .tag{background:var(--ok-soft);color:var(--ok)} .t[data-s="redo"] .tag{background:var(--redo-soft);color:var(--redo)}
+.t:not([data-s]) .tag{display:none}
+.rev{margin-top:8px;border:0;background:none;color:var(--accent);padding:2px 0;font-size:13.5px;font-weight:500;text-decoration:underline;text-underline-offset:3px}
+.q,.qh,.t{min-width:0;overflow-wrap:anywhere}
+.ans{margin-top:10px;padding:10px 12px;background:var(--accent-soft);border-radius:6px;min-width:0;overflow-x:auto}
+.ans p{margin:.4em 0}
+.ans strong{font-weight:600}
+.mark{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mark .btn[data-v="ok"]:hover{border-color:var(--ok);color:var(--ok)} .mark .btn[data-v="redo"]:hover{border-color:var(--redo);color:var(--redo)}
+.note{font-size:12.5px;color:var(--muted);margin-top:36px;border-top:1px solid var(--line);padding-top:14px;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.t{transition:border-color .2s}}
+</style>
+
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['\\[','\\]']],macros:{
+R:'\\mathbb{R}',N:'\\mathbb{N}',Z:'\\mathbb{Z}',Q:'\\mathbb{Q}',C:'\\mathbb{C}',K:'\\mathbb{K}',U:'\\mathbb{U}',
+pgcd:'\\operatorname{pgcd}',ppcm:'\\operatorname{ppcm}',deg:'\\operatorname{deg}',Card:'\\operatorname{Card}',id:'\\operatorname{id}'}},
+svg:{fontCache:'global'},startup:{typeset:false}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Prépa 1 · Algèbre · polycopié « Structure algébrique »</div>
+  <h1>Fiches, exercices corrigés et auto-test</h1>
+  <p class="lead">Les trois chapitres du cours : structures usuelles, arithmétique dans Z, polynômes. Chaque chapitre a une fiche de formules et de méthodes. Les exercices du polycopié ont une correction détaillée, rédigée pas à pas. Un auto-test de questions de cours complète le tout.</p>
+  <div class="method">
+    <div><b>Cours</b>Lis la fiche du chapitre.</div>
+    <div><b>Cache</b>Active « Mode test » : les fiches disparaissent.</div>
+    <div><b>Cherche</b>Fais l'exercice sur papier, puis ouvre la correction.</div>
+    <div><b>Corrige</b>Marque « À revoir » et refais ces questions demain.</div>
+  </div>
+</header>
+</div>
+<nav><div class="row" id="nav"></div></nav>
+<div class="wrap">
+  <div class="bar">
+    <div class="prog"><div class="pt" id="ptxt"></div><div class="meter"><i class="a" id="pa"></i><i class="b" id="pb"></i></div></div>
+    <div class="ctl">
+      <button class="btn" id="bTest" aria-pressed="false">Mode test : masquer les fiches</button>
+      <button class="btn" id="bRedo" aria-pressed="false">Seulement « à revoir »</button>
+      <button class="btn" id="bReset">Tout remettre à zéro</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <p class="note">Contenu tiré du polycopié « Structure algébrique » (2016). Le polycopié ne contient des exercices que dans le chapitre 1 : ce sont les 8 exercices corrigés ici. Les chapitres 2 et 3 n'ont pas d'exercices, leur auto-test est donc composé de démonstrations et de calculs types. Deux points du polycopié sont précisés : la formule de Leibniz s'écrit $(PQ)^{(n)}=\sum_{k=0}^n\binom nkP^{(n-k)}Q^{(k)}$, et l'exercice 1.5 (3) suppose la loi associative, hypothèse nécessaire à la démonstration.</p>
+</div>
+
+<script>
+const R=String.raw;
+const CH=[
+{id:'a1',n:'1',t:'Structures algébriques usuelles',src:'Polycopié · chap. 1 · lois internes, groupes, permutations, anneaux',
+fiche:[
+{h:'Loi de composition interne',m:R`<p>Soit $E\neq\emptyset$. Une loi de composition interne (LCI) est une application $*:E\times E\to E$, $(x,y)\mapsto x*y$. Il faut que le résultat reste dans $E$.</p><p>Exemples : $+$ et $\times$ sur $\N$ ; $\cup$ et $\cap$ sur $\mathcal P(E)$ ; $\circ$ sur les fonctions affines. Contre-exemple : $-$ sur $\N$.</p>`},
+{h:'Qualités d\'une loi',m:R`\[\text{associative : }x*(y*z)=(x*y)*z\qquad\text{commutative : }x*y=y*x\]\[\text{neutre : }\exists e\in E,\ \forall x,\ x*e=e*x=x\]\[\text{symétrique de }x\ (\text{ou inverse}) :\ \exists x'\in E,\ x*x'=x'*x=e\]<p>Le neutre, s'il existe, est unique. Si $*$ est associative, le symétrique d'un élément, s'il existe, est unique.</p>`},
+{h:'Distributivité, partie stable',m:R`\[\bot\ \text{distributive sur}\ \top :\ a\bot(b\top c)=(a\bot b)\top(a\bot c)\ \text{ et }\ (b\top c)\bot a=(b\bot a)\top(c\bot a)\]<p>Une partie $A\subset E$ est stable pour $*$ si $\forall a,b\in A,\ a*b\in A$.</p>`},
+{h:'Groupe',m:R`<p>$(G,*)$ est un groupe si :</p><ol><li>$*$ a un élément neutre ;</li><li>$*$ est associative ;</li><li>tout élément de $G$ a un symétrique.</li></ol><p>Si $*$ est de plus commutative, le groupe est commutatif (abélien). Exemples : $(\Z,+)$, $(\R^*,\times)$, $(\U,\times)$, $(S_n,\circ)$. Contre-exemples : $(\N,+)$ (pas de symétrique), $(\Z,\times)$.</p>`},
+{h:'Méthode : montrer que $(G,*)$ est un groupe',m:R`<ol><li>$*$ est bien une LCI : le résultat reste dans $G$.</li><li>Associativité (souvent héritée d'un ensemble plus grand).</li><li>Neutre : le donner, vérifier qu'il est dans $G$.</li><li>Symétrique de chaque élément : le donner, vérifier qu'il est dans $G$.</li></ol><p>Raccourci : montrer que c'est un sous-groupe d'un groupe connu.</p>`},
+{h:'Calcul dans un groupe',m:R`\[a*x=b*x\Rightarrow a=b,\qquad x*a=x*b\Rightarrow a=b\]\[(a*b)^{-1}=b'*a'\quad(a'\text{ et }b'\text{ symétriques de }a\text{ et }b)\]`},
+{h:'Sous-groupe',m:R`<p>$H\subset G$ est un sous-groupe si $(H,*)$ est un groupe. Équivalent : </p><ol><li>$\forall x,y\in H,\ x*y\in H$ ;</li><li>$e\in H$ ;</li><li>$\forall x\in H,\ x'\in H$.</li></ol>\[\text{Caractérisation : }H\neq\emptyset\ \text{ et }\ \forall a,b\in H,\ a*b^{-1}\in H\]<p>En notation additive : $a-b\in H$.</p>`},
+{h:'Ordre d\'un élément',m:R`<p>L'ordre de $a\in G$ est le plus petit entier $k\ge1$ tel que $a^k=e$ (sinon l'ordre est infini). Notation $O(a)$.</p><p>Exemples dans $(\C^*,\times)$ : $i$ est d'ordre 4, $-1$ d'ordre 2, $j=e^{2i\pi/3}$ d'ordre 3. Dans $(\Z,+)$, $1$ est d'ordre infini.</p>`},
+{h:'Groupe symétrique $S_n$',m:R`<p>Une permutation de $E$ est une bijection de $E$ dans $E$. Avec la composition, elles forment le groupe symétrique $S(E)$, noté $S_n$ si $E=\{1,\dots,n\}$.</p>\[\Card(S_n)=n!,\qquad s=\begin{pmatrix}1&2&\cdots&n\\ s(1)&s(2)&\cdots&s(n)\end{pmatrix}\]<p>Point fixe : $i$ tel que $s(i)=i$. $S_n$ n'est pas commutatif dès que $n\ge3$.</p>`},
+{h:'Cycles et transpositions',m:R`<p>Un $p$-cycle $(x_1\,x_2\,\dots\,x_p)$ envoie $x_1\mapsto x_2\mapsto\cdots\mapsto x_p\mapsto x_1$ et fixe tous les autres éléments. $\{x_1,\dots,x_p\}$ est son support, $p$ sa longueur. Un $p$-cycle est d'ordre $p$.</p><p>Toute permutation s'écrit de façon unique (à l'ordre près) comme produit de cycles à supports disjoints, qui commutent. Son ordre est le ppcm des longueurs de ces cycles.</p>\[(a_1a_2\dots a_p)=(a_1a_2)(a_2a_3)\cdots(a_{p-1}a_p)\]<p>Une transposition $\tau_{ij}$ échange $i$ et $j$. Tout $p$-cycle est un produit de $p-1$ transpositions, donc toute permutation est un produit de transpositions.</p>`},
+{h:'Inversions et signature',m:R`\[I(\sigma)=\Card\{(i,j):i\lt j,\ \sigma(i)\gt\sigma(j)\},\qquad \Sigma(\sigma)=(-1)^{I(\sigma)}\]<p>Si $\sigma$ est un produit de $p$ transpositions : $\Sigma(\sigma)=(-1)^p$. Une transposition a pour signature $-1$ ; un $p$-cycle a pour signature $(-1)^{p-1}$.</p>`},
+{h:'Méthode : décomposer une permutation',m:R`<ol><li>Partir de $1$ : suivre $1\mapsto\sigma(1)\mapsto\sigma^2(1)\cdots$ jusqu'au retour à $1$. Cela donne un cycle.</li><li>Recommencer avec le plus petit élément non encore utilisé. Ignorer les points fixes.</li><li>Chaque $p$-cycle devient $p-1$ transpositions.</li><li>Vérifier en recalculant l'image de quelques éléments (composition de droite à gauche).</li></ol>`},
+{h:'Anneau',m:R`<p>$(A,+,\times)$ est un anneau si :</p><ul><li>$(A,+)$ est un groupe commutatif ;</li><li>$\times$ est associative et distributive sur $+$ ;</li><li>$\times$ a un élément neutre.</li></ul><p>Les éléments inversibles pour $\times$ forment un groupe. Exemple : $(\Z,+,\times)$. Contre-exemple : $(\N,+,\times)$.</p>`},
+{h:'Calcul dans un anneau',m:R`<p>Notations : $a-b=a+(-b)$, $na=a+\dots+a$ ($n$ fois). Si $ab=ba$ :</p>\[a^n-b^n=(a-b)\sum_{k=0}^{n-1}a^kb^{n-1-k},\qquad (a+b)^n=\sum_{k=0}^n\binom nka^kb^{n-k}\]<p>Sans commutativité, ces formules sont fausses en général.</p>`}
+],
+ex:[
+{lab:'1.5 (1)',q:R`Soit $E=\{a+b\sqrt3:\ a,b\in\Z\}$ et la loi $*$ définie par $(a+b\sqrt3)*(c+d\sqrt3)=(a+b\sqrt3)\times(c+d\sqrt3)$. (i) Démontrer que $*$ est une loi de composition interne sur $E$. (ii) Démontrer que $*$ admet un élément neutre dans $E$. (iii) Déterminer l'ensemble $E^*$ des éléments de $E$ qui ont un symétrique dans $E$.`,a:R`<p><strong>Idée.</strong> $*$ est la multiplication de $\R$ restreinte à $E$. Il faut vérifier que le produit de deux éléments de $E$ reste dans $E$.</p>
+<p><strong>(i) LCI.</strong> Soient $x=a+b\sqrt3$ et $y=c+d\sqrt3$ dans $E$ ($a,b,c,d\in\Z$). On développe :</p>\[x*y=ac+ad\sqrt3+bc\sqrt3+3bd=(ac+3bd)+(ad+bc)\sqrt3.\]<p>Comme $\Z$ est stable par somme et produit, $A=ac+3bd\in\Z$ et $B=ad+bc\in\Z$. Donc $x*y=A+B\sqrt3\in E$ : $*$ est une LCI sur $E$.</p>
+<p><strong>(ii) Neutre.</strong> Le neutre de $\times$ dans $\R$ est $1$. Or $1=1+0\cdot\sqrt3\in E$. Pour tout $x\in E$, $1*x=x*1=x$. Donc $1$ est neutre pour $*$ dans $E$ (il est unique).</p>
+<p><strong>(iii) Éléments symétrisables.</strong> Trois outils préparatoires.</p>
+<p>a) <em>Unicité de l'écriture.</em> Si $a+b\sqrt3=a'+b'\sqrt3$ avec des entiers, alors $(b-b')\sqrt3=a'-a$. Si $b\neq b'$ alors $\sqrt3=\frac{a'-a}{b-b'}\in\Q$, ce qui est faux. Donc $b=b'$ puis $a=a'$.</p>
+<p>b) <em>Conjugué et norme.</em> Pour $x=a+b\sqrt3$, on pose $\bar x=a-b\sqrt3$ (bien défini grâce à a)) et $N(x)=x\bar x=a^2-3b^2\in\Z$. Le conjugué est multiplicatif : $(a-b\sqrt3)(c-d\sqrt3)=(ac+3bd)-(ad+bc)\sqrt3=\overline{x*y}$. Donc $N(x*y)=N(x)N(y)$.</p>
+<p>c) <em>Analyse.</em> Si $x$ a un symétrique $x'\in E$, alors $x*x'=1$, donc $N(x)N(x')=N(1)=1$. Ce sont deux entiers de produit $1$ : $N(x)=\pm1$.</p>
+<p><em>Synthèse.</em> Réciproquement, si $a^2-3b^2=\varepsilon\in\{1,-1\}$, alors $x*\big(\varepsilon(a-b\sqrt3)\big)=\varepsilon(a^2-3b^2)=\varepsilon^2=1$, et $\varepsilon(a-b\sqrt3)\in E$. Donc $x$ est symétrisable, d'inverse $\varepsilon\bar x$.</p>
+<p><strong>Conclusion.</strong> $E^*=\{a+b\sqrt3:\ a,b\in\Z,\ a^2-3b^2=\pm1\}$.</p>
+<p><strong>Remarque.</strong> Le cas $-1$ est impossible : $a^2\equiv-1\equiv2\pmod 3$ n'a pas de solution car un carré est congru à $0$ ou $1$ modulo $3$. Donc $E^*=\{a+b\sqrt3:\ a^2-3b^2=1\}$. Exemples : $2+\sqrt3\in E^*$ (car $4-3=1$) d'inverse $2-\sqrt3$ ; $1+\sqrt3\notin E^*$ (car $1-3=-2$). $E^*$ est infini : toutes les puissances de $2+\sqrt3$ y sont.</p>`},
+{lab:'1.5 (2)',q:R`On définit sur $]-1,1[$ la loi $*$ par $a*b=\dfrac{a+b}{1+ab}$. Démontrer que $*$ est une LCI sur $]-1,1[$ (on pourra remarquer que $a+b-ab-1=-(1-a)(1-b)$). Étudier les qualités de cette loi.`,a:R`<p><strong>Plan.</strong> Pour la LCI il faut (a) que $a*b$ soit bien défini, (b) qu'il soit dans $]-1,1[$. Ensuite on étudie associativité, commutativité, neutre, symétriques.</p>
+<p><strong>(a) Bien défini.</strong> Si $a,b\in]-1,1[$ alors $|ab|\lt1$, donc $1+ab\gt0$ : la division est possible.</p>
+<p><strong>(b) $a*b\lt1$.</strong> Avec l'indication : $(a+b)-(1+ab)=-(1-a)(1-b)$. Comme $1-a\gt0$ et $1-b\gt0$, ce produit est strictement négatif, donc $a+b\lt1+ab$. En divisant par $1+ab\gt0$ : $a*b\lt1$.</p>
+<p><strong>$a*b\gt-1$.</strong> De même $(a+b)+(1+ab)=(1+a)(1+b)\gt0$, donc $a+b\gt-(1+ab)$, et en divisant par $1+ab\gt0$ : $a*b\gt-1$.</p>
+<p>Donc $a*b\in]-1,1[$ : $*$ est une LCI.</p>
+<p><strong>Commutativité.</strong> $a*b=\dfrac{a+b}{1+ab}=\dfrac{b+a}{1+ba}=b*a$.</p>
+<p><strong>Associativité.</strong> Soient $a,b,c\in]-1,1[$.</p>\[(a*b)*c=\frac{\frac{a+b}{1+ab}+c}{1+\frac{(a+b)c}{1+ab}}=\frac{a+b+c(1+ab)}{1+ab+c(a+b)}=\frac{a+b+c+abc}{1+ab+ac+bc}\]\[a*(b*c)=\frac{a+\frac{b+c}{1+bc}}{1+\frac{a(b+c)}{1+bc}}=\frac{a(1+bc)+b+c}{1+bc+a(b+c)}=\frac{a+b+c+abc}{1+ab+ac+bc}\]<p>Les deux expressions sont égales : $*$ est associative.</p>
+<p><strong>Neutre.</strong> $0\in]-1,1[$ et $a*0=\dfrac{a}{1}=a=0*a$. Donc $0$ est neutre.</p>
+<p><strong>Symétrique.</strong> $a*a'=0\iff a+a'=0\iff a'=-a$, et $-a\in]-1,1[$. Donc tout élément a pour symétrique son opposé.</p>
+<p><strong>Conclusion.</strong> $(]-1,1[,*)$ est un groupe commutatif. Remarque : avec $a=\tanh u$ on retrouve la formule d'addition $\tanh(u+v)=\frac{\tanh u+\tanh v}{1+\tanh u\tanh v}$, ce groupe est donc « $(\R,+)$ en disguise ».</p>`},
+{lab:'1.5 (3)',q:R`Soit $E\neq\emptyset$ muni d'une LCI $*$ associative admettant un neutre $e$. Un élément $a$ est régulier si pour tous $x,y\in E$ : $a*x=a*y\Rightarrow x=y$ et $x*a=y*a\Rightarrow x=y$. Démontrer que tout élément symétrisable est régulier. La réciproque est-elle vraie ?`,a:R`<p><strong>Remarque sur l'énoncé.</strong> Le polycopié ne dit pas que $*$ est associative, mais la démonstration l'utilise. Sans associativité l'énoncé peut être faux, on l'ajoute donc comme hypothèse.</p>
+<p><strong>Démonstration.</strong> Soit $a$ symétrisable, de symétrique $a'$ : $a*a'=a'*a=e$.</p>
+<p><em>Régularité à gauche.</em> Supposons $a*x=a*y$. On compose à gauche par $a'$ :</p>\[a'*(a*x)=a'*(a*y)\ \Longrightarrow\ (a'*a)*x=(a'*a)*y\ \Longrightarrow\ e*x=e*y\ \Longrightarrow\ x=y.\]<p>(La deuxième implication utilise l'associativité.)</p>
+<p><em>Régularité à droite.</em> Supposons $x*a=y*a$. On compose à droite par $a'$ :</p>\[(x*a)*a'=(y*a)*a'\ \Longrightarrow\ x*(a*a')=y*(a*a')\ \Longrightarrow\ x*e=y*e\ \Longrightarrow\ x=y.\]<p>Donc $a$ est régulier.</p>
+<p><strong>Réciproque : fausse.</strong> Dans $(\Z,\times)$, l'élément $2$ est régulier : $2x=2y\Rightarrow x=y$ (on simplifie par $2\neq0$). Mais $2$ n'a pas de symétrique dans $\Z$, car $\frac12\notin\Z$. De même, dans $(\N,+)$ tout élément est régulier, alors que seul $0$ est symétrisable.</p>`},
+{lab:'1.6',q:R`Soit $E\neq\emptyset$ muni d'une LCI $*$ associative admettant un neutre $e$. On désigne par $A$ l'ensemble des éléments inversibles de $E$. Démontrer que $A$ est une partie non vide de $E$ stable pour la loi $*$.`,a:R`<p><strong>Non vide.</strong> $e*e=e$, donc $e$ est inversible (son symétrique est lui-même). Donc $e\in A$ et $A\neq\emptyset$.</p>
+<p><strong>Stable.</strong> Soient $a,b\in A$, de symétriques $a'$ et $b'$. On montre que $b'*a'$ est un symétrique de $a*b$, en utilisant l'associativité :</p>\[(a*b)*(b'*a')=a*\big((b*b')*a'\big)=a*(e*a')=a*a'=e,\]\[(b'*a')*(a*b)=b'*\big((a'*a)*b\big)=b'*(e*b)=b'*b=e.\]<p>Donc $a*b$ est inversible : $a*b\in A$. L'ensemble $A$ est stable par $*$.</p>
+<p><strong>Complément.</strong> Le symétrique de $a\in A$ est lui-même inversible (d'inverse $a$), donc $(A,*)$ est un groupe. C'est ce qu'exprime la propriété 1.30 pour un anneau.</p>`},
+{lab:'1.8',q:R`(1) Soit $n\ge2$. On pose $\U_n=\{z\in\C:\ z^n=1\}$. Démontrer que $(\U_n,\times)$ est un groupe. (2) On pose $\U=\{z\in\C:\ |z|=1\}$. Démontrer que $(\U,\times)$ est un groupe. (3) Démontrer que $\U_n\subset\U$.`,a:R`<p><strong>(1) $(\U_n,\times)$ est un groupe.</strong></p>
+<p>• <em>LCI.</em> Si $z,w\in\U_n$ alors $(zw)^n=z^nw^n=1\cdot1=1$, donc $zw\in\U_n$.</p>
+<p>• <em>Associativité.</em> Elle est héritée de la multiplication de $\C$.</p>
+<p>• <em>Neutre.</em> $1^n=1$ donc $1\in\U_n$, et $1$ est neutre pour $\times$.</p>
+<p>• <em>Symétrique.</em> Si $z\in\U_n$, alors $z\neq0$ (car $z^n=1$). Son inverse $\frac1z$ vérifie $\left(\frac1z\right)^n=\frac1{z^n}=1$, donc $\frac1z\in\U_n$, et $z\cdot\frac1z=1$.</p>
+<p>Donc $(\U_n,\times)$ est un groupe, qui est commutatif. (Il a $n$ éléments : $e^{2ik\pi/n}$, $k=0,\dots,n-1$.)</p>
+<p><strong>(2) $(\U,\times)$ est un groupe.</strong></p>
+<p>• <em>LCI.</em> $|zw|=|z||w|=1\cdot1=1$.</p>
+<p>• <em>Associativité</em> héritée de $\C$. <em>Neutre :</em> $|1|=1$, donc $1\in\U$.</p>
+<p>• <em>Symétrique.</em> Pour $z\in\U$, $z\neq0$ et $\left|\frac1z\right|=\frac1{|z|}=1$, donc $\frac1z\in\U$.</p>
+<p><strong>(3) $\U_n\subset\U$.</strong> Soit $z\in\U_n$. Alors $|z|^n=|z^n|=1$. Comme $|z|$ est un réel positif dont la puissance $n$-ième vaut $1$, on a $|z|=1$. Donc $z\in\U$.</p>
+<p><strong>Conclusion.</strong> $\U_n\subset\U$ et les deux sont des groupes pour la même loi : $\U_n$ est un sous-groupe de $(\U,\times)$.</p>`},
+{lab:'1.10',q:R`Soit $(G,*)$ un groupe d'élément neutre $e$ et $H\subset G$. Définition A : $(H,*)$, avec la restriction de $*$ à $H\times H$, est un groupe. Définition B : (1) $\forall x,y\in H,\ x*y\in H$ ; (2) $e\in H$ ; (3) $\forall x\in H$, son symétrique $x'$ dans $G$ est dans $H$. Montrer que A et B sont équivalentes.`,a:R`<p><strong>B $\Rightarrow$ A.</strong></p>
+<p>• Par (1), la restriction de $*$ est une LCI sur $H$.</p>
+<p>• L'associativité vient de $G$ : elle est vraie pour tous les éléments de $G$, donc pour ceux de $H$.</p>
+<p>• Par (2), $e\in H$, et $e*x=x*e=x$ pour tout $x\in H$ : $e$ est neutre dans $H$.</p>
+<p>• Soit $x\in H$. Par (3), son symétrique $x'$ est dans $H$ et vérifie $x*x'=x'*x=e$ : $x$ est symétrisable dans $H$.</p>
+<p>Donc $(H,*)$ est un groupe.</p>
+<p><strong>A $\Rightarrow$ B.</strong> On suppose que $(H,*)$ est un groupe.</p>
+<p>• (1) : la restriction est une LCI sur $H$, donc $H$ est stable.</p>
+<p>• (2) : soit $e_H$ le neutre de $(H,*)$. Alors $e_H*e_H=e_H$ dans $H$. Dans $G$, on a aussi $e_H*e=e_H$. Donc $e_H*e_H=e_H*e$. On compose à gauche par le symétrique $e_H'$ de $e_H$ dans $G$ :</p>\[(e_H'*e_H)*e_H=(e_H'*e_H)*e\ \Longrightarrow\ e*e_H=e*e\ \Longrightarrow\ e_H=e.\]<p>Donc $e=e_H\in H$.</p>
+<p>• (3) : soit $x\in H$. Il a un symétrique $y\in H$ dans le groupe $(H,*)$ : $x*y=y*x=e_H=e$. Donc $y$ est aussi un symétrique de $x$ dans $G$. Par unicité du symétrique dans $G$, $y=x'$. Donc $x'\in H$.</p>
+<p>Les deux définitions sont équivalentes.</p>`},
+{lab:'1.24',q:R`Trouver la décomposition en produit de transpositions de la permutation $\sigma=\begin{pmatrix}1&2&3&4&5&6&7&8&9&10\\3&4&6&2&5&1&8&10&7&9\end{pmatrix}\in S_{10}$.`,a:R`<p><strong>Étape 1 : lire les images.</strong> $\sigma(1)=3$, $\sigma(2)=4$, $\sigma(3)=6$, $\sigma(4)=2$, $\sigma(5)=5$, $\sigma(6)=1$, $\sigma(7)=8$, $\sigma(8)=10$, $\sigma(9)=7$, $\sigma(10)=9$.</p>
+<p><strong>Étape 2 : décomposer en cycles à supports disjoints.</strong></p>
+<p>• On part de $1$ : $1\mapsto3\mapsto6\mapsto1$. Cycle $(1\,3\,6)$.</p>
+<p>• Plus petit élément non utilisé : $2$ : $2\mapsto4\mapsto2$. Cycle $(2\,4)$.</p>
+<p>• $5$ est un point fixe, on l'ignore.</p>
+<p>• Plus petit élément non utilisé : $7$ : $7\mapsto8\mapsto10\mapsto9\mapsto7$. Cycle $(7\,8\,10\,9)$.</p>\[\sigma=(1\,3\,6)(2\,4)(7\,8\,10\,9).\]<p><strong>Étape 3 : chaque cycle en transpositions</strong> avec $(a_1\dots a_p)=(a_1a_2)(a_2a_3)\cdots(a_{p-1}a_p)$ :</p>\[(1\,3\,6)=(1\,3)(3\,6),\qquad(2\,4)=(2\,4),\qquad(7\,8\,10\,9)=(7\,8)(8\,10)(10\,9).\]\[\boxed{\sigma=(1\,3)(3\,6)(2\,4)(7\,8)(8\,10)(10\,9)}\]<p>Cela fait $2+1+3=6$ transpositions.</p>
+<p><strong>Vérification</strong> (composition de droite à gauche) : pour $7$, $(10\,9)$ et $(8\,10)$ le fixent, $(7\,8)$ l'envoie sur $8$, les autres le fixent : $\sigma(7)=8$. ✓. Pour $9$ : $(10\,9)\to10$, $(8\,10)\to8$, $(7\,8)\to7$ : $\sigma(9)=7$ ✓. Pour $6$ : $(3\,6)\to3$ puis $(1\,3)\to1$ : $\sigma(6)=1$ ✓.</p>
+<p><strong>Remarque.</strong> La décomposition en transpositions n'est pas unique, mais le nombre de transpositions garde la même parité (c'est la signature).</p>`},
+{lab:'1.28',q:R`Déterminer de deux façons différentes la signature de la permutation $\sigma$ de l'exercice 1.24.`,a:R`<p><strong>Façon 1 : avec la décomposition en transpositions.</strong> D'après 1.24, $\sigma$ est un produit de $p=6$ transpositions, donc $\Sigma(\sigma)=(-1)^6=+1$.</p>
+<p><strong>Façon 2 : en comptant les inversions.</strong> Les images dans l'ordre sont $(3,4,6,2,5,1,8,10,7,9)$. Pour chaque position $i$, on compte les positions $j\gt i$ avec $\sigma(j)\lt\sigma(i)$ :</p>
+<p>$i=1$ (image 3) : $2,1$ → 2 ; $i=2$ (4) : $2,1$ → 2 ; $i=3$ (6) : $2,5,1$ → 3 ; $i=4$ (2) : $1$ → 1 ; $i=5$ (5) : $1$ → 1 ; $i=6$ (1) : aucune → 0 ; $i=7$ (8) : $7$ → 1 ; $i=8$ (10) : $7,9$ → 2 ; $i=9$ (7) : aucune → 0 ; $i=10$ : 0.</p>\[I(\sigma)=2+2+3+1+1+0+1+2+0+0=12,\qquad\Sigma(\sigma)=(-1)^{12}=+1.\]<p><strong>Contrôle (3e façon).</strong> Avec les cycles : un $p$-cycle a pour signature $(-1)^{p-1}$ ; $(1\,3\,6)$ : $+1$, $(2\,4)$ : $-1$, $(7\,8\,10\,9)$ : $-1$. Le produit vaut $+1$ ✓.</p>`}
+],
+tests:[
+{q:R`Donne les définitions : loi interne, associative, commutative, élément neutre, symétrique.`,a:R`<p>LCI sur $E\neq\emptyset$ : application $E\times E\to E$. Associative : $x*(y*z)=(x*y)*z$ pour tous $x,y,z$. Commutative : $x*y=y*x$. Neutre : $e$ tel que $x*e=e*x=x$ pour tout $x$. Symétrique de $x$ : $x'$ tel que $x*x'=x'*x=e$.</p>`},
+{q:R`Donne des exemples et des contre-exemples de lois internes, associatives ou non, commutatives ou non.`,a:R`<p>$+$ et $\times$ sur $\N$ : LCI, associatives, commutatives. $-$ sur $\N$ : pas une LCI ($2-5\notin\N$). $-$ sur $\Z$ : LCI, ni associative ($(5-3)-1=1\neq5-(3-1)=3$) ni commutative.</p><p>Exponentiation sur $\N$ : ni associative ($(2^3)^2=64\neq2^{(3^2)}=512$) ni commutative ($2^3\neq3^2$).</p><p>Composition des fonctions affines : associative, non commutative : avec $f(x)=2x$ et $g(x)=x+1$, $f\circ g(x)=2x+2\neq g\circ f(x)=2x+1$.</p>`},
+{q:R`Montre que $\times$ est distributive sur $+$ dans $\R$, mais pas $+$ sur $\times$.`,a:R`<p>$a(b+c)=ab+ac$ pour tous réels : $\times$ est distributive sur $+$.</p><p>Contre-exemple pour l'autre sens : $2+(3\times4)=14$ alors que $(2+3)\times(2+4)=30$.</p>`},
+{q:R`Démontre l'unicité de l'élément neutre.`,a:R`<p>Soient $e$ et $e'$ deux neutres. Comme $e'$ est neutre, $e*e'=e$. Comme $e$ est neutre, $e*e'=e'$. Donc $e=e'$.</p>`},
+{q:R`Démontre l'unicité du symétrique pour une loi associative.`,a:R`<p>Soient $x'$ et $x''$ deux symétriques de $x$. Alors</p>\[x'=x'*e=x'*(x*x'')=(x'*x)*x''=e*x''=x''.\]<p>La deuxième égalité utilise $x*x''=e$, la troisième l'associativité.</p>`},
+{q:R`Donne la définition d'un groupe, deux exemples et deux contre-exemples.`,a:R`<p>$(G,*)$ est un groupe si $*$ a un neutre, est associative et si tout élément a un symétrique. Exemples : $(\Z,+)$, $(\R^*,\times)$. Contre-exemples : $(\N,+)$ (seul $0$ a un symétrique), $(\Z,\times)$ (seuls $1$ et $-1$ en ont un).</p>`},
+{q:R`Démontre la propriété 1.9 : dans un groupe, (1) $a*x=b*x\Rightarrow a=b$ ; (2) $x*a=x*b\Rightarrow a=b$ ; (3) le symétrique de $a*b$ est $b'*a'$.`,a:R`<p>(1) On compose à droite par le symétrique $x'$ de $x$ : $(a*x)*x'=(b*x)*x'$, donc $a*(x*x')=b*(x*x')$, soit $a*e=b*e$ et $a=b$.</p><p>(2) Même chose en composant à gauche par $x'$.</p><p>(3) $(a*b)*(b'*a')=a*(b*b')*a'=a*e*a'=e$ et de même $(b'*a')*(a*b)=b'*(a'*a)*b=e$. Donc $b'*a'$ est le symétrique de $a*b$.</p>`},
+{q:R`Démontre la caractérisation des sous-groupes : $H\subset G$ est un sous-groupe si et seulement si $H\neq\emptyset$ et $\forall a,b\in H,\ a*b^{-1}\in H$.`,a:R`<p>($\Rightarrow$) $H$ contient $e$, donc $H\neq\emptyset$. Si $a,b\in H$ alors $b^{-1}\in H$ puis $a*b^{-1}\in H$ par stabilité.</p><p>($\Leftarrow$) Soit $x\in H$ (possible car $H\neq\emptyset$). Avec $a=b=x$ : $e=x*x^{-1}\in H$. Pour $x\in H$, avec $a=e$ et $b=x$ : $x^{-1}=e*x^{-1}\in H$. Pour $x,y\in H$, $y^{-1}\in H$ donc $x*(y^{-1})^{-1}=x*y\in H$. Les trois conditions de la définition sont vérifiées.</p>`},
+{q:R`Montre que $n\Z$ est un sous-groupe de $(\Z,+)$. Pourquoi $\N$ n'en est-il pas un ?`,a:R`<p>$0\in n\Z$ donc $n\Z\neq\emptyset$. Si $a=nk$ et $b=nl$, alors $a-b=n(k-l)\in n\Z$. D'après la caractérisation, $n\Z$ est un sous-groupe.</p><p>$\N\subset\Z$ n'en est pas un : $1\in\N$ mais son symétrique $-1\notin\N$.</p>`},
+{q:R`Donne l'ordre de $i$, de $-1$ et de $j=e^{2i\pi/3}$ dans $(\C^*,\times)$. Quel est l'ordre de $1$ dans $(\Z,+)$ ?`,a:R`<p>$i,\ i^2=-1,\ i^3=-i,\ i^4=1$ : ordre $4$. $(-1)^2=1$ : ordre $2$. $j^3=1$ avec $j\neq1$ et $j^2\neq1$ : ordre $3$.</p><p>Dans $(\Z,+)$, $n\cdot1=n\neq0$ pour tout $n\ge1$ : ordre infini.</p>`},
+{q:R`Combien d'éléments a $S_3$ ? Liste-les. Montre que $S_3$ n'est pas commutatif.`,a:R`<p>$\Card(S_3)=3!=6$ : $\id,\ (1\,2),\ (1\,3),\ (2\,3),\ (1\,2\,3),\ (1\,3\,2)$.</p><p>Soient $\sigma=(1\,2\,3)$ et $\tau=(1\,2)$. $\sigma\circ\tau$ : $1\mapsto2\mapsto3$, $2\mapsto1\mapsto2$, $3\mapsto3\mapsto1$, c'est $(1\,3)$. $\tau\circ\sigma$ : $1\mapsto2\mapsto1$, $2\mapsto3\mapsto3$, $3\mapsto1\mapsto2$, c'est $(2\,3)$. Comme $(1\,3)\neq(2\,3)$, $\sigma\circ\tau\neq\tau\circ\sigma$.</p>`},
+{q:R`Pour $\sigma=(1\,3\,6)(2\,4)(7\,8\,10\,9)$ (exercice 1.24), donne l'ordre et l'inverse.`,a:R`<p>Ordre : ppcm des longueurs $3,2,4$ = $12$.</p><p>Inverse : on inverse chaque cycle (on lit à l'envers) : $\sigma^{-1}=(1\,6\,3)(2\,4)(7\,9\,10\,8)$. Vérification : $\sigma(1)=3$ et $\sigma^{-1}(3)=1$ ✓.</p>`},
+{q:R`Rappelle la définition de la signature. Quelle est celle d'une transposition, d'un $p$-cycle ? Vérifie sur $(1\,2\,3)$.`,a:R`<p>$\Sigma(\sigma)=(-1)^{I(\sigma)}$, $I(\sigma)$ étant le nombre d'inversions. Produit de $p$ transpositions : $(-1)^p$. Transposition : $-1$. $p$-cycle : $(-1)^{p-1}$, car il est produit de $p-1$ transpositions.</p><p>$(1\,2\,3)$ a pour images $(2,3,1)$ : inversions $(1,3)$ et $(2,3)$, donc $I=2$ et $\Sigma=+1=(-1)^{3-1}$ ✓.</p>`},
+{q:R`Donne la définition d'un anneau, un exemple et un contre-exemple.`,a:R`<p>$(A,+,\times)$ : $(A,+)$ groupe commutatif ; $\times$ associative, distributive sur $+$, avec un neutre. Exemple : $(\Z,+,\times)$. Contre-exemple : $(\N,+,\times)$, car $(\N,+)$ n'est pas un groupe.</p>`},
+{q:R`Pourquoi la formule du binôme demande-t-elle $ab=ba$ ? Donne un contre-exemple et la factorisation de $a^3-b^3$.`,a:R`<p>Sans commutativité, $(a+b)^2=a^2+ab+ba+b^2$, qui n'est pas $a^2+2ab+b^2$. Contre-exemple avec des matrices : $A=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ et $B=\begin{pmatrix}0&0\\1&0\end{pmatrix}$, $A^2=B^2=0$, $(A+B)^2=I$ alors que $A^2+2AB+B^2=2AB\neq I$.</p><p>Si $ab=ba$ : $a^3-b^3=(a-b)(a^2+ab+b^2)$.</p>`}
+]},
+
+{id:'a2',n:'2',t:'Arithmétique dans l\'ensemble des entiers relatifs',src:'Polycopié · chap. 2 · divisibilité, pgcd, Bézout, Gauss, premiers, congruences',
+fiche:[
+{h:'Divisibilité',m:R`<p>$a$ est multiple de $b$ s'il existe $q\in\Z$ tel que $a=bq$. Si $b\neq0$, on dit que $b$ divise $a$. $D(a)$ : diviseurs de $a$ ; $a\Z$ : multiples de $a$.</p><p>Propriétés ($a,b\neq0$) : $a\mid a$ ; $a\mid b$ et $b\mid c\Rightarrow a\mid c$ ; $a\mid b$ et $a\mid c\Rightarrow a\mid bp+cq$ ; $a\mid b\Rightarrow|a|\le|b|$ ; $a\mid b$ et $b\mid a\Rightarrow a=\pm b$.</p>`},
+{h:'Division euclidienne',m:R`\[a=bq+r,\qquad 0\le r\lt|b|,\qquad (q,r)\ \text{unique}\quad(b\neq0)\]<p>Pour un $a$ négatif, le reste reste positif : $-17=5\times(-4)+3$.</p>`},
+{h:'PGCD',m:R`<p>$\pgcd(a,b)=a\wedge b$ : plus grand élément de $D(a)\cap D(b)$.</p>\[\pgcd(a,b)=\pgcd(|a|,|b|),\qquad \pgcd(ka,kb)=|k|\pgcd(a,b)\]\[D(a)\cap D(b)=D(b)\cap D(a-bq)=D(b)\cap D(r),\qquad D(a)\cap D(b)=D(\delta),\ \delta=a\wedge b\]`},
+{h:'Algorithme d\'Euclide',m:R`<p>Divisions successives : $a=bq_1+r_1$, $b=r_1q_2+r_2$, ... Le pgcd est le dernier reste non nul. Il marche parce que $\pgcd(a,b)=\pgcd(b,r)$ et que les restes décroissent strictement.</p>`},
+{h:'Relation de Bézout',m:R`\[\exists u_0,v_0\in\Z,\quad a\wedge b=au_0+bv_0\]\[\{au+bv:\ u,v\in\Z\}=(a\wedge b)\Z\]<p>Pour $n$ entiers : $d=\pgcd(a_1,\dots,a_n)$ s'écrit $a_1u_1+\dots+a_nu_n$.</p>`},
+{h:'Méthode : coefficients de Bézout',m:R`<ol><li>Faire l'algorithme d'Euclide en gardant toutes les divisions.</li><li>Écrire le dernier reste non nul : $d=r_{k-1}-r_{k-2}q_k$.</li><li>Remonter : remplacer chaque reste par l'expression de la ligne précédente.</li><li>Vérifier en calculant $au+bv$.</li></ol>`},
+{h:'PPCM',m:R`<p>$a\vee b$ : plus petit élément de $a\Z\cap b\Z\cap\N^*$.</p>\[a\Z\cap b\Z=(a\vee b)\Z,\qquad ka\vee kb=|k|(a\vee b),\qquad ab=(a\wedge b)(a\vee b)\]`},
+{h:'Entiers premiers entre eux',m:R`<p>$a\wedge b=1$.</p>\[a\wedge b=1\iff\exists u,v:\ au+bv=1\]\[\text{Lemme de Gauss : }a\mid bc\ \text{et}\ a\wedge b=1\Rightarrow a\mid c\]\[a\wedge b=1\ \text{et}\ a\wedge c=1\iff a\wedge(bc)=1\]<p>$a_1,\dots,a_n$ sont premiers entre eux (dans leur ensemble) si leur pgcd vaut $1$, ce qui équivaut à $\sum a_iu_i=1$.</p>`},
+{h:'Nombres premiers',m:R`<p>$p\ge2$ est premier si ses seuls diviseurs positifs sont $1$ et $p$. Il y en a une infinité. Valuation $v_p(n)$ : plus grand $k$ tel que $p^k\mid n$.</p>\[n=\prod_{p\in\mathbb P}p^{v_p(n)}\quad(n\ge1)\ \text{ (unique, presque tous les exposants sont nuls)}\]`},
+{h:'Congruences',m:R`<p>$x\equiv y\ (\mathrm{mod}\ n)$ si $n\mid x-y$, ce qui équivaut à « même reste dans la division par $n$ ».</p>\[a\equiv b,\ a'\equiv b'\ \Rightarrow\ a+a'\equiv b+b',\quad aa'\equiv bb'\ (\mathrm{mod}\ n)\]<p>Réflexive, symétrique, transitive.</p>`},
+{h:'Petit théorème de Fermat',m:R`\[p\ \text{premier}:\quad a^p\equiv a\ (\mathrm{mod}\ p);\qquad p\nmid a\Rightarrow a^{p-1}\equiv1\ (\mathrm{mod}\ p)\]<p>Méthode : pour calculer $a^N\bmod p$, écrire $N=(p-1)q+r$ et réduire à $a^r$.</p>`}
+],
+ex:[],
+tests:[
+{q:R`Démontre : si $a\mid b$ et $b\mid c$ alors $a\mid c$. Puis : si $a\mid b$ et $a\mid c$, alors $a\mid bp+cq$ pour tous $p,q$.`,a:R`<p>$b=aq_1$ et $c=bq_2$ donnent $c=a(q_1q_2)$, donc $a\mid c$.</p><p>$b=aq_1$ et $c=aq_2$ donnent $bp+cq=a(q_1p+q_2q)$, donc $a\mid bp+cq$.</p>`},
+{q:R`Écris la division euclidienne de $-17$ par $5$ et de $100$ par $7$.`,a:R`<p>On veut $0\le r\lt|b|$. $-17=5\times(-4)+3$ (car $5\times(-4)=-20$ et $-17+20=3$). $100=7\times14+2$.</p>`},
+{q:R`Calcule $252\wedge198$ avec l'algorithme d'Euclide, puis trouve des coefficients de Bézout.`,a:R`<p><strong>Euclide.</strong> $252=198\times1+54$ ; $198=54\times3+36$ ; $54=36\times1+18$ ; $36=18\times2+0$. Le dernier reste non nul est $18$ : $252\wedge198=18$.</p><p><strong>Remontée.</strong> $18=54-36=54-(198-3\times54)=4\times54-198=4\times(252-198)-198=4\times252-5\times198$.</p><p><strong>Vérification.</strong> $4\times252=1008$ et $5\times198=990$ : $1008-990=18$ ✓. Donc $(u_0,v_0)=(4,-5)$.</p>`},
+{q:R`Explique pourquoi l'algorithme d'Euclide donne le pgcd, en utilisant $D(a)\cap D(b)=D(b)\cap D(r)$.`,a:R`<p>Si $a=bq+r$ : un diviseur commun de $a$ et $b$ divise $a-bq=r$, donc divise $b$ et $r$. Réciproquement un diviseur commun de $b$ et $r$ divise $bq+r=a$. Donc $D(a)\cap D(b)=D(b)\cap D(r)$ et $a\wedge b=b\wedge r$.</p><p>Les restes $r_1\gt r_2\gt\cdots\ge0$ décroissent strictement, donc le reste finit par être nul. Le dernier reste non nul $r_k$ vérifie $r_k\wedge0=r_k$ : c'est le pgcd.</p>`},
+{q:R`Démontre : $a\wedge b=1$ si et seulement si il existe $u,v$ avec $au+bv=1$.`,a:R`<p>($\Rightarrow$) C'est Bézout : $a\wedge b=1=au_0+bv_0$.</p><p>($\Leftarrow$) Soit $d$ un diviseur commun positif de $a$ et $b$. Il divise $au+bv=1$, donc $d=1$. Le seul diviseur commun positif est $1$ : $a\wedge b=1$.</p>`},
+{q:R`Démontre le lemme de Gauss.`,a:R`<p>On suppose $a\mid bc$ et $a\wedge b=1$. Par Bézout, $au+bv=1$. On multiplie par $c$ : $c=acu+bcv$. Or $a\mid acu$ et $a\mid bc$ donc $a\mid bcv$. Donc $a$ divise la somme : $a\mid c$.</p>`},
+{q:R`Résous dans $\Z^2$ l'équation $252x+198y=18$.`,a:R`<p>On divise par $18$ : $14x+11y=1$. Une solution particulière est $(4,-5)$ (obtenue par Bézout) : $56-55=1$ ✓.</p><p>Soit $(x,y)$ une solution. En soustrayant : $14(x-4)=-11(y+5)$. Donc $11\mid14(x-4)$ et $11\wedge14=1$ : par Gauss, $11\mid x-4$, soit $x=4+11k$. Alors $14\cdot11k=-11(y+5)$, donc $y=-5-14k$.</p><p>Solutions : $(x,y)=(4+11k,\,-5-14k)$, $k\in\Z$ (elles conviennent bien : $14(4+11k)+11(-5-14k)=1$).</p>`},
+{q:R`Calcule le ppcm de $12$ et $18$ et vérifie $ab=(a\wedge b)(a\vee b)$.`,a:R`<p>$12\wedge18=6$. Les multiples positifs : $12:12,24,36,\dots$ ; $18:18,36,\dots$ ; le premier commun est $36$. Donc $12\vee18=36$.</p><p>$12\times18=216$ et $6\times36=216$ ✓.</p>`},
+{q:R`Montre que si $a\wedge b=1$ et $a\wedge c=1$ alors $a\wedge(bc)=1$.`,a:R`<p>Par Bézout : $au+bv=1$ et $au'+cv'=1$. On multiplie : $1=(au+bv)(au'+cv')=a(auu'+ucv'+bvu')+bc\,vv'$. C'est une relation de Bézout entre $a$ et $bc$, donc $a\wedge(bc)=1$.</p>`},
+{q:R`Démontre qu'il y a une infinité de nombres premiers.`,a:R`<p>Supposons l'ensemble fini : $p_1,\dots,p_n$. Posons $N=p_1p_2\cdots p_n+1\ge2$. Il a un diviseur premier $p$, donc $p=p_i$ pour un certain $i$. Alors $p_i$ divise $N$ et $p_1\cdots p_n$, donc divise leur différence $1$ : absurde.</p>`},
+{q:R`Décompose $360$ en facteurs premiers et donne $v_2(360)$, $v_3(360)$ et $v_7(360)$.`,a:R`<p>$360=2^3\times3^2\times5$. $v_2=3$, $v_3=2$, $v_5=1$, et $v_7(360)=0$ car $7\nmid360$.</p>`},
+{q:R`Démontre que les congruences sont compatibles avec le produit.`,a:R`<p>Si $a\equiv b$ et $a'\equiv b'$ modulo $n$, alors $aa'-bb'=a(a'-b')+b'(a-b)$. Les deux termes sont multiples de $n$, donc $n\mid aa'-bb'$ : $aa'\equiv bb'$.</p>`},
+{q:R`Calcule $7^{100}\bmod13$ avec Fermat, puis $2^{2024}\bmod7$.`,a:R`<p>$13$ est premier et $13\nmid7$, donc $7^{12}\equiv1$. $100=12\times8+4$, donc $7^{100}\equiv7^4$. $7^2=49\equiv10$ et $7^4\equiv100\equiv9\ (\mathrm{mod}\ 13)$. Résultat : $9$.</p><p>$2^3=8\equiv1\ (\mathrm{mod}\ 7)$ et $2024=3\times674+2$, donc $2^{2024}\equiv2^2=4$.</p>`},
+{q:R`Montre que $n^7-n$ est divisible par $7$ pour tout entier $n$.`,a:R`<p>$7$ est premier. Le petit théorème de Fermat donne $n^7\equiv n\ (\mathrm{mod}\ 7)$, soit $7\mid n^7-n$.</p>`}
+]},
+
+{id:'a3',n:'3',t:'Polynômes et fractions rationnelles',src:'Polycopié · chap. 3 · degré, division, racines, pgcd, irréductibles, éléments simples',
+fiche:[
+{h:'Polynômes et degré',m:R`<p>$P=\sum_{i=0}^na_iX^i\in\K[X]$, avec $\K=\Q,\R$ ou $\C$. Degré : plus grand $i$ tel que $a_i\neq0$ ; $\deg0=-\infty$. Unitaire : coefficient dominant $1$.</p>\[\deg(PQ)=\deg P+\deg Q,\qquad \deg(P+Q)\le\max(\deg P,\deg Q)\]<p>Produit : $PQ=\sum_k\left(\sum_{i+j=k}a_ib_j\right)X^k$. $\K[X]$ est un anneau commutatif.</p>`},
+{h:'Divisibilité et division euclidienne',m:R`<p>$B\mid A$ s'il existe $Q$ avec $A=BQ$.</p>\[A=BQ+R,\qquad\deg R\lt\deg B\quad(B\neq0),\ (Q,R)\ \text{unique}\]`},
+{h:'Racines',m:R`\[P(\alpha)=0\iff(X-\alpha)\mid P\]<p>Un polynôme de degré $n\ge1$ a au plus $n$ racines dans $\K$. Multiplicité $k$ : $(X-\alpha)^k\mid P$ et $(X-\alpha)^{k+1}\nmid P$.</p>\[\alpha\ \text{de multiplicité }k\iff P(\alpha)=P'(\alpha)=\cdots=P^{(k-1)}(\alpha)=0,\ P^{(k)}(\alpha)\neq0\]`},
+{h:'Dérivation',m:R`\[\left(\sum a_iX^i\right)'=\sum ia_iX^{i-1},\qquad(\alpha P+\beta Q)'=\alpha P'+\beta Q',\qquad(PQ)'=P'Q+PQ'\]\[(PQ)^{(n)}=\sum_{k=0}^n\binom nkP^{(n-k)}Q^{(k)}\quad\text{(Leibniz)}\]`},
+{h:'PGCD, PPCM, Bézout, Gauss',m:R`<p>$A\wedge B$ : polynôme unitaire de plus grand degré qui divise $A$ et $B$. Même théorie que dans $\Z$.</p>\[A\wedge B=B\wedge R\ (A=BQ+R),\qquad \exists U,V:\ AU+BV=A\wedge B\]<p>$A\wedge B=1\iff\exists U,V:\ AU+BV=1$. Gauss : $A\mid BC$ et $A\wedge B=1\Rightarrow A\mid C$. Le pgcd est le dernier reste non nul de l'algorithme d'Euclide, rendu unitaire. $A\vee B$ : unitaire de plus petit degré, multiple de $A$ et $B$.</p>`},
+{h:'Polynômes irréductibles',m:R`<p>$P$ (degré $\gt0$) est irréductible si ses seuls diviseurs sont les constantes non nulles et les $\lambda P$.</p><ul><li>Dans $\C[X]$ : les polynômes de degré $1$ (d'Alembert-Gauss : tout polynôme de degré $n\gt0$ a $n$ racines complexes comptées avec multiplicité).</li><li>Dans $\R[X]$ : degré $1$, ou degré $2$ de discriminant $\Delta\lt0$.</li></ul>\[P=\lambda\prod_i(X-\alpha_i)^{k_i}\ (\C),\qquad P=\lambda\prod_i(X-\alpha_i)^{k_i}\prod_jQ_j^{l_j}\ (\R,\ Q_j=X^2+\beta X+\gamma,\ \Delta\lt0)\]`},
+{h:'Fractions rationnelles',m:R`<p>$F=\dfrac PQ$, $Q\neq0$. On suppose $P\wedge Q=1$.</p><p>Sur $\C$, avec $Q=\prod(X-\alpha_i)^{k_i}$ : $F=E+\sum_i\sum_{j=1}^{k_i}\dfrac{\alpha_{i,j}}{(X-\alpha_i)^j}$ ($E$ : partie entière, quotient de la division de $P$ par $Q$).</p><p>Sur $\R$ : éléments simples $\dfrac a{(X-\alpha)^i}$ et $\dfrac{aX+b}{(X^2+\alpha X+\beta)^i}$.</p>`},
+{h:'Méthode : éléments simples',m:R`<ol><li>Si $\deg P\ge\deg Q$ : division euclidienne, on garde $E$ puis la fraction restante.</li><li>Factoriser $Q$ dans $\C$ ou $\R$.</li><li>Écrire la forme générale avec des coefficients inconnus.</li><li>Pôle simple $\alpha$ : multiplier par $(X-\alpha)$ et évaluer en $\alpha$. Sinon identification ou valeurs particulières.</li><li>Vérifier en remettant sur le même dénominateur.</li></ol>`},
+{h:'Formule de Taylor',m:R`\[P(X)=\sum_{k=0}^{d}\frac{P^{(k)}(c)}{k!}(X-c)^k\qquad(\deg P\le d)\]`},
+{h:'Interpolation de Lagrange',m:R`<p>Pour $c_0,\dots,c_n$ distincts et $a_0,\dots,a_n$ donnés, il existe un unique $P$ de degré $\le n$ tel que $P(c_i)=a_i$ :</p>\[P(X)=\sum_{i=0}^na_i\prod_{j\neq i}\frac{X-c_j}{c_i-c_j}\]`},
+{h:'Relations coefficients-racines',m:R`<p>$P=X^n+a_{n-1}X^{n-1}+\dots+a_0$ scindé, de racines $c_1,\dots,c_n$ :</p>\[(-1)^ka_{n-k}=\sum_{i_1\lt\cdots\lt i_k}c_{i_1}\cdots c_{i_k}\]<p>En particulier $a_{n-1}=-\sum c_i$ et $(-1)^na_0=c_1\cdots c_n$.</p>`}
+],
+ex:[],
+tests:[
+{q:R`Donne le degré de $(X^2+1)(X^3-X)$ et un exemple où $\deg(P+Q)\lt\max(\deg P,\deg Q)$.`,a:R`<p>$\deg=2+3=5$. Pour $P=X^3+X$ et $Q=-X^3+1$ : $P+Q=X+1$ de degré $1\lt3$.</p>`},
+{q:R`Divise $A=X^4+2X^3-X+3$ par $B=X^2+1$.`,a:R`<p>On écrit $A=X^4+2X^3+0X^2-X+3$.</p><p>• $X^4/X^2=X^2$ : on soustrait $X^2(X^2+1)=X^4+X^2$, reste $2X^3-X^2-X+3$.</p><p>• $2X^3/X^2=2X$ : on soustrait $2X^3+2X$, reste $-X^2-3X+3$.</p><p>• $-X^2/X^2=-1$ : on soustrait $-X^2-1$, reste $-3X+4$ (de degré $1\lt2$).</p><p>$Q=X^2+2X-1$ et $R=-3X+4$.</p><p>Vérification : $(X^2+1)(X^2+2X-1)=X^4+2X^3+2X-1$, et en ajoutant $-3X+4$ on trouve $X^4+2X^3-X+3$ ✓.</p>`},
+{q:R`Démontre : $P(\alpha)=0\iff(X-\alpha)\mid P$.`,a:R`<p>Division euclidienne par $X-\alpha$ (de degré $1$) : $P=(X-\alpha)Q+r$ avec $r$ constante. En évaluant en $\alpha$ : $P(\alpha)=r$. Donc $P(\alpha)=0\iff r=0\iff(X-\alpha)\mid P$.</p>`},
+{q:R`Démontre qu'un polynôme de degré $n\ge1$ a au plus $n$ racines.`,a:R`<p>Récurrence sur $n$. Pour $n=1$ : $aX+b$ a au plus une racine. Si c'est vrai au rang $n-1$ et que $P$ de degré $n$ a une racine $\alpha$, alors $P=(X-\alpha)Q$ avec $\deg Q=n-1$. Toute autre racine de $P$ est racine de $Q$ (car $\K$ est un corps), il y en a au plus $n-1$. Au total au plus $n$.</p>`},
+{q:R`Montre que $1$ est racine double de $P=X^3-3X+2$ et factorise.`,a:R`<p>$P(1)=1-3+2=0$. $P'=3X^2-3$ donc $P'(1)=0$. $P''=6X$ donc $P''(1)=6\neq0$. La multiplicité de $1$ est $2$.</p><p>Donc $(X-1)^2\mid P$ : $P=(X-1)^2(X+2)$. Vérification : $(X^2-2X+1)(X+2)=X^3-3X+2$ ✓.</p>`},
+{q:R`Calcule $(X^3-1)\wedge(X^2-1)$ et une relation de Bézout.`,a:R`<p>$X^3-1=(X^2-1)X+(X-1)$ ; $X^2-1=(X-1)(X+1)+0$. Dernier reste non nul : $X-1$, déjà unitaire. Donc le pgcd est $X-1$.</p><p>Bézout : $X-1=(X^3-1)\cdot1+(X^2-1)\cdot(-X)$.</p>`},
+{q:R`Démontre le lemme de Gauss pour les polynômes.`,a:R`<p>Si $A\mid BC$ et $A\wedge B=1$, Bézout donne $AU+BV=1$. Donc $C=ACU+BCV$. $A$ divise $ACU$ et $BC$, donc divise $C$.</p>`},
+{q:R`Factorise $X^4+1$ dans $\C[X]$ puis dans $\R[X]$.`,a:R`<p>Dans $\C$ : les racines de $z^4=-1$ sont $e^{i(2k+1)\pi/4}$, $k=0,\dots,3$, donc $X^4+1=\prod_{k=0}^3\left(X-e^{i(2k+1)\pi/4}\right)$.</p><p>Dans $\R$ : $X^4+1=(X^2+1)^2-2X^2=(X^2+\sqrt2X+1)(X^2-\sqrt2X+1)$. Chaque facteur a un discriminant $2-4=-2\lt0$, donc est irréductible.</p>`},
+{q:R`Quels sont les polynômes irréductibles de $\C[X]$ et de $\R[X]$ ? Pourquoi ?`,a:R`<p>$\C[X]$ : ceux de degré $1$, car d'après d'Alembert-Gauss tout polynôme de degré $\ge2$ a une racine, donc un facteur $X-\alpha$.</p><p>$\R[X]$ : degré $1$, ou degré $2$ avec $\Delta\lt0$. Un polynôme réel de degré $\ge3$ a une racine complexe $z$, donc aussi $\bar z$, et $(X-z)(X-\bar z)$ est un facteur réel de degré $\le2$ : il est réductible.</p>`},
+{q:R`Décompose $\dfrac1{X^2-1}$ en éléments simples sur $\R$.`,a:R`<p>$\dfrac1{(X-1)(X+1)}=\dfrac a{X-1}+\dfrac b{X+1}$. On multiplie par $X-1$ et on évalue en $1$ : $a=\dfrac12$. On multiplie par $X+1$ et on évalue en $-1$ : $b=-\dfrac12$.</p>\[\frac1{X^2-1}=\frac{1/2}{X-1}-\frac{1/2}{X+1}.\]<p>Vérification : $\frac12\cdot\frac{(X+1)-(X-1)}{X^2-1}=\frac1{X^2-1}$ ✓.</p>`},
+{q:R`Décompose $\dfrac{X^3+X+1}{X^2-1}$ sur $\R$.`,a:R`<p>Division : $X^3+X+1=X(X^2-1)+2X+1$. Partie entière $E=X$. Reste $\dfrac{2X+1}{X^2-1}=\dfrac a{X-1}+\dfrac b{X+1}$, avec $a=\dfrac{2+1}{2}=\dfrac32$ et $b=\dfrac{-2+1}{-2}=\dfrac12$.</p>\[\frac{X^3+X+1}{X^2-1}=X+\frac{3/2}{X-1}+\frac{1/2}{X+1}.\]<p>Vérification : $\frac32(X+1)+\frac12(X-1)=2X+1$ ✓.</p>`},
+{q:R`Décompose $\dfrac1{X(X^2+1)}$ sur $\R$ puis sur $\C$.`,a:R`<p>Sur $\R$ : $\dfrac a X+\dfrac{bX+c}{X^2+1}$. En multipliant par $X$ et en évaluant en $0$ : $a=1$. Puis $1=(X^2+1)+(bX+c)X$ donne $b=-1$, $c=0$. Donc $\dfrac1X-\dfrac X{X^2+1}$.</p><p>Sur $\C$ : $\dfrac X{X^2+1}=\dfrac12\left(\dfrac1{X-i}+\dfrac1{X+i}\right)$, d'où $\dfrac1X-\dfrac{1/2}{X-i}-\dfrac{1/2}{X+i}$.</p>`},
+{q:R`Développe $X^3$ en puissances de $X-1$ (Taylor).`,a:R`<p>$P=X^3$, $P(1)=1$, $P'(1)=3$, $\frac{P''(1)}{2}=\frac62=3$, $\frac{P^{(3)}(1)}{3!}=1$.</p>\[X^3=1+3(X-1)+3(X-1)^2+(X-1)^3.\]`},
+{q:R`Trouve le polynôme $P$ de degré $\le2$ tel que $P(0)=1$, $P(1)=3$, $P(2)=7$.`,a:R`<p>Lagrange avec les nœuds $0,1,2$ : $L_0=\dfrac{(X-1)(X-2)}2$, $L_1=-X(X-2)$, $L_2=\dfrac{X(X-1)}2$.</p>\[P=1\cdot L_0+3L_1+7L_2=\tfrac12(X^2-3X+2)+(-3X^2+6X)+\tfrac72(X^2-X)=X^2+X+1.\]<p>Vérification : $P(0)=1$, $P(1)=3$, $P(2)=7$ ✓.</p>`},
+{q:R`Vérifie les relations coefficients-racines sur $X^3-6X^2+11X-6$, de racines $1,2,3$.`,a:R`<p>Somme : $1+2+3=6=-a_2$ ✓. Somme des produits deux à deux : $2+3+6=11=a_1$ ✓. Produit : $1\cdot2\cdot3=6=(-1)^3a_0$ ✓.</p>`}
+]}
+];
+
+const KEY='algebre-prepa1-v1';
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+function item(id,label,q,a,show,hide){
+  return `<div class="t" data-id="${id}"><div class="qh"><span class="qn">${label}</span><div class="q">${q}<span class="tag"></span><div><button class="rev" aria-expanded="false" data-show="${show}" data-hide="${hide}">${show}</button></div><div class="ans" hidden>${a}<div class="mark"><button class="btn" data-v="ok">Je savais</button><button class="btn" data-v="redo">À revoir</button></div></div></div></div></div>`;
+}
+const main=document.getElementById('main'),nav=document.getElementById('nav');
+let html='',navh='';
+CH.forEach(c=>{
+  navh+=`<a href="#${c.id}"><span>${c.n}</span>${c.t}</a>`;
+  html+=`<section class="ch" id="${c.id}"><div class="chh"><span class="num">CH. ${c.n}</span><h2>${c.t}</h2></div><p class="src">${c.src}</p>
+  <div class="fiche"><h3>Fiche de formules et de méthodes</h3><div class="grid">${c.fiche.map(f=>`<div class="f${f.h.startsWith('Méthode')?' meth':''}"><div class="fh">${f.h}</div><div class="fm">${f.m}</div></div>`).join('')}</div></div>`;
+  if(c.ex.length){
+    html+=`<h3>Exercices du polycopié · ${c.ex.length} corrections détaillées</h3><div>${c.ex.map((x,i)=>item(c.id+'-x'+(i+1),'Ex. '+x.lab,x.q,x.a,'Voir la correction détaillée','Masquer la correction')).join('')}</div>`;
+  }
+  html+=`<h3>Auto-test · ${c.tests.length} questions</h3><div>${c.tests.map((t,i)=>item(c.id+'-'+(i+1),'Q'+(i+1),t.q,t.a,'Voir la réponse','Masquer la réponse')).join('')}</div></section>`;
+});
+nav.innerHTML=navh;main.innerHTML=html;
+
+const total=CH.reduce((n,c)=>n+c.tests.length+c.ex.length,0);
+function paint(){
+  let ok=0,redo=0;
+  document.querySelectorAll('.t').forEach(el=>{
+    const s=S[el.dataset.id];
+    if(s){el.dataset.s=s;el.querySelector('.tag').textContent=s==='ok'?'su':'à revoir'}else{delete el.dataset.s}
+    if(s==='ok')ok++;if(s==='redo')redo++;
+  });
+  document.getElementById('ptxt').textContent=`${ok} sues · ${redo} à revoir · ${total-ok-redo} pas encore vues sur ${total}`;
+  document.getElementById('pa').style.width=(100*ok/total)+'%';
+  document.getElementById('pb').style.width=(100*redo/total)+'%';
+}
+main.addEventListener('click',e=>{
+  const rev=e.target.closest('.rev');
+  if(rev){const ans=rev.closest('.q').querySelector('.ans');const open=ans.hidden;ans.hidden=!open;rev.setAttribute('aria-expanded',open);rev.textContent=open?rev.dataset.hide:rev.dataset.show;return}
+  const b=e.target.closest('.mark .btn');
+  if(b){const id=b.closest('.t').dataset.id;S[id]=b.dataset.v;save();paint()}
+});
+const bTest=document.getElementById('bTest'),bRedo=document.getElementById('bRedo');
+bTest.onclick=()=>{const on=document.body.classList.toggle('testmode');bTest.setAttribute('aria-pressed',on)};
+bRedo.onclick=()=>{const on=document.body.classList.toggle('only-redo');bRedo.setAttribute('aria-pressed',on)};
+document.getElementById('bReset').onclick=()=>{S={};save();paint()};
+paint();
+if(window.MathJax&&MathJax.startup&&MathJax.startup.promise){MathJax.startup.promise.then(()=>MathJax.typesetPromise([main,document.querySelector('.note')])).catch(()=>{})}
+</script>
+
+</body></html>

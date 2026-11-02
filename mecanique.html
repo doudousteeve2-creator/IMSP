@@ -1,0 +1,349 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>Fiches de mécanique du point</title>
+</head><body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+/* Layout: en-tête, barre de chapitres collante, puis un bloc par chapitre (fiche de formules + auto-test). */
+:root{
+  --bg:#F3F5F8; --panel:#FFFFFF; --ink:#14202B; --muted:#5A6B7B; --line:#D5DDE6;
+  --accent:#0B5FA5; --accent-soft:#E3EEF8; --ok:#0F7B4F; --ok-soft:#DFF3E9; --redo:#B4440E; --redo-soft:#FBE9DD;
+  --serif:"IBM Plex Serif",Georgia,serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E151C; --panel:#16202A; --ink:#E4EAF0; --muted:#93A3B3; --line:#2A3846;
+  --accent:#6DB3F2; --accent-soft:#17283A; --ok:#59C896; --ok-soft:#14302A; --redo:#F29B6B; --redo-soft:#3A2418; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E151C; --panel:#16202A; --ink:#E4EAF0; --muted:#93A3B3; --line:#2A3846;
+  --accent:#6DB3F2; --accent-soft:#17283A; --ok:#59C896; --ok-soft:#14302A; --redo:#F29B6B; --redo-soft:#3A2418; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:0 56px}
+.wrap{max-width:900px;margin-inline:auto}
+header{padding-block:28px 8px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,5vw,36px);line-height:1.15;margin:6px 0 10px;text-wrap:balance}
+.lead{max-width:62ch;color:var(--muted);margin:0}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-block:20px 14px}
+.method div{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:10px 12px;font-size:13.5px}
+.method b{display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px}
+nav .row{max-width:900px;margin-inline:auto;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+nav a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px;white-space:nowrap}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);outline:none}
+nav a span{font-family:var(--mono);color:var(--accent);margin-right:5px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-block:16px}
+.prog{flex:1 1 220px;min-width:0}
+.prog .pt{font-size:13px;color:var(--muted);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.meter .a{background:var(--ok)} .meter .b{background:var(--redo)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 12px;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,.rev:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+section.ch{padding-top:34px;scroll-margin-top:56px}
+.chh{display:flex;gap:14px;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:6px}
+.num{font-family:var(--mono);font-size:13px;color:var(--accent);flex:none}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,4vw,26px);margin:0;line-height:1.2;text-wrap:balance}
+.src{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 14px}
+h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px 8px;min-width:0}
+.fh{font-weight:600;font-size:14px;margin-bottom:2px}
+.fm{min-width:0;overflow-x:auto;overflow-y:hidden;font-size:14px;color:var(--ink)}
+.fm p{margin:.25em 0;color:var(--muted);font-size:13.5px}
+mjx-container[display="true"]{margin:.35em 0 !important;text-align:left !important}
+.testmode .fiche{display:none}
+.t{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;padding:12px 14px;margin-bottom:10px;min-width:0}
+.t[data-s="ok"]{border-left-color:var(--ok)} .t[data-s="redo"]{border-left-color:var(--redo)}
+.only-redo .t:not([data-s="redo"]){display:none}
+.qh{display:flex;gap:10px;align-items:flex-start}
+.qn{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px;flex:none}
+.q{flex:1;min-width:0}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+.t[data-s="ok"] .tag{background:var(--ok-soft);color:var(--ok)} .t[data-s="redo"] .tag{background:var(--redo-soft);color:var(--redo)}
+.t:not([data-s]) .tag{display:none}
+.rev{margin-top:8px;border:0;background:none;color:var(--accent);padding:2px 0;font-size:13.5px;font-weight:500;text-decoration:underline;text-underline-offset:3px}
+.ans{margin-top:10px;padding:10px 12px;background:var(--accent-soft);border-radius:6px;min-width:0;overflow-x:auto}
+.ans p{margin:.3em 0}
+.mark{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mark .btn[data-v="ok"]:hover{border-color:var(--ok);color:var(--ok)} .mark .btn[data-v="redo"]:hover{border-color:var(--redo);color:var(--redo)}
+.note{font-size:12.5px;color:var(--muted);margin-top:36px;border-top:1px solid var(--line);padding-top:14px;max-width:70ch}
+.empty{color:var(--muted);font-size:13.5px;padding:8px 0}
+@media (prefers-reduced-motion:no-preference){.t{transition:border-color .2s}}
+</style>
+
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['\\[','\\]']],macros:{
+V:['\\vec{#1}',1],er:'\\vec e_r',et:'\\vec e_\\theta',ep:'\\vec e_\\varphi',erho:'\\vec e_\\rho',ez:'\\vec e_z',
+grad:'\\overrightarrow{\\mathrm{grad}}',rot:'\\overrightarrow{\\mathrm{rot}}',OM:'\\overrightarrow{OM}'}},
+svg:{fontCache:'global'},startup:{typeset:false}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Prépa 1 · Mécanique du point</div>
+  <h1>Fiches de formules et auto-test</h1>
+  <p class="lead">Neuf chapitres tirés de ton cours. Chaque chapitre a une fiche à relire, puis des questions dont la réponse reste cachée tant que tu n'as pas essayé.</p>
+  <div class="method">
+    <div><b>Cours</b>Lis la fiche du chapitre.</div>
+    <div><b>Cache</b>Active « Mode test » : les fiches disparaissent.</div>
+    <div><b>Cherche</b>Réponds sur papier, puis clique sur « Voir la réponse ».</div>
+    <div><b>Corrige</b>Marque « À revoir » et refais ces questions demain.</div>
+  </div>
+</header>
+</div>
+<nav><div class="row" id="nav"></div></nav>
+<div class="wrap">
+  <div class="bar">
+    <div class="prog"><div class="pt" id="ptxt"></div><div class="meter"><i class="a" id="pa"></i><i class="b" id="pb"></i></div></div>
+    <div class="ctl">
+      <button class="btn" id="bTest" aria-pressed="false">Mode test : masquer les fiches</button>
+      <button class="btn" id="bRedo" aria-pressed="false">Seulement « à revoir »</button>
+      <button class="btn" id="bReset">Tout remettre à zéro</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <p class="note">Les fiches suivent ton cours (Université de Parakou, chapitres 1 à 7) et les deux chapitres sur les oscillateurs. La numérotation ci-dessus suit l'ordre de ton PDF. Les corrigés sont rédigés de façon concise : compare-les avec ceux de ton enseignant.</p>
+</div>
+
+<script>
+const R=String.raw;
+const CH=[
+{id:'c1',n:1,t:'Outils mathématiques',src:'Parakou · chap. 1 · vecteurs, coordonnées, opérateurs',
+fiche:[
+{h:'Produit scalaire',m:R`\[\V u\cdot\V v=\|\V u\|\,\|\V v\|\cos(\V u,\V v)=xx'+yy'+zz'\]<p>Orthogonaux : $\V u\cdot\V v=0$. Aussi $\V u\cdot\V u=\|\V u\|^2$.</p>`},
+{h:'Produit vectoriel',m:R`\[\V u\wedge\V v=(yz'-y'z)\,\V i+(zx'-z'x)\,\V j+(xy'-x'y)\,\V k\]<p>Norme = aire du parallélogramme. $\V u\wedge\V v=-\V v\wedge\V u$. Vecteurs parallèles : résultat nul.</p>`},
+{h:'Double produit vectoriel',m:R`\[\V u\wedge(\V v\wedge\V t)=\V v\,(\V u\cdot\V t)-\V t\,(\V u\cdot\V v)\]<p>Le produit vectoriel n'est pas associatif.</p>`},
+{h:'Produit mixte',m:R`\[\V u\cdot(\V v\wedge\V w)=\V v\cdot(\V w\wedge\V u)=\V w\cdot(\V u\wedge\V v)\]<p>Valeur absolue = volume du parallélépipède.</p>`},
+{h:'Moment d\'un vecteur',m:R`\[\vec{\mathcal M}_O(\V u)=\OM\wedge\V u\qquad \mathcal M_\Delta(\V u)=\vec{\mathcal M}_O(\V u)\cdot\V n\]`},
+{h:'Différentielle',m:R`\[df=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy\]`},
+{h:'Polaires (ρ, θ)',m:R`\[\erho=\cos\theta\,\V i+\sin\theta\,\V j,\quad \et=-\sin\theta\,\V i+\cos\theta\,\V j\]\[\frac{d\erho}{d\theta}=\et,\quad \frac{d\et}{d\theta}=-\erho\]\[d\OM=d\rho\,\erho+\rho\,d\theta\,\et,\quad ds=\rho\,d\rho\,d\theta\]`},
+{h:'Cylindriques (ρ, φ, z)',m:R`\[x=\rho\cos\varphi,\quad y=\rho\sin\varphi,\quad z=z\]\[d\OM=d\rho\,\erho+\rho\,d\varphi\,\ep+dz\,\ez\]\[dv=\rho\,d\rho\,d\varphi\,dz\]`},
+{h:'Sphériques (r, θ, φ)',m:R`<p>θ = angle avec $Oz$, φ = angle dans le plan $xOy$.</p>\[x=r\sin\theta\cos\varphi,\ y=r\sin\theta\sin\varphi,\ z=r\cos\theta\]\[d\OM=dr\,\er+r\,d\theta\,\et+r\sin\theta\,d\varphi\,\ep\]\[dv=r^2\sin\theta\,dr\,d\theta\,d\varphi\]`},
+{h:'Dérivées de la base sphérique',m:R`\[\begin{aligned}\partial_\theta\er&=\et, & \partial_\varphi\er&=\sin\theta\,\ep\\ \partial_\theta\et&=-\er, & \partial_\varphi\et&=\cos\theta\,\ep\\ \partial_\theta\ep&=\V 0, & \partial_\varphi\ep&=-\sin\theta\,\er-\cos\theta\,\et\end{aligned}\]`},
+{h:'Gradient',m:R`\[\grad f=\frac{\partial f}{\partial x}\V i+\frac{\partial f}{\partial y}\V j+\frac{\partial f}{\partial z}\V k,\qquad df=\grad f\cdot d\V l\]<p>Normal aux surfaces de niveau. Si $\V F=-\grad f$, la circulation de A à B vaut $f(A)-f(B)$.</p>`},
+{h:'Divergence, rotationnel, laplacien',m:R`<p>Pour $\V A=(f,g,h)$ :</p>\[\mathrm{div}\,\V A=\frac{\partial f}{\partial x}+\frac{\partial g}{\partial y}+\frac{\partial h}{\partial z},\qquad \rot\V A=\nabla\wedge\V A\]\[\Delta f=\frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}+\frac{\partial^2 f}{\partial z^2}\]`},
+{h:'Théorèmes et identités',m:R`\[\iint_S\V A\cdot d\V S=\iiint_V\mathrm{div}\,\V A\,dV\quad\text{(Green-Ostrogradski)}\]\[\oint_{\mathcal C}\V A\cdot d\V l=\iint_S\rot\V A\cdot d\V S\quad\text{(Stokes)}\]\[\mathrm{div}(\rot\V A)=0,\quad \rot(\grad f)=\V 0,\quad \rot(\rot\V A)=\grad(\mathrm{div}\,\V A)-\Delta\V A\]`}
+],
+tests:[
+{q:R`Donne les deux écritures du produit scalaire. Que vaut-il pour deux vecteurs orthogonaux ?`,a:R`<p>$\V u\cdot\V v=\|\V u\|\|\V v\|\cos(\V u,\V v)=xx'+yy'+zz'$. Pour deux vecteurs orthogonaux, il vaut $0$.</p>`},
+{q:R`Que représentent la norme de $\V u\wedge\V v$ et la valeur absolue de $\V u\cdot(\V v\wedge\V w)$ ?`,a:R`<p>La norme de $\V u\wedge\V v$ est l'aire du parallélogramme construit sur $\V u$ et $\V v$. La valeur absolue du produit mixte est le volume du parallélépipède construit sur les trois vecteurs.</p>`},
+{q:R`Calcule $\V u\wedge\V v$ pour $\V u=(1,2,0)$ et $\V v=(0,1,3)$.`,a:R`<p>$(2\cdot3-0\cdot1,\ 0\cdot0-1\cdot3,\ 1\cdot1-2\cdot0)=(6,-3,1)$.</p><p>Vérification : $\V u\cdot(\V u\wedge\V v)=6-6+0=0$, le résultat est bien orthogonal à $\V u$.</p>`},
+{q:R`Développe $\V u\wedge(\V v\wedge\V t)$.`,a:R`<p>$\V u\wedge(\V v\wedge\V t)=\V v\,(\V u\cdot\V t)-\V t\,(\V u\cdot\V v)$.</p>`},
+{q:R`Démontre que $\dfrac{d\erho}{d\theta}=\et$ à partir de l'expression de $\erho$ en base cartésienne.`,a:R`<p>$\erho=\cos\theta\,\V i+\sin\theta\,\V j$. On dérive par rapport à θ : $-\sin\theta\,\V i+\cos\theta\,\V j=\et$. De même $\dfrac{d\et}{d\theta}=-\cos\theta\,\V i-\sin\theta\,\V j=-\erho$.</p>`},
+{q:R`Écris le déplacement élémentaire $d\OM$ et l'élément de volume en coordonnées sphériques.`,a:R`<p>$d\OM=dr\,\er+r\,d\theta\,\et+r\sin\theta\,d\varphi\,\ep$ et $dv=r^2\sin\theta\,dr\,d\theta\,d\varphi$.</p>`},
+{q:R`Que valent $\mathrm{div}(\rot\V A)$ et $\rot(\grad f)$ ? Que signifie $\Delta f=0$ ?`,a:R`<p>Les deux valent zéro. Si $\Delta f=0$, la fonction $f$ est dite harmonique.</p>`},
+{q:R`Pour $f=2x^2-3y^2+z^2$, calcule $\grad f$ puis montre que $f$ est harmonique.`,a:R`<p>$\grad f=4x\,\V i-6y\,\V j+2z\,\V k$.</p><p>$\Delta f=4-6+2=0$, donc $f$ est harmonique.</p>`}
+]},
+
+{id:'c2',n:2,t:'Cinématique du point',src:'Parakou · chap. 2 · repérage, vitesse, accélération, référentiels',
+fiche:[
+{h:'Vitesse',m:R`\[\V V=\frac{d\OM}{dt}\]\[\text{cartésiennes : }\dot x\,\V i+\dot y\,\V j+\dot z\,\V k\]\[\text{polaires : }\dot\rho\,\erho+\rho\dot\theta\,\et\]\[\text{cylindriques : }\dot\rho\,\erho+\rho\dot\varphi\,\ep+\dot z\,\ez\]\[\text{sphériques : }\dot r\,\er+r\dot\theta\,\et+r\sin\theta\,\dot\varphi\,\ep\]`},
+{h:'Accélération (polaires et cylindriques)',m:R`\[\V a=(\ddot\rho-\rho\dot\theta^2)\,\erho+(2\dot\rho\dot\theta+\rho\ddot\theta)\,\et\]<p>En cylindriques : remplacer θ par φ et ajouter $\ddot z\,\ez$.</p>`},
+{h:'Accélération (sphériques)',m:R`\[\begin{aligned}a_r&=\ddot r-r\dot\theta^2-r\dot\varphi^2\sin^2\theta\\ a_\theta&=2\dot r\dot\theta+r\ddot\theta-r\dot\varphi^2\sin\theta\cos\theta\\ a_\varphi&=2\dot r\dot\varphi\sin\theta+2r\dot\theta\dot\varphi\cos\theta+r\ddot\varphi\sin\theta\end{aligned}\]`},
+{h:'Base de Frenet',m:R`\[\V\tau=\frac{\V V}{V},\quad \frac{d\V\tau}{ds}=\frac{\V n}{R_c},\quad \V a=\frac{dv}{dt}\,\V\tau+\frac{v^2}{R_c}\,\V n\]\[R_c=\frac{v^3}{\|\V a\wedge\V v\|}\]`},
+{h:'Mouvements particuliers',m:R`<p>Rectiligne uniforme : $x=vt+x_0$. Uniformément varié :</p>\[v=at+v_0,\quad x=\tfrac12at^2+v_0t+x_0\]<p>Sinusoïdal : $x=x_m\sin(\omega t+\varphi)$, avec $\ddot x+\omega^2x=0$.</p>\[\text{Circulaire : }\V V=R\dot\theta\,\et,\quad \V a=-R\dot\theta^2\,\erho+R\ddot\theta\,\et\]`},
+{h:'Dérivée dans deux référentiels',m:R`\[\frac{d\V A}{dt}\Big|_R=\frac{d\V A}{dt}\Big|_{R'}+\V\Omega\wedge\V A\]`},
+{h:'Composition des vitesses',m:R`\[\V V_a=\V V_r+\V V_e,\qquad \V V_e=\frac{d\overrightarrow{OO'}}{dt}\Big|_R+\V\Omega\wedge\overrightarrow{O'M}\]`},
+{h:'Composition des accélérations',m:R`\[\V a_a=\V a_r+\V a_e+\V a_c\]\[\V a_e=\frac{d^2\overrightarrow{OO'}}{dt^2}\Big|_R+\frac{d\V\Omega}{dt}\wedge\overrightarrow{O'M}+\V\Omega\wedge(\V\Omega\wedge\overrightarrow{O'M}),\quad \V a_c=2\,\V\Omega\wedge\V V_r\]<p>Translation seule ($\V\Omega=\V 0$) : $\V a_a=\V a_r+\V a_a(O')$. Translation uniforme : $\V a_a=\V a_r$.</p>`}
+],
+tests:[
+{q:R`Donne la vitesse et l'accélération en coordonnées polaires.`,a:R`<p>$\V V=\dot\rho\,\erho+\rho\dot\theta\,\et$ et $\V a=(\ddot\rho-\rho\dot\theta^2)\,\erho+(2\dot\rho\dot\theta+\rho\ddot\theta)\,\et$.</p>`},
+{q:R`Établis l'accélération en polaires à partir de la vitesse.`,a:R`<p>On part de $\V V=\dot\rho\,\erho+\rho\dot\theta\,\et$ et on utilise $\dot{\erho}=\dot\theta\,\et$ et $\dot{\et}=-\dot\theta\,\erho$.</p><p>$\V a=\ddot\rho\,\erho+\dot\rho\dot\theta\,\et+(\dot\rho\dot\theta+\rho\ddot\theta)\,\et-\rho\dot\theta^2\,\erho$, soit le résultat attendu.</p>`},
+{q:R`Mouvement circulaire uniforme de rayon $R$ : que valent $\V a$ et sa norme ?`,a:R`<p>$\ddot\theta=0$, donc $\V a=-R\dot\theta^2\,\erho$. Elle est centripète et sa norme est $R\dot\theta^2=v^2/R$.</p>`},
+{q:R`Donne les composantes de l'accélération dans la base de Frenet et le rayon de courbure.`,a:R`<p>$a_\tau=\dfrac{dv}{dt}$ et $a_n=\dfrac{v^2}{R_c}$. Comme $a_n=\dfrac{\|\V a\wedge\V v\|}{v}$, on obtient $R_c=\dfrac{v^3}{\|\V a\wedge\V v\|}$.</p>`},
+{q:R`Hélice : $x=R\cos\omega t$, $y=R\sin\omega t$, $z=h\omega t$. Calcule $v$, $a$ et $R_c$.`,a:R`<p>$\V V=(-R\omega\sin\omega t,\ R\omega\cos\omega t,\ h\omega)$, donc $v=\omega\sqrt{R^2+h^2}$, constante.</p><p>$\V a=-R\omega^2(\cos\omega t,\sin\omega t,0)$, donc $a=R\omega^2$.</p><p>$a_\tau=0$, donc $a_n=a$ et $R_c=\dfrac{v^2}{a}=\dfrac{R^2+h^2}{R}$.</p>`},
+{q:R`Écris les lois de composition des vitesses et des accélérations, et nomme chaque terme.`,a:R`<p>$\V V_a=\V V_r+\V V_e$ (absolue, relative, d'entraînement).</p><p>$\V a_a=\V a_r+\V a_e+\V a_c$, avec $\V a_c=2\V\Omega\wedge\V V_r$ l'accélération de Coriolis.</p>`},
+{q:R`Dans quels cas l'accélération de Coriolis est-elle nulle ?`,a:R`<p>Si $\V\Omega=\V 0$ (translation du référentiel), si $\V V_r=\V 0$ (point fixe dans $R'$), ou si $\V V_r$ est parallèle à $\V\Omega$.</p>`}
+]},
+
+{id:'c3',n:3,t:'Dynamique du point',src:'Parakou · chap. 3 · forces, lois de Newton, moment cinétique',
+fiche:[
+{h:'Forces usuelles',m:R`\[\V P=m\V g,\quad \V F=-\alpha\V v,\quad \V T=-k(l-l_0)\,\V u,\quad \mu=\frac{f}{R_n}\]\[\V F_e=q\V E,\quad \V F_m=q\V v\wedge\V B,\quad \V F=q(\V E+\V v\wedge\V B)\]<p>À distance : poids, électrostatique, magnétique. De contact : frottement, rappel, réaction.</p>`},
+{h:'Lois de Newton',m:R`<p>1re : dans un référentiel galiléen, un point isolé est au repos ou en MRU.</p>\[\frac{d\V p}{dt}=\sum\V F_i\ \ (\V p=m\V v),\qquad \sum\V F_i=m\V a\ \ (m\text{ constante})\]\[\V F_{A/B}=-\V F_{B/A}\]`},
+{h:'Référentiel galiléen',m:R`<p>Tout référentiel en translation rectiligne uniforme par rapport au repère de Copernic. Le repère géocentrique est galiléen pour une expérience courte devant 365 jours. Le repère terrestre l'est si la durée est négligeable devant la période de rotation de la Terre.</p>`},
+{h:'Référentiel non galiléen',m:R`\[m\V a_r=\sum\V F_{ext}+\V F_{ie}+\V F_{ic}\]\[\V F_{ie}=-m\V a_e,\qquad \V F_{ic}=-m\V a_c\]`},
+{h:'Équations du mouvement',m:R`\[F_x=m\ddot x,\quad F_y=m\ddot y,\quad F_z=m\ddot z\]<p>On intègre, puis on fixe les constantes avec la position et la vitesse à $t=0$.</p>`},
+{h:'Moment cinétique',m:R`\[\V\sigma_O(M)=\OM\wedge m\V V,\qquad \text{polaires : }\V\sigma_O=mr^2\dot\theta\,\V k\]\[\mathcal M_\Delta=\V\sigma_O\cdot\V u\]`},
+{h:'Théorème du moment cinétique',m:R`\[\frac{d\V\sigma_O}{dt}=\OM\wedge m\V a=\OM\wedge\sum\V F_{ext}\]<p>Dans un référentiel galiléen, avec $O$ fixe.</p>`}
+],
+tests:[
+{q:R`Énonce les trois lois de Newton.`,a:R`<p>1re : principe d'inertie. 2e : $\dfrac{d\V p}{dt}=\sum\V F$, soit $m\V a$ si $m$ est constante. 3e : $\V F_{A/B}=-\V F_{B/A}$.</p>`},
+{q:R`Quand un référentiel est-il galiléen ?`,a:R`<p>Lorsqu'il est en translation rectiligne uniforme par rapport au repère de Copernic (centre du Soleil, axes vers trois étoiles lointaines).</p>`},
+{q:R`Écris le PFD dans un référentiel non galiléen. Quelles sont les forces d'inertie ?`,a:R`<p>$m\V a_r=\sum\V F_{ext}+\V F_{ie}+\V F_{ic}$ avec $\V F_{ie}=-m\V a_e$ (entraînement) et $\V F_{ic}=-m\V a_c$ (Coriolis).</p>`},
+{q:R`Chute verticale avec frottement $-\alpha\V v$, lancée vers le bas à $v_0$ (axe descendant). Trouve $v(t)$ et la vitesse limite.`,a:R`<p>$m\dot v=mg-\alpha v$. Solution : $v(t)=\dfrac{mg}{\alpha}+\left(v_0-\dfrac{mg}{\alpha}\right)e^{-\alpha t/m}$.</p><p>Vitesse limite : $v_\ell=\dfrac{mg}{\alpha}$.</p>`},
+{q:R`Corps qui glisse sur un plan incliné d'angle $\alpha$ : accélération sans frottement, puis avec frottement $\mu$ ?`,a:R`<p>Sans frottement : $a=g\sin\alpha$. Avec frottement : $R_n=mg\cos\alpha$, donc $a=g(\sin\alpha-\mu\cos\alpha)$.</p><p>Départ sans vitesse : $v=at$ et $x=\tfrac12at^2$.</p>`},
+{q:R`Écris le moment cinétique en polaires, puis le théorème du moment cinétique.`,a:R`<p>$\V\sigma_O=mr^2\dot\theta\,\V k$ avec $\V k=\er\wedge\et$.</p><p>$\dfrac{d\V\sigma_O}{dt}=\OM\wedge\sum\V F_{ext}$.</p>`}
+]},
+
+{id:'c4',n:4,t:'Travail et énergie',src:'Parakou · chap. 4 · puissance, énergies, équilibres',
+fiche:[
+{h:'Puissance et travail',m:R`\[P=\V F\cdot\V V,\qquad dW=\V F\cdot d\V l=P\,dt,\qquad W=\int_A^B\V F\cdot d\V l\]<p>$P\gt0$ : force motrice. $P\lt0$ : résistante. $P=0$ : ne travaille pas.</p>`},
+{h:'Théorème de l\'énergie cinétique',m:R`\[E_c=\tfrac12mV^2,\qquad W_{A\to B}(\V F)=E_c(B)-E_c(A)\]<p>Référentiel galiléen, $\V F$ = résultante.</p>`},
+{h:'Force conservative',m:R`\[\V F=-\grad E_p,\quad \rot\V F=\V 0,\quad W_{A\to B}=E_p(A)-E_p(B),\quad dW=-dE_p\]<p>Le travail ne dépend pas du chemin suivi.</p>`},
+{h:'Énergies potentielles',m:R`\[E_{pp}=mgz+\text{cte}\ \ (z\text{ ascendant}),\qquad E_{pe}=\tfrac12kx^2\]\[\V P=-\grad E_{pp},\qquad \V T=-\grad E_{pe}=-kx\,\V u\]`},
+{h:'Énergie mécanique',m:R`\[E_m=E_c+E_p\]<p>Système conservatif : $E_m$ constante. Sinon : $\Delta E_m$ = somme des travaux des forces non conservatives.</p>`},
+{h:'Stabilité d\'un équilibre',m:R`\[\frac{dE_p}{dx}=0\ \text{à l'équilibre};\quad \frac{d^2E_p}{dx^2}\gt0\Rightarrow\text{stable},\quad \frac{d^2E_p}{dx^2}\lt0\Rightarrow\text{instable}\]`}
+],
+tests:[
+{q:R`Définis la puissance et le travail d'une force. Quelles sont les unités ?`,a:R`<p>$P=\V F\cdot\V V$ en watts. $dW=\V F\cdot d\V l=P\,dt$ et $W=\int_A^B\V F\cdot d\V l$ en joules.</p>`},
+{q:R`Démontre le théorème de l'énergie cinétique.`,a:R`<p>$W=\int_A^B\V F\cdot d\V l=\int_A^B m\dfrac{d\V V}{dt}\cdot\V V\,dt=\int_A^B d\left(\tfrac12mV^2\right)=\tfrac12mV_B^2-\tfrac12mV_A^2$.</p>`},
+{q:R`Qu'est-ce qu'une force conservative ? Que vaut son travail ?`,a:R`<p>Elle dérive d'une énergie potentielle : $\V F=-\grad E_p$ et $\rot\V F=\V 0$. Son travail ne dépend que des extrémités : $W_{A\to B}=E_p(A)-E_p(B)$.</p>`},
+{q:R`Donne $E_{pp}$ et $E_{pe}$, et les forces qui en dérivent.`,a:R`<p>$E_{pp}=mgz$ avec $\V P=-mg\,\V k=m\V g$, et $E_{pe}=\tfrac12kx^2$ avec $\V T=-kx\,\V u$.</p>`},
+{q:R`Quelle condition donne un équilibre stable ?`,a:R`<p>$\dfrac{dE_p}{dx}=0$ et $\dfrac{d^2E_p}{dx^2}\gt0$ : l'énergie potentielle est minimale.</p>`},
+{q:R`Skieur sans vitesse initiale sur une pente $AB$ de 200 m avec $\sin\alpha=0{,}1$, sans frottement. Vitesse en $B$ ($g=10$ m·s$^{-2}$) ?`,a:R`<p>$h=200\times0{,}1=20$ m. Par le TEC, $\tfrac12mv_B^2=mgh$, donc $v_B=\sqrt{2gh}=\sqrt{400}=20$ m·s$^{-1}$.</p>`},
+{q:R`Montre que $\V F=-2xy\,\V i-x^2\,\V j+z^2\,\V k$ dérive d'un potentiel et trouve $U$.`,a:R`<p>Les trois composantes de $\rot\V F$ sont nulles, par exemple $\partial_xF_y-\partial_yF_x=-2x+2x=0$.</p><p>Avec $\V F=-\grad U$ : $\partial_xU=2xy$, $\partial_yU=x^2$, $\partial_zU=-z^2$, d'où $U=x^2y-\dfrac{z^3}{3}+\text{cte}$.</p>`}
+]},
+
+{id:'c5',n:5,t:'Oscillateurs libres',src:'Chapitre « Oscillateurs mécaniques » · harmonique, amorti, portrait de phase',
+fiche:[
+{h:'Oscillateur harmonique',m:R`\[\ddot x+\omega^2x=0\ \Rightarrow\ x=x_{max}\cos(\omega t+\varphi)=A\cos\omega t+B\sin\omega t\]\[T=\frac{2\pi}{\omega},\quad v\text{ en quadrature avec }x,\quad a=-\omega^2x\]`},
+{h:'Pendule élastique',m:R`<p>Horizontal : $m\ddot x+kx=0$. Vertical : même équation, avec l'origine à la position d'équilibre.</p>\[\omega_0=\sqrt{\frac km},\qquad T_0=2\pi\sqrt{\frac mk}\]`},
+{h:'Pendule simple',m:R`\[\ddot\theta+\frac gl\sin\theta=0\ \xrightarrow{\ \theta\ \text{petit}\ }\ \ddot\theta+\frac gl\theta=0,\quad \omega_0=\sqrt{\frac gl}\]<p>Approximation valable pour $\theta\lt10^\circ$.</p>`},
+{h:'Énergie',m:R`\[E=\tfrac12m\dot x^2+\tfrac12kx^2=\tfrac12kx_m^2=\text{cte}\]<p>$E_c$ et $E_p$ évoluent de façon complémentaire.</p>`},
+{h:'Amorti par frottement visqueux',m:R`\[m\ddot x+\alpha\dot x+kx=0\iff\ddot x+\frac{\alpha}{m}\dot x+\omega_0^2x=0\]\[r^2+\frac{\alpha}{m}r+\omega_0^2=0,\qquad \Delta=\frac{\alpha^2}{m^2}-4\omega_0^2\]`},
+{h:'Les trois régimes',m:R`\[\Delta\lt0:\ x=X_{max}e^{-\frac{\alpha}{2m}t}\cos(\omega t+\varphi),\ \ \omega=\sqrt{\omega_0^2-\tfrac{\alpha^2}{4m^2}}\]\[\Delta=0:\ x=(At+B)e^{-\frac{\alpha}{2m}t}\ \text{(critique)}\]\[\Delta\gt0:\ \text{retour sans oscillation (apériodique)}\]`},
+{h:'Pseudo-période et décrément',m:R`\[T=\frac{2\pi}{\omega}\gt T_0,\qquad \delta=\ln\frac{x(nT)}{x((n-1)T)}=\frac{\alpha}{2m}T\]`},
+{h:'Analogie avec le circuit RLC',m:R`\[x\to q,\quad m\to L,\quad \alpha\to R,\quad k\to\frac1C\]`},
+{h:'Frottement solide',m:R`\[m\ddot x+kx=\varepsilon F\quad(\varepsilon=\pm1\text{ selon le signe de }\dot x)\]<p>La période reste $T_0$. L'amplitude décroît linéairement de $4F/k$ par période.</p>`},
+{h:'Portrait de phase',m:R`<p>Harmonique : ellipse parcourue indéfiniment. Amorti : spirale qui converge vers l'attracteur $(x=0,\,v=0)$.</p>`}
+],
+tests:[
+{q:R`Écris l'équation différentielle de l'oscillateur harmonique, sa solution générale et sa période.`,a:R`<p>$\ddot x+\omega^2x=0$ ; $x=x_{max}\cos(\omega t+\varphi)$ ; $T=2\pi/\omega$.</p>`},
+{q:R`Établis l'équation du pendule élastique horizontal.`,a:R`<p>PFD : $m\V a=\V P+\V T+\V R$. Projection sur $Ox$ : $m\ddot x=-kx$, soit $\ddot x+\dfrac km x=0$, avec $\omega_0=\sqrt{k/m}$.</p>`},
+{q:R`Pourquoi le pendule vertical obéit-il à la même équation que l'horizontal ?`,a:R`<p>À l'équilibre, $mg=k\Delta l_0$. En prenant l'origine à l'équilibre, le poids est compensé par l'allongement statique et il reste $m\ddot x=-kx$.</p>`},
+{q:R`Pendule simple : équation du mouvement et condition pour la rendre harmonique.`,a:R`<p>TMC : $ml^2\ddot\theta=-mgl\sin\theta$, soit $\ddot\theta+\dfrac gl\sin\theta=0$. Pour $\theta\lt10^\circ$, $\sin\theta\simeq\theta$ et on obtient un oscillateur harmonique de $\omega_0=\sqrt{g/l}$.</p>`},
+{q:R`Montre que l'énergie mécanique de l'oscillateur élastique est constante et donne sa valeur.`,a:R`<p>$E=\tfrac12m\dot x^2+\tfrac12kx^2$. Avec $x=x_m\cos(\omega_0t+\varphi)$ et $k=m\omega_0^2$ : $E=\tfrac12kx_m^2$.</p>`},
+{q:R`Écris l'équation caractéristique de l'oscillateur amorti et les trois régimes selon $\Delta$.`,a:R`<p>$r^2+\dfrac{\alpha}{m}r+\dfrac km=0$, $\Delta=\dfrac{\alpha^2}{m^2}-4\omega_0^2$.</p><p>$\Delta\lt0$ : pseudo-périodique. $\Delta=0$ : critique. $\Delta\gt0$ : apériodique.</p>`},
+{q:R`Pourquoi parle-t-on de pseudo-période ? Comparer à $T_0$.`,a:R`<p>Avec l'amortissement, $x(t)\ne x(t+T)$ : le mouvement n'est plus périodique. La pseudo-période $T=2\pi/\sqrt{\omega_0^2-\alpha^2/4m^2}$ est plus grande que $T_0$.</p>`},
+{q:R`Quelle est l'analogie entre l'oscillateur amorti et le circuit RLC série ?`,a:R`<p>$m\ddot x+\alpha\dot x+kx=0$ et $L\ddot q+R\dot q+q/C=0$ : $x\to q$, $m\to L$, $\alpha\to R$, $k\to1/C$.</p>`},
+{q:R`Masse $m=0{,}1$ kg sur un plan incliné de $30^\circ$, ressort $k=10$ N·m$^{-1}$, $g=10$. Calcule l'allongement à l'équilibre sans frottement, puis $\omega_0$, $T_0$ et $x(t)$ si on lâche à $X_0=+5$ cm sans vitesse.`,a:R`<p>Équilibre : $k\Delta l_1=mg\sin\theta$, donc $\Delta l_1=\dfrac{0{,}1\times10\times0{,}5}{10}=0{,}05$ m $=5$ cm.</p><p>$\omega_0=\sqrt{k/m}=10$ rad·s$^{-1}$ et $T_0=2\pi/10\approx0{,}63$ s.</p><p>$x(t)=5\cos(10t)$ cm.</p>`},
+{q:R`Ressort vertical posé sur le sol, masse $m=0{,}1$ kg, $k=10$ N·m$^{-1}$, $g=10$. Quelle est la compression d'équilibre $X_e$ ?`,a:R`<p>$kX_e=mg$, donc $X_e=\dfrac{0{,}1\times10}{10}=0{,}1$ m. On obtient aussi $\omega=\sqrt{k/m}=10$ rad·s$^{-1}$.</p>`}
+]},
+
+{id:'c6',n:6,t:'Oscillations forcées et résonance',src:'Chapitre « Oscillations forcées, résonance » · amplitude, vitesse, qualité',
+fiche:[
+{h:'Équation et régime permanent',m:R`\[m\ddot x+\alpha\dot x+kx=F_0\cos\omega t\]<p>Après le régime transitoire (négligeable), $x(t)=X_0\cos(\omega t+\phi)$ à la pulsation de l'excitateur.</p>`},
+{h:'Amplitude et phase',m:R`\[X_0(\omega)=\frac{F_0}{m\sqrt{(\omega_0^2-\omega^2)^2+\dfrac{\omega^2\alpha^2}{m^2}}},\qquad \tan\phi=-\frac{\omega\alpha}{m(\omega_0^2-\omega^2)}\]`},
+{h:'Résonance d\'amplitude',m:R`\[\omega_r^2=\omega_0^2-\frac{\alpha^2}{2m^2}\quad\text{si}\quad\omega_0\gt\frac{\alpha}{m\sqrt2}\]<p>Maximum légèrement avant $\omega_0$ ; il s'éloigne de $\omega_0$ quand $\alpha$ augmente. Basse fréquence : $X_0\to e$. Haute fréquence : $X_0\to0$.</p>`},
+{h:'Résonance de vitesse',m:R`\[V_0(\omega)=\frac{F_0}{\sqrt{\alpha^2+\left(m\omega-\frac k\omega\right)^2}}\]\[\omega=\omega_0:\quad V_{max}=\frac{F_0}{\alpha},\quad \text{force et vitesse en phase}\]`},
+{h:'Impédance mécanique',m:R`\[F=Z(\omega)\,v,\qquad Z=\alpha+j\left(m\omega-\frac k\omega\right),\qquad |Z(\omega_0)|=\alpha\]`},
+{h:'Puissance moyenne',m:R`\[\langle P_F\rangle=\alpha\frac{V_0^2}{2},\qquad \langle P_f\rangle=-\alpha\frac{V_0^2}{2}\]<p>La puissance de l'excitateur compense celle du frottement. Transfert maximal à $\omega_0$.</p>`},
+{h:'Facteur de qualité',m:R`\[Q=\frac{\omega_0}{\Delta\omega},\qquad \Delta\omega=\frac{\alpha}{m},\qquad Q=\frac{m\omega_0}{\alpha},\qquad X_0(\omega_0)=Q\,e\]<p>Bande passante : pulsations où $V_0=V_{max}/\sqrt2$.</p>`}
+],
+tests:[
+{q:R`Écris l'équation de l'oscillateur forcé et dis quel régime on étudie.`,a:R`<p>$m\ddot x+\alpha\dot x+kx=F_0\cos\omega t$. On étudie le régime permanent (régime forcé), sinusoïdal à la pulsation $\omega$ de l'excitateur.</p>`},
+{q:R`Donne $X_0(\omega)$ et $\tan\phi$ en notation complexe.`,a:R`<p>Avec $x=X_0e^{j(\omega t+\phi)}$ : $X_0e^{j\phi}\left(\omega_0^2-\omega^2+j\dfrac{\omega\alpha}{m}\right)=\dfrac{F_0}{m}$. On prend le module puis l'argument :</p><p>$X_0=\dfrac{F_0}{m\sqrt{(\omega_0^2-\omega^2)^2+\omega^2\alpha^2/m^2}}$ et $\tan\phi=-\dfrac{\omega\alpha}{m(\omega_0^2-\omega^2)}$.</p>`},
+{q:R`À quelle condition y a-t-il résonance d'amplitude, et pour quelle pulsation ?`,a:R`<p>On annule $dX_0/d\omega$ : $\omega^2=\omega_0^2-\dfrac{\alpha^2}{2m^2}$. Il faut $\omega_0\gt\dfrac{\alpha}{m\sqrt2}$.</p>`},
+{q:R`Résonance de vitesse : pour quelle pulsation, quelle valeur maximale, quel déphasage ?`,a:R`<p>À $\omega=\omega_0$, quel que soit $\alpha$. $V_{max}=F_0/\alpha$. La force et la vitesse sont en phase ($\phi_v=0$).</p>`},
+{q:R`Définis le facteur de qualité et relie-le à la bande passante.`,a:R`<p>$Q=\omega_0/\Delta\omega$ avec $\Delta\omega=\omega_2-\omega_1$, où $V_0(\omega_{1,2})=V_{max}/\sqrt2$. On trouve $\Delta\omega=\alpha/m$, donc $Q=m\omega_0/\alpha$.</p>`},
+{q:R`Que vaut $\langle P_F\rangle$ ? Pourquoi compense-t-elle la puissance du frottement ?`,a:R`<p>$\langle P_F\rangle=\alpha V_0^2/2$ et $\langle P_f\rangle=-\alpha V_0^2/2$. En régime permanent l'énergie du système est constante en moyenne, donc la puissance fournie égale la puissance dissipée.</p>`},
+{q:R`Application : $\alpha=0{,}01$, $k=0{,}1$ N·m$^{-1}$, $m=0{,}05$ kg, $e=2$ cm. Calcule $\omega_0$, $Q$ et $X_0(\omega_0)$.`,a:R`<p>$\omega_0=\sqrt{0{,}1/0{,}05}=\sqrt2\approx1{,}41$ rad·s$^{-1}$.</p><p>$Q=\dfrac{m\omega_0}{\alpha}=\dfrac{0{,}05\times1{,}41}{0{,}01}\approx7$.</p><p>$X_0(\omega_0)=Qe\approx14$ cm.</p>`}
+]},
+
+{id:'c7',n:7,t:'Mouvement à force centrale',src:'Parakou · chap. 5 · Binet, coniques, Kepler, satellites, Bohr',
+fiche:[
+{h:'Propriétés',m:R`\[\mathcal M_O(\V F)=\V 0\ \Rightarrow\ \V\sigma_O=m\V C=\text{cte}\]<p>Mouvement plan (ou rectiligne si $\V C=\V 0$). Loi des aires :</p>\[C=r^2\dot\theta,\qquad \frac{dS}{dt}=\frac C2\]`},
+{h:'Formules de Binet ($u=1/r$)',m:R`\[E_c=\tfrac12mC^2\left[\left(\frac{du}{d\theta}\right)^2+u^2\right]\]\[\V F=-mC^2u^2\left[\frac{d^2u}{d\theta^2}+u\right]\er\]`},
+{h:'Champ newtonien',m:R`\[\V F=-\frac{k}{r^2}\,\er,\quad E_p=-\frac kr,\quad \frac{d^2u}{d\theta^2}+u=\frac{k}{mC^2}\]<p>$k\gt0$ : attractive. $k\lt0$ : répulsive.</p>`},
+{h:'Trajectoire conique',m:R`\[r(\theta)=\frac{P}{1+e\cos\theta},\qquad P=\frac{mC^2}{k}\]\[E_m=-\frac{k}{2P}(1-e^2)\]`},
+{h:'Nature de la trajectoire',m:R`<p>$e=0$ cercle ($E_m=-k/2P$) · $0\lt e\lt1$ ellipse ($E_m\lt0$) · $e=1$ parabole ($E_m=0$) · $e\gt1$ hyperbole ($E_m\gt0$).</p><p>Trajectoire fermée si $e\lt1$, ouverte si $e\ge1$.</p>`},
+{h:'Ellipse',m:R`\[r_{min}=\frac{P}{1+e},\quad r_{max}=\frac{P}{1-e},\quad P=a(1-e^2)=\frac{b^2}{a},\quad e=\frac ca,\quad a^2=b^2+c^2\]`},
+{h:'Lois de Kepler',m:R`<p>1re : trajectoire elliptique. 2e : aires égales en temps égaux.</p>\[T^2=\frac{4m\pi^2}{k}\,a^3\]`},
+{h:'Satellites',m:R`\[E_m=\tfrac12mV^2-\frac{GM_Tm}{r},\qquad V_l=\sqrt{\frac{2GM_T}{r_0}}\approx11{,}2\ \text{km·s}^{-1}\]\[\text{géostationnaire : }r=\sqrt[3]{\frac{T^2GM_T}{4\pi^2}},\quad V=\frac{2\pi r}{T}\]`},
+{h:'Modèle de Bohr',m:R`\[\sigma_O=n\hbar,\qquad r_n=\frac{h^2\varepsilon_0}{\pi q^2m}\,n^2,\qquad E_n=-\frac{E_0}{n^2},\quad E_0\approx13{,}6\text{ eV}\]`}
+],
+tests:[
+{q:R`Qu'est-ce qu'une force centrale ? Deux conséquences.`,a:R`<p>Sa droite d'action passe toujours par un point fixe $O$. Conséquences : le moment cinétique par rapport à $O$ est constant (mouvement plan) et la loi des aires est vérifiée.</p>`},
+{q:R`Montre que $C=r^2\dot\theta$ est constante.`,a:R`<p>$\dfrac{d\V\sigma_O}{dt}=\OM\wedge\V F=\V 0$, donc $\V\sigma_O=m\V C$ est constant. En polaires, $\V\sigma_O=mr^2\dot\theta\,\V k$, d'où $C=r^2\dot\theta$.</p>`},
+{q:R`Énonce les deux formules de Binet.`,a:R`<p>$E_c=\tfrac12mC^2\left[\left(\dfrac{du}{d\theta}\right)^2+u^2\right]$ et $\V F=-mC^2u^2\left[\dfrac{d^2u}{d\theta^2}+u\right]\er$, avec $u=1/r$.</p>`},
+{q:R`Pour $\V F=-\dfrac k{r^2}\er$, établis l'équation de la trajectoire.`,a:R`<p>Binet : $-mC^2u^2(u''+u)=-ku^2$, donc $u''+u=\dfrac{k}{mC^2}$.</p><p>Solution : $u=\dfrac{e}{P}\cos\theta+\dfrac1P$, soit $r=\dfrac{P}{1+e\cos\theta}$ avec $P=\dfrac{mC^2}{k}$.</p>`},
+{q:R`Relie la nature de la conique à $e$ et à $E_m$.`,a:R`<p>$E_m=-\dfrac{k}{2P}(1-e^2)$. $E_m=-\dfrac k{2P}$ : cercle. $E_m\lt0$ : ellipse. $E_m=0$ : parabole. $E_m\gt0$ : hyperbole.</p>`},
+{q:R`Pour une ellipse, exprime $r_{min}$, $r_{max}$, $P$ et $e$ avec $a$, $b$ et $c$.`,a:R`<p>$r_{min}=\dfrac P{1+e}$, $r_{max}=\dfrac P{1-e}$. Leur somme vaut $2a$, d'où $P=a(1-e^2)=\dfrac{b^2}{a}$. Aussi $e=\dfrac ca$ et $a^2=b^2+c^2$.</p>`},
+{q:R`Établis la 3e loi de Kepler.`,a:R`<p>Vitesse aréolaire : $\dfrac C2=\dfrac{\pi ab}T$, donc $T^2=\dfrac{4\pi^2a^2b^2}{C^2}$. Avec $C^2=\dfrac{kP}{m}=\dfrac{kb^2}{ma}$ : $T^2=\dfrac{4m\pi^2}{k}a^3$.</p>`},
+{q:R`Établis la vitesse de libération.`,a:R`<p>Il faut $E_m\ge0$ : $\tfrac12mV_0^2-\dfrac{GM_Tm}{r_0}\ge0$, donc $V_l=\sqrt{\dfrac{2GM_T}{r_0}}\approx11{,}2$ km·s$^{-1}$ au sol.</p>`},
+{q:R`Établis le rayon de l'orbite géostationnaire.`,a:R`<p>PFD : $\dfrac{GM_Tm}{r^2}=m\dfrac{V^2}{r}$, donc $r=\dfrac{GM_T}{V^2}$. Avec $V=\dfrac{2\pi r}T$ : $r=\sqrt[3]{\dfrac{T^2GM_T}{4\pi^2}}$. Ce rayon ne dépend pas du satellite.</p>`},
+{q:R`Modèle de Bohr : établis $r_n$ et $E_n$.`,a:R`<p>Postulat : $mVr=n\dfrac{h}{2\pi}$. PFD : $\dfrac{q^2}{4\pi\varepsilon_0r^2}=\dfrac{mV^2}{r}$. On élimine $V$ : $r_n=\dfrac{h^2\varepsilon_0}{\pi q^2m}n^2$.</p><p>Avec $E=-\dfrac{k}{2r}$ et $k=\dfrac{q^2}{4\pi\varepsilon_0}$ : $E_n=-\dfrac{mq^4}{8h^2\varepsilon_0^2}\dfrac1{n^2}=-\dfrac{E_0}{n^2}$.</p>`}
+]},
+
+{id:'c8',n:8,t:'Système de particules',src:'Parakou · chap. 6 · centre de masse, théorèmes, Kœnig',
+fiche:[
+{h:'Centre de masse',m:R`\[\sum_i m_i\,\overrightarrow{GA_i}=\V 0,\qquad \V R=\overrightarrow{OG}=\frac{\sum_i m_i\V r_i}{M}\]`},
+{h:'Quantité de mouvement',m:R`\[\V P=\sum_i m_i\V v_i=M\V V_G\]`},
+{h:'PFD du système',m:R`\[\frac{d\V P}{dt}=\sum_i\V F_i^{ext}=M\V a_G\]<p>Les forces intérieures s'annulent (action-réaction). Système isolé : $\V P$ conservé, $G$ au repos ou en MRU.</p>`},
+{h:'Moment cinétique',m:R`\[\V L=\sum_i\V r_i\wedge m_i\V v_i,\qquad \frac{d\V L}{dt}=\sum_i\V r_i\wedge\V F_i^{ext}\]<p>Condition : forces d'interaction portées par la droite qui joint les deux particules.</p>`},
+{h:'Théorèmes de Kœnig',m:R`\[\V L=\V R\wedge M\V V_G+\sum_i\V r_i'\wedge m_i\V v_i'\]\[E_c=\tfrac12MV_G^2+\sum_i\tfrac12m_iv_i'^2\]<p>Les grandeurs primées sont relatives au centre de masse, avec $\sum m_i\V r_i'=\V 0$.</p>`}
+],
+tests:[
+{q:R`Définis le centre de masse.`,a:R`<p>Barycentre des points $A_i$ pondérés par leurs masses : $\sum m_i\overrightarrow{GA_i}=\V 0$, soit $\V R=\dfrac{\sum m_i\V r_i}{M}$.</p>`},
+{q:R`Montre que $\V P=M\V V_G$.`,a:R`<p>$\V P=\sum m_i\dfrac{d\V r_i}{dt}=\dfrac{d}{dt}\sum m_i\V r_i=\dfrac{d}{dt}(M\V R)=M\V V_G$.</p>`},
+{q:R`Énonce le PFD pour un système de particules. Pourquoi les forces intérieures disparaissent-elles ?`,a:R`<p>$\dfrac{d\V P}{dt}=\sum\V F_i^{ext}=M\V a_G$. En sommant sur toutes les particules, les forces d'interaction vérifient $\V F_{ji}=-\V F_{ij}$ et leur somme est nulle.</p>`},
+{q:R`Énonce le théorème du moment cinétique pour un système. Quelle hypothèse faut-il ?`,a:R`<p>$\dfrac{d\V L}{dt}=\sum\V r_i\wedge\V F_i^{ext}$. Il faut que les forces d'interaction soient dirigées suivant $\V r_i-\V r_j$, pour que $\sum(\V r_i-\V r_j)\wedge\V F_{ji}=\V 0$.</p>`},
+{q:R`Énonce les deux théorèmes de Kœnig.`,a:R`<p>1er : $\V L=\V R\wedge M\V V_G+\sum\V r_i'\wedge m_i\V v_i'$. 2e : $E_c=\tfrac12MV_G^2+\sum\tfrac12m_iv_i'^2$.</p>`},
+{q:R`$m_1=4$ kg à $5\,\V i$ m·s$^{-1}$ et $m_2=2$ kg à $2\,\V i$ m·s$^{-1}$. Calcule $E_c$ totale, $V_G$, $E_c(G)$ et vérifie Kœnig.`,a:R`<p>$E_c=\tfrac12\cdot4\cdot25+\tfrac12\cdot2\cdot4=54$ J.</p><p>$V_G=\dfrac{4\cdot5+2\cdot2}{6}=4$ m·s$^{-1}$ et $\tfrac12MV_G^2=48$ J.</p><p>Vitesses relatives : $v_1'=1$ et $v_2'=-2$, d'où $\tfrac12\cdot4\cdot1+\tfrac12\cdot2\cdot4=6$ J. Et $48+6=54$ J. ✓</p>`}
+]},
+
+{id:'c9',n:9,t:'Chocs de deux particules',src:'Parakou · chap. 7 · conservation, élastique, mou, restitution',
+fiche:[
+{h:'Conservation de la quantité de mouvement',m:R`\[\V P_1+\V P_2=\V P_1'+\V P_2'\]<p>Valable pour tout choc, car les forces de choc vérifient l'action-réaction et dominent les forces extérieures.</p>`},
+{h:'Choc élastique',m:R`\[\tfrac12m_1V_1^2+\tfrac12m_2V_2^2=\tfrac12m_1V_1'^2+\tfrac12m_2V_2'^2\]<p>Choc direct (frontal) : vitesses colinéaires. Type billard : $M_2$ au repos, vitesses finales à angles $\theta_1$ et $\theta_2$ de $\V V_1$.</p>`},
+{h:'Résultat du choc frontal élastique (à savoir retrouver)',m:R`\[V_1'=\frac{(m_1-m_2)V_1+2m_2V_2}{m_1+m_2},\qquad V_2'=\frac{(m_2-m_1)V_2+2m_1V_1}{m_1+m_2}\]`},
+{h:'Choc inélastique',m:R`\[U=E_{c,\text{après}}-E_{c,\text{avant}}\]<p>$U\lt0$ : le système perd de l'énergie. $U\gt0$ : il en absorbe.</p>`},
+{h:'Choc mou',m:R`\[m_1\V V_1+m_2\V V_2=(m_1+m_2)\V V\]<p>Les deux corps restent accrochés. L'énergie cinétique n'est pas conservée.</p>`},
+{h:'Coefficient de restitution',m:R`\[e=\frac{\|\V V_1'-\V V_2'\|}{\|\V V_1-\V V_2\|}\]<p>$e=0$ : mou. $e=1$ : élastique. $0\lt e\lt1$ : inélastique.</p>`}
+],
+tests:[
+{q:R`Qu'est-ce qui est toujours conservé dans un choc, et qu'est-ce qui ne l'est que pour un choc élastique ?`,a:R`<p>La quantité de mouvement totale est toujours conservée. L'énergie cinétique totale ne l'est que pour un choc parfaitement élastique.</p>`},
+{q:R`Écris le système d'équations du choc élastique frontal.`,a:R`<p>$m_1V_1+m_2V_2=m_1V_1'+m_2V_2'$ et $\tfrac12m_1V_1^2+\tfrac12m_2V_2^2=\tfrac12m_1V_1'^2+\tfrac12m_2V_2'^2$.</p>`},
+{q:R`Choc type billard, $M_2$ au repos : écris les trois équations de projection.`,a:R`<p>$m_1V_1=m_1V_1'\cos\theta_1+m_2V_2'\cos\theta_2$</p><p>$0=-m_1V_1'\sin\theta_1+m_2V_2'\sin\theta_2$</p><p>$m_1V_1^2=m_1V_1'^2+m_2V_2'^2$</p>`},
+{q:R`Définis le choc mou et écris la conservation.`,a:R`<p>Après le choc, les deux particules restent accrochées : $m_1\V V_1+m_2\V V_2=(m_1+m_2)\V V$. L'énergie cinétique est en partie perdue (chaleur, déformation).</p>`},
+{q:R`Définis le coefficient de restitution et ses valeurs remarquables.`,a:R`<p>$e=\dfrac{\|\V V_1'-\V V_2'\|}{\|\V V_1-\V V_2\|}$. $e=0$ : choc mou. $e=1$ : choc élastique.</p>`},
+{q:R`$B_1$ ($m_1=5$ kg, $5$ m·s$^{-1}$) heurte $B_2$ ($m_2=8$ kg) au repos, choc frontal élastique. Vitesses finales ?`,a:R`<p>$V_1'=\dfrac{m_1-m_2}{m_1+m_2}V_1=-\dfrac{3}{13}\times5\approx-1{,}15$ m·s$^{-1}$ (elle rebondit).</p><p>$V_2'=\dfrac{2m_1}{m_1+m_2}V_1=\dfrac{10}{13}\times5\approx3{,}85$ m·s$^{-1}$.</p>`},
+{q:R`Deux boules identiques, $B_2$ au repos, $B_1$ à 5 m·s$^{-1}$. Après le choc : angles de $50^\circ$ et $40^\circ$. Vitesses et nature du choc ?`,a:R`<p>Masses égales : $v_1'=v\cos50^\circ\approx3{,}2$ m·s$^{-1}$ et $v_2'=v\cos40^\circ\approx3{,}8$ m·s$^{-1}$.</p><p>Comme $v_1'^2+v_2'^2=v^2$ et $\theta_1+\theta_2=90^\circ$, le choc est élastique.</p>`}
+]}
+];
+
+const KEY='meca-prepa1-v1';
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+const main=document.getElementById('main'),nav=document.getElementById('nav');
+let html='',navh='';
+CH.forEach(c=>{
+  navh+=`<a href="#${c.id}"><span>${c.n}</span>${c.t}</a>`;
+  html+=`<section class="ch" id="${c.id}"><div class="chh"><span class="num">CH. ${c.n}</span><h2>${c.t}</h2></div><p class="src">${c.src}</p>
+  <div class="fiche"><h3>Fiche de formules</h3><div class="grid">${c.fiche.map(f=>`<div class="f"><div class="fh">${f.h}</div><div class="fm">${f.m}</div></div>`).join('')}</div></div>
+  <h3>Auto-test · ${c.tests.length} questions</h3><div>${c.tests.map((t,i)=>{const id=c.id+'-'+(i+1);return `<div class="t" data-id="${id}"><div class="qh"><span class="qn">Q${i+1}</span><div class="q">${t.q}<span class="tag"></span><div><button class="rev" aria-expanded="false">Voir la réponse</button></div><div class="ans" hidden>${t.a}<div class="mark"><button class="btn" data-v="ok">Je savais</button><button class="btn" data-v="redo">À revoir</button></div></div></div></div></div>`}).join('')}</div></section>`;
+});
+nav.innerHTML=navh;main.innerHTML=html;
+
+const total=CH.reduce((n,c)=>n+c.tests.length,0);
+function paint(){
+  let ok=0,redo=0;
+  document.querySelectorAll('.t').forEach(el=>{
+    const s=S[el.dataset.id];
+    if(s){el.dataset.s=s;el.querySelector('.tag').textContent=s==='ok'?'su':'à revoir'}else{delete el.dataset.s}
+    if(s==='ok')ok++;if(s==='redo')redo++;
+  });
+  document.getElementById('ptxt').textContent=`${ok} sues · ${redo} à revoir · ${total-ok-redo} pas encore vues sur ${total}`;
+  document.getElementById('pa').style.width=(100*ok/total)+'%';
+  document.getElementById('pb').style.width=(100*redo/total)+'%';
+}
+main.addEventListener('click',e=>{
+  const rev=e.target.closest('.rev');
+  if(rev){const ans=rev.closest('.q').querySelector('.ans');const open=ans.hidden;ans.hidden=!open;rev.setAttribute('aria-expanded',open);rev.textContent=open?'Masquer la réponse':'Voir la réponse';return}
+  const b=e.target.closest('.mark .btn');
+  if(b){const id=b.closest('.t').dataset.id;S[id]=b.dataset.v;save();paint()}
+});
+const bTest=document.getElementById('bTest'),bRedo=document.getElementById('bRedo');
+bTest.onclick=()=>{const on=document.body.classList.toggle('testmode');bTest.setAttribute('aria-pressed',on)};
+bRedo.onclick=()=>{const on=document.body.classList.toggle('only-redo');bRedo.setAttribute('aria-pressed',on)};
+document.getElementById('bReset').onclick=()=>{S={};save();paint()};
+paint();
+if(window.MathJax&&MathJax.startup){MathJax.startup.promise.then(()=>MathJax.typesetPromise([main])).catch(()=>{})}
+</script>
+
+</body></html>
