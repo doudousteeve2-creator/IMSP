@@ -1,0 +1,316 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Fiches d'électrocinétique</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+<style>
+/* Layout: en-tête, barre de chapitres collante, puis un bloc par chapitre (fiche de formules + auto-test). */
+:root{
+  --bg:#F4F5F2; --panel:#FFFFFF; --ink:#16211B; --muted:#5B6A62; --line:#D8DFD8;
+  --accent:#0E7A5A; --accent-soft:#E0F1EA; --ok:#0F7B4F; --ok-soft:#DFF3E9; --redo:#B4440E; --redo-soft:#FBE9DD;
+  --serif:"IBM Plex Serif",Georgia,serif; --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1613; --panel:#17211C; --ink:#E3EBE6; --muted:#93A59B; --line:#2A3A32;
+  --accent:#5FD0A6; --accent-soft:#163027; --ok:#59C896; --ok-soft:#14302A; --redo:#F29B6B; --redo-soft:#3A2418; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1613; --panel:#17211C; --ink:#E3EBE6; --muted:#93A59B; --line:#2A3A32;
+  --accent:#5FD0A6; --accent-soft:#163027; --ok:#59C896; --ok-soft:#14302A; --redo:#F29B6B; --redo-soft:#3A2418; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:0 56px}
+.wrap{max-width:900px;margin-inline:auto}
+header{padding-block:28px 8px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,5vw,36px);line-height:1.15;margin:6px 0 10px;text-wrap:balance}
+.lead{max-width:62ch;color:var(--muted);margin:0}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-block:20px 14px}
+.method div{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:10px 12px;font-size:13.5px}
+.method b{display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px}
+nav .row{max-width:900px;margin-inline:auto;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+nav a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px;white-space:nowrap}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);outline:none}
+nav a span{font-family:var(--mono);color:var(--accent);margin-right:5px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-block:16px}
+.prog{flex:1 1 220px;min-width:0}
+.prog .pt{font-size:13px;color:var(--muted);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.meter .a{background:var(--ok)} .meter .b{background:var(--redo)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 12px;font-size:13px}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,.rev:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+section.ch{padding-top:34px;scroll-margin-top:56px}
+.chh{display:flex;gap:14px;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:6px}
+.num{font-family:var(--mono);font-size:13px;color:var(--accent);flex:none}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,4vw,26px);margin:0;line-height:1.2;text-wrap:balance}
+.src{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 14px}
+h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:10px}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px 8px;min-width:0}
+.fh{font-weight:600;font-size:14px;margin-bottom:2px}
+.fm{min-width:0;overflow-x:auto;overflow-y:hidden;font-size:14px;color:var(--ink)}
+.fm p{margin:.25em 0;color:var(--muted);font-size:13.5px}
+.fm table{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0}
+.fm th,.fm td{border:1px solid var(--line);padding:4px 8px;text-align:left}
+.fm th{color:var(--muted);font-weight:500}
+mjx-container[display="true"]{margin:.35em 0 !important;text-align:left !important}
+.testmode .fiche{display:none}
+.t{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;padding:12px 14px;margin-bottom:10px;min-width:0}
+.t[data-s="ok"]{border-left-color:var(--ok)} .t[data-s="redo"]{border-left-color:var(--redo)}
+.only-redo .t:not([data-s="redo"]){display:none}
+.qh{display:flex;gap:10px;align-items:flex-start}
+.qn{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px;flex:none}
+.q{flex:1;min-width:0}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-radius:3px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+.t[data-s="ok"] .tag{background:var(--ok-soft);color:var(--ok)} .t[data-s="redo"] .tag{background:var(--redo-soft);color:var(--redo)}
+.t:not([data-s]) .tag{display:none}
+.rev{margin-top:8px;border:0;background:none;color:var(--accent);padding:2px 0;font-size:13.5px;font-weight:500;text-decoration:underline;text-underline-offset:3px}
+.ans{margin-top:10px;padding:10px 12px;background:var(--accent-soft);border-radius:6px;min-width:0;overflow-x:auto}
+.ans p{margin:.3em 0}
+.mark{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mark .btn[data-v="ok"]:hover{border-color:var(--ok);color:var(--ok)} .mark .btn[data-v="redo"]:hover{border-color:var(--redo);color:var(--redo)}
+.note{font-size:12.5px;color:var(--muted);margin-top:36px;border-top:1px solid var(--line);padding-top:14px;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.t{transition:border-color .2s}}
+</style>
+
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['\\[','\\]']],macros:{
+V:['\\vec{#1}',1],cx:['\\underline{#1}',1],Z:'\\underline{Z}',Y:'\\underline{Y}'}},
+svg:{fontCache:'global'},startup:{typeset:false}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+
+<div class="wrap">
+<header>
+  <div class="kicker">Prépa 1 · Électrocinétique · polycopié IMSP</div>
+  <h1>Fiches de formules et auto-test</h1>
+  <p class="lead">Les cinq chapitres de ton polycopié (le chapitre 4 est coupé en deux : régime transitoire, puis résonance). Chaque chapitre a une fiche à relire, puis des questions dont la réponse reste cachée tant que tu n'as pas essayé.</p>
+  <div class="method">
+    <div><b>Cours</b>Lis la fiche du chapitre.</div>
+    <div><b>Cache</b>Active « Mode test » : les fiches disparaissent.</div>
+    <div><b>Cherche</b>Réponds sur papier, puis clique sur « Voir la réponse ».</div>
+    <div><b>Corrige</b>Marque « À revoir » et refais ces questions demain.</div>
+  </div>
+</header>
+</div>
+<nav><div class="row" id="nav"></div></nav>
+<div class="wrap">
+  <div class="bar">
+    <div class="prog"><div class="pt" id="ptxt"></div><div class="meter"><i class="a" id="pa"></i><i class="b" id="pb"></i></div></div>
+    <div class="ctl">
+      <button class="btn" id="bTest" aria-pressed="false">Mode test : masquer les fiches</button>
+      <button class="btn" id="bRedo" aria-pressed="false">Seulement « à revoir »</button>
+      <button class="btn" id="bReset">Tout remettre à zéro</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <p class="note">Contenu tiré du polycopié « Électrocinétique » de T. D. Oké (IMSP, Université d'Abomey-Calavi). Les corrigés sont concis : compare-les avec ceux de ton enseignant. Deux points du polycopié sont corrigés ici : la conductivité s'écrit $\gamma=ne^2/a$ (positive), et l'impédance du circuit RC parallèle est $R/(1+jRC\omega)$.</p>
+</div>
+
+<script>
+const R=String.raw;
+const CH=[
+{id:'e1',n:'1',t:'Généralités et lois de Kirchhoff',src:'Polycopié · chap. 1 · courant, densité, conservation, nœuds, mailles',
+fiche:[
+{h:'Vocabulaire du circuit',m:R`<p>Dipôle : composant à deux bornes. Actif (générateur) ou passif (récepteur).</p><p>Nœud : point qui relie au moins trois dipôles. Branche : dipôles entre deux nœuds consécutifs. Maille : branches qui forment un contour fermé.</p>`},
+{h:'Intensité du courant',m:R`\[i=\frac{dq}{dt},\qquad I=\frac{Q}{t}\ \text{(régime permanent)}\]<p>Unité : ampère, $1\,\mathrm{A}=1\,\mathrm{C\cdot s^{-1}}$. Le sens positif est celui des charges positives, donc opposé à celui des électrons. L'ampèremètre se branche en série.</p>`},
+{h:'Densité de courant',m:R`\[dI=\V j\cdot d\V S,\qquad I=\iint_S\V j\cdot d\V S,\qquad I=\V j\cdot\V n\,S\ \ (\text{section plane})\]<p>L'intensité est le flux de $\V j$ à travers la section.</p>`},
+{h:'Expression de j',m:R`\[\V j=\rho_m\V v=ne\mu\V E,\qquad \V j=\sum_k\rho_k\V v_k\]<p>$\rho_m=n|q|$ (C·m$^{-3}$), $\V v=\mu\V E$ avec $\mu$ la mobilité. $\V j$ a toujours le sens du courant.</p>`},
+{h:'Conservation de la charge',m:R`\[\mathrm{div}\,\V j+\frac{\partial\rho}{\partial t}=0\]<p>Régime permanent : $\mathrm{div}\,\V j=0$, le flux de $\V j$ est conservatif.</p>`},
+{h:'1re loi de Kirchhoff (nœuds)',m:R`\[\sum_i I_i=\sum_j I_j\]<p>Somme des courants qui arrivent au nœud = somme de ceux qui en partent.</p>`},
+{h:'Potentiel et tension',m:R`\[U_{AB}=V_A-V_B,\qquad U_{AC}=U_{AB}+U_{BC}\]<p>Le potentiel est défini à une constante près. La masse est prise à $V=0$.</p>`},
+{h:'2e loi de Kirchhoff (mailles)',m:R`\[\sum_i U_i=0\]<p>On parcourt la maille dans un sens donné et on compte chaque tension avec son signe.</p>`},
+{h:'Générateur et récepteur',m:R`<p>Générateur : le courant circule dans le sens des potentiels croissants (pile, accumulateur). Récepteur : sens des potentiels décroissants (résistance, diode, condensateur en charge, moteur).</p>\[P_g=U_gI,\qquad P_r=U_rI\quad(\text{en watts})\]`}
+],
+tests:[
+{q:R`Définis nœud, branche et maille.`,a:R`<p>Nœud : point où se rejoignent au moins trois dipôles. Branche : ensemble des dipôles compris entre deux nœuds consécutifs. Maille : ensemble de branches qui forment un contour fermé.</p>`},
+{q:R`Donne la relation entre intensité et charge, et le sens du courant positif.`,a:R`<p>$i=\dfrac{dq}{dt}$, et $I=Q/t$ en régime permanent. Le courant positif va dans le sens des charges positives, donc dans le sens contraire à celui des électrons.</p>`},
+{q:R`Une piste de cuivre de 0,1 mm d'épaisseur et 1 mm de largeur porte 10 mA. Calcule $j$ et compare avec un fil de 1 mm$^2$ parcouru par 1 A.`,a:R`<p>$S=0{,}1\cdot10^{-3}\times10^{-3}=10^{-7}$ m$^2$, donc $j=I/S=10^{-2}/10^{-7}=10^{5}$ A·m$^{-2}$.</p><p>Fil : $j=1/10^{-6}=10^{6}$ A·m$^{-2}$, soit dix fois plus.</p>`},
+{q:R`Exprime $\V j$ en fonction de la vitesse des porteurs, puis du champ $\V E$.`,a:R`<p>$\V j=\rho_m\V v$ avec $\rho_m=n|q|$. Avec $\V v=\mu\V E$ : $\V j=ne\mu\V E$.</p>`},
+{q:R`Établis l'équation de conservation de la charge.`,a:R`<p>La charge qui sort d'un volume $V$ par unité de temps vaut $\oint_S\V j\cdot d\V S=-\dfrac{dQ}{dt}=-\iiint\dfrac{\partial\rho}{\partial t}d\tau$.</p><p>Par Ostrogradski, $\oint_S\V j\cdot d\V S=\iiint\mathrm{div}\,\V j\,d\tau$. Cela vaut pour tout volume, donc $\mathrm{div}\,\V j+\dfrac{\partial\rho}{\partial t}=0$.</p>`},
+{q:R`Énonce les deux lois de Kirchhoff.`,a:R`<p>Nœuds : $\sum I_{\text{arrivant}}=\sum I_{\text{partant}}$ (conservation de la charge). Mailles : $\sum U_i=0$ pour un parcours complet de la maille.</p>`},
+{q:R`Avec $V_A=5$ V, $V_B=2$ V et $V_C=-1$ V, calcule $U_{AB}$, $U_{BC}$ et $U_{AC}$.`,a:R`<p>$U_{AB}=3$ V, $U_{BC}=3$ V, $U_{AC}=6$ V. On vérifie l'additivité : $U_{AC}=U_{AB}+U_{BC}$.</p>`},
+{q:R`Quand un dipôle $AB$ a-t-il un caractère générateur ou récepteur ? Donne les puissances.`,a:R`<p>Générateur : le courant le traverse dans le sens des potentiels croissants, $P_g=U_gI$. Récepteur : sens des potentiels décroissants, $P_r=U_rI$.</p>`},
+{q:R`Silicium pur : $n_e=n_p=n_i=1{,}5\cdot10^{16}$ m$^{-3}$, $v_e=12$ cm·s$^{-1}$, $v_p=5$ cm·s$^{-1}$. Calcule $j$.`,a:R`<p>Les deux types de porteurs contribuent dans le même sens : $j=n_ie(v_e+v_p)=1{,}5\cdot10^{16}\times1{,}6\cdot10^{-19}\times0{,}17\approx4{,}1\cdot10^{-4}$ A·m$^{-2}$.</p>`}
+]},
+
+{id:'e2',n:'2',t:'Modélisations linéaires d\'un dipôle',src:'Polycopié · chap. 2 · Ohm, associations, Thévenin, Norton, récepteurs',
+fiche:[
+{h:'Caractéristique, dipôle actif ou passif',m:R`<p>Caractéristique : courbe $u=f(i)$ ou $i=g(u)$. Droite : dipôle linéaire.</p><p>Passif : la caractéristique passe par l'origine, l'énergie reçue est dissipée en chaleur. Actif : elle ne passe pas par l'origine, le dipôle fournit de l'énergie.</p><p>Point de fonctionnement : intersection des caractéristiques du générateur et du récepteur.</p>`},
+{h:'Conducteur ohmique et effet Joule',m:R`\[u=Ri,\qquad G=\frac1R,\qquad P=Ri^2=Gu^2\]<p>$R$ en ohms (Ω), $G$ en siemens (S). Convention récepteur.</p>`},
+{h:'Loi d\'Ohm locale',m:R`<p>Forces sur un électron : $-e\V E$ et $-a\V v$. À l'équilibre $\V v=-\dfrac ea\V E$, d'où</p>\[\V j=\gamma\V E,\qquad \gamma=\frac{ne^2}{a},\qquad \rho'=\frac1\gamma\]<p>$\gamma$ : conductivité (S·m$^{-1}$). $\rho'$ : résistivité (Ω·m), à ne pas confondre avec la densité de charge $\rho$.</p>`},
+{h:'Résistance d\'un fil cylindrique',m:R`\[R=\frac1\gamma\frac LS=\rho'\frac LS\]`},
+{h:'Association série',m:R`\[R_{eq}=\sum_kR_k,\qquad u_k=\frac{R_k}{\sum R_k}\,u\ \ (\text{diviseur de tension})\]`},
+{h:'Association parallèle',m:R`\[\frac1{R_{eq}}=\sum_k\frac1{R_k},\qquad G_{eq}=\sum_kG_k,\qquad i_k=\frac{G_k}{\sum G_k}\,i\ \ (\text{diviseur de courant})\]`},
+{h:'Théorème de Millman',m:R`\[V_N=\frac{\sum_k V_{A_k}/R_k}{\sum_k 1/R_k}\]<p>C'est la loi des nœuds écrite avec les potentiels. Les $n$ résistances relient $N$ aux points $A_k$.</p>`},
+{h:'Générateurs idéaux',m:R`<p>Tension : $u=E$ quel que soit $i$, $P_g=Ei$. Courant : $i=\eta$ quel que soit $u$, $P_g=\eta u$.</p>\[E_{eq}=\sum_kE_k\ \ (\text{série}),\qquad \eta_{eq}=\sum_k\eta_k\ \ (\text{parallèle})\]`},
+{h:'Générateur réel : Thévenin et Norton',m:R`\[\text{Thévenin : }u=E-Ri,\qquad \text{Norton : }i=\eta-Gu,\qquad E=R\eta\]<p>$E$ : tension à vide. $\eta$ : courant de court-circuit. $G=1/R$.</p>\[\text{Séries : }E_{eq}=\sum E_k,\ R_{eq}=\sum R_k\qquad\text{Parallèle : }\eta_{eq}=\sum\eta_k,\ G_{eq}=\sum G_k\]`},
+{h:'Puissance d\'un générateur réel',m:R`\[P_g=Ei-Ri^2\ \ (\text{Thévenin}),\qquad P_g=\eta u-Gu^2\ \ (\text{Norton})\]<p>Le terme $Ri^2$ est la puissance perdue par effet Joule dans la résistance interne.</p>`},
+{h:'Récepteur linéaire et diode',m:R`\[u=E'+R'i,\qquad P_r=E'i+R'i^2\]<p>$E'$ : force contre-électromotrice. $E'i$ est la puissance utile.</p><p>Diode : $u\lt U_d$, bloquée ($i=0$). $u\gt U_d$ : $u=U_d+R_di$, générateur de tension $U_d$ en série avec $R_d$.</p>`},
+{h:'Réseau : Thévenin ou Norton équivalent',m:R`<p>$R_{Th}=R_N$ : on éteint les sources (générateurs de tension idéaux en court-circuit, générateurs de courant idéaux en circuit ouvert) et on calcule la résistance vue entre les bornes.</p><p>$E_{Th}$ : tension à vide entre les bornes. $\eta$ : courant de court-circuit.</p><p>Superposition : on traite chaque générateur seul, puis on additionne. Valable pour des dipôles linéaires.</p>`}
+],
+tests:[
+{q:R`Démontre la loi d'Ohm locale $\V j=\gamma\V E$ avec le modèle de l'électron libre.`,a:R`<p>Forces : $-e\V E$ et $-a\V v$. Vitesse limite : $-e\V E-a\V v=\V 0$, donc $\V v=-\dfrac ea\V E$.</p><p>Les électrons portent la charge volumique $-ne$ : $\V j=-ne\,\V v=\dfrac{ne^2}{a}\V E=\gamma\V E$.</p>`},
+{q:R`Montre que $R=\rho'\dfrac LS$ pour un conducteur cylindrique homogène.`,a:R`<p>$E$ est uniforme : $U_{AB}=EL$. $I=jS=\gamma ES$, donc $U_{AB}=\dfrac1\gamma\dfrac LS\,I$. Par identification avec $U_{AB}=RI$ : $R=\dfrac{L}{\gamma S}=\rho'\dfrac LS$.</p>`},
+{q:R`Calcule la résistance équivalente de $R_1=100\ \Omega$ et $R_2=150\ \Omega$ en série, puis en parallèle. Donne $u_1$ dans la série.`,a:R`<p>Série : $250\ \Omega$ et $u_1=\dfrac{100}{250}u=0{,}4\,u$. Parallèle : $\dfrac{100\times150}{250}=60\ \Omega$.</p>`},
+{q:R`Une source $E=6$ V alimente $R_1=100\ \Omega$ en série avec l'ensemble de $R_3=50\ \Omega$ en parallèle avec ($R_2=50\ \Omega$ en série avec $R_4=50\ \Omega$). Calcule le courant dans $R_2$ et la tension aux bornes de $R_3$.`,a:R`<p>$R_2+R_4=100\ \Omega$ et $R_3\parallel(R_2+R_4)=\dfrac{50\times100}{150}=33{,}3\ \Omega$.</p><p>Courant total $6/133{,}3=45$ mA. Tension aux bornes de $R_3$ : $u=45\ \text{mA}\times33{,}3\ \Omega=1{,}5$ V.</p><p>Courant dans $R_2$ : $i=u/(R_2+R_4)=15$ mA.</p>`},
+{q:R`Énonce le théorème de Millman. Application : trois résistances de 1 kΩ relient $N$ à des points de potentiel 6 V, 0 V et 3 V.`,a:R`<p>$V_N=\dfrac{\sum V_{A_k}/R_k}{\sum1/R_k}$. Avec trois résistances égales : $V_N=\dfrac{6+0+3}{3}=3$ V.</p>`},
+{q:R`Un générateur délivre 12 V à vide et 3 A en court-circuit. Donne ses modèles de Thévenin et de Norton.`,a:R`<p>Thévenin : $E=12$ V et $R=E/\eta=4\ \Omega$. Norton : $\eta=3$ A et $G=1/R=0{,}25$ S.</p>`},
+{q:R`Comment détermine-t-on le générateur de Thévenin équivalent à un réseau ?`,a:R`<p>On éteint les sources : générateurs de tension idéaux remplacés par des fils (court-circuit), générateurs de courant idéaux par des interrupteurs ouverts. On calcule alors $R_{Th}$ vue entre les bornes. Puis $E_{Th}$ est la tension à vide entre ces bornes, obtenue avec les lois de l'électrocinétique.</p>`},
+{q:R`Donne la puissance fournie par un générateur réel dans les deux modèles, et interprète chaque terme.`,a:R`<p>Thévenin : $P_g=Ei-Ri^2$ ($Ei$ est la puissance du générateur idéal, $Ri^2$ la perte Joule). Norton : $P_g=\eta u-Gu^2$.</p>`},
+{q:R`Un moteur de f.c.é.m. $E'=kN$ et de résistance $R'$ est alimenté par un générateur $(E,R)$. Trouve $i$, la puissance motrice $P_m$ et la vitesse $N_0$ qui rend $P_m$ maximale.`,a:R`<p>Loi des mailles : $E-Ri-R'i-kN=0$, donc $i=\dfrac{E-kN}{R+R'}$.</p><p>$P_m=E'i=\dfrac{kN(E-kN)}{R+R'}$, une parabole en $N$. Sa dérivée s'annule pour $N_0=\dfrac E{2k}$ et $P_{max}=\dfrac{E^2}{4(R+R')}$.</p>`},
+{q:R`Décris le modèle linéaire par morceaux d'une diode.`,a:R`<p>Pour $u\lt U_d$ : $i=0$, la diode est bloquée (interrupteur ouvert). Pour $u\gt U_d$ : $u=U_d+R_di$, c'est un générateur de tension $U_d$ en série avec $R_d$.</p>`}
+]},
+
+{id:'e3',n:'3',t:'Dipôles linéaires en tension variable',src:'Polycopié · chap. 3 · condensateur, bobine, ARQS',
+fiche:[
+{h:'ARQS et dipôle linéaire',m:R`<p>Régimes quasi-stationnaires : tensions et courants varient assez lentement pour que les lois de Kirchhoff restent valables.</p><p>Dipôle linéaire : $u(t)$ et $i(t)$ vérifient une équation différentielle linéaire à coefficients constants.</p>`},
+{h:'Condensateur parfait',m:R`\[q=Cu,\qquad i=C\frac{du}{dt}\ \text{(conv. récepteur)},\qquad \mathcal E=\tfrac12Cu^2\]<p>En régime permanent continu : $i=0$, le condensateur se comporte comme un interrupteur ouvert.</p>`},
+{h:'Association de condensateurs',m:R`\[\text{Série : }\frac1C=\sum_k\frac1{C_k}\qquad\text{Parallèle : }C=\sum_kC_k\]`},
+{h:'Condensateur réel',m:R`<p>Condensateur idéal $C$ en parallèle avec une résistance de fuite $R_f$.</p>\[i_C=C\frac{du}{dt},\quad i_R=\frac u{R_f},\quad E=\int_0^{t_u}\frac{u^2}{R_f}dt+\tfrac12Cu^2\]<p>Parallèle de condensateurs réels : $C=\sum C_k$ et $\dfrac1{R_f}=\sum\dfrac1{R_k}$.</p>`},
+{h:'Bobine parfaite',m:R`\[u=L\frac{di}{dt}\ \text{(conv. récepteur)},\qquad E_{mag}=\tfrac12Li^2\]<p>$L$ en henrys (H). En régime permanent continu : $u=0$, la bobine se comporte comme un fil.</p>`},
+{h:'Association de bobines',m:R`\[\text{Série : }L=\sum_kL_k\qquad\text{Parallèle : }\frac1L=\sum_k\frac1{L_k}\]`},
+{h:'Bobine réelle',m:R`<p>Bobine parfaite $L$ en série avec une résistance $r$.</p>\[u=L\frac{di}{dt}+ri,\qquad E=\int_0^{t_1}ri^2\,dt+\tfrac12Li^2\]<p>Série de bobines réelles : $L=\sum L_k$ et $r=\sum r_k$.</p>`},
+{h:'Continuité',m:R`<p>L'énergie ne varie pas de façon brutale : la tension $u_C$ (donc la charge) et l'intensité $i_L$ sont continues. L'intensité dans un condensateur et la tension aux bornes d'une bobine peuvent sauter.</p>`}
+],
+tests:[
+{q:R`Écris la relation entre $u$ et $i$ pour un condensateur, son énergie, et son comportement en régime continu.`,a:R`<p>$i=C\dfrac{du}{dt}$ (convention récepteur), $\mathcal E=\tfrac12Cu^2$. En régime permanent continu, $i=0$ : circuit ouvert.</p>`},
+{q:R`Calcule l'énergie d'un condensateur de 10 µF chargé sous 100 V.`,a:R`<p>$\mathcal E=\tfrac12\times10^{-5}\times100^2=0{,}05$ J.</p>`},
+{q:R`Établis la capacité équivalente de deux condensateurs en série. Applique avec $C_1=2$ µF et $C_2=3$ µF, puis en parallèle.`,a:R`<p>Série : même $i$, $u=u_1+u_2$, donc $\dfrac{du}{dt}=i\left(\dfrac1{C_1}+\dfrac1{C_2}\right)$ et $\dfrac1C=\dfrac1{C_1}+\dfrac1{C_2}$ : $C=1{,}2$ µF.</p><p>Parallèle : même $u$, $i=i_1+i_2$, donc $C=C_1+C_2=5$ µF.</p>`},
+{q:R`Décris le modèle d'un condensateur réel et son bilan d'énergie.`,a:R`<p>Condensateur idéal $C$ en parallèle avec une résistance de fuite $R_f$. La puissance reçue $ui=\dfrac{u^2}{R_f}+Cu\dfrac{du}{dt}$ donne $E=\int\dfrac{u^2}{R_f}dt+\tfrac12Cu^2$ : énergie dissipée par effet Joule plus énergie électrostatique stockée.</p>`},
+{q:R`Relation $u$-$i$ d'une bobine, énergie, comportement en continu. Calcule l'énergie pour $L=0{,}5$ H et $i=2$ A.`,a:R`<p>$u=L\dfrac{di}{dt}$ et $E_{mag}=\tfrac12Li^2=\tfrac12\times0{,}5\times4=1$ J. En continu $u=0$ : la bobine se comporte comme un fil.</p>`},
+{q:R`Écris l'équation d'une bobine réelle et son bilan énergétique.`,a:R`<p>$u=L\dfrac{di}{dt}+ri$. La puissance reçue $ui=ri^2+Li\dfrac{di}{dt}$ donne $E=\int ri^2dt+\tfrac12Li^2$ (Joule plus énergie magnétique).</p>`},
+{q:R`Définis un dipôle linéaire et l'ARQS.`,a:R`<p>Dipôle linéaire : $u(t)$ et $i(t)$ vérifient une équation différentielle linéaire à coefficients constants. ARQS : tensions et courants varient assez lentement pour que les lois de Kirchhoff restent valables à chaque instant.</p>`},
+{q:R`Quelles grandeurs sont continues dans un circuit contenant $L$ et $C$ ? Pourquoi ?`,a:R`<p>La tension $u_C$ (donc la charge $q=Cu_C$) et l'intensité $i_L$. Une discontinuité demanderait une puissance infinie, car les énergies $\tfrac12Cu^2$ et $\tfrac12Li^2$ ne peuvent pas varier brutalement.</p>`}
+]},
+
+{id:'e4a',n:'4A',t:'Circuits RC, RL, RLC : régime transitoire',src:'Polycopié · chap. 4 (4.1 à 4.4) · charge, décharge, régimes, analogie',
+fiche:[
+{h:'Circuit RC : charge',m:R`\[RC\frac{du_c}{dt}+u_c=E,\qquad \tau=RC\]\[u_c=E\left(1-e^{-t/\tau}\right),\qquad i=\frac ER\,e^{-t/\tau}\]<p>Initial : $u_c=0$, $i=E/R$. Final : $u_c=E$, $i=0$.</p>`},
+{h:'Circuit RC : décharge',m:R`\[RC\frac{du_c}{dt}+u_c=0\ \Rightarrow\ u_c=U_0e^{-t/\tau},\qquad i=-C\frac{du_c}{dt}=\frac{U_0}Re^{-t/\tau}\]`},
+{h:'Constante de temps',m:R`<p>À $t=\tau$ : 63 % de la valeur finale (charge) ou 37 % de la valeur initiale (décharge). La tangente à l'origine coupe l'asymptote en $t=\tau$. Régime permanent atteint à 1 % près pour $t=4{,}6\,\tau$ ; au-delà de $5\tau$ on considère le régime permanent établi.</p>`},
+{h:'Bilan énergétique (RC)',m:R`\[Ei=Ri^2+\frac d{dt}\left(\tfrac12Cu_c^2\right),\quad\text{soit }P_g=P_J+\frac{d\mathcal E_{elect}}{dt}\]<p>Décharge : $-\dfrac{d}{dt}\mathcal E_{elect}=P_J$, toute l'énergie du condensateur est dissipée dans $R$.</p>`},
+{h:'Circuit RL : établissement',m:R`\[\frac LR\frac{di}{dt}+i=\frac ER,\qquad \tau=\frac LR\]\[i=\frac ER\left(1-e^{-t/\tau}\right),\qquad u_L=E\,e^{-t/\tau}\]<p>Initial : $i=0$, $u_L=E$ (bobine = circuit ouvert). Final : $i=E/R$, $u_L=0$ (bobine = fil).</p>`},
+{h:'Circuit RL : arrêt du courant',m:R`\[\frac LR\frac di{dt}+i=0\ \Rightarrow\ i=I_0e^{-t/\tau},\qquad u_L=RI_0e^{-t/\tau}\]<p>Bilan : $P_g=P_J+\dfrac{d}{dt}\left(\tfrac12Li^2\right)$. À l'arrêt, $-\dfrac{d\mathcal E_{mag}}{dt}=P_J$.</p>`},
+{h:'RLC série : équation',m:R`\[LC\frac{d^2u_c}{dt^2}+RC\frac{du_c}{dt}+u_c=E\]<p>Conditions initiales : $u_c(0)=0$ et $\dfrac{du_c}{dt}(0)=0$ (donc $i(0)=0$). Équation caractéristique : $r^2+\dfrac RLr+\dfrac1{LC}=0$.</p>`},
+{h:'Variables réduites',m:R`\[\omega_0=\frac1{\sqrt{LC}},\quad \lambda=\frac R{2L},\quad \alpha=\frac\lambda{\omega_0}=\frac R2\sqrt{\frac CL},\quad Q=\frac1{2\alpha}=\frac{L\omega_0}R=\frac1{RC\omega_0}\]\[r^2+2\lambda r+\omega_0^2=0,\qquad \Delta'=\lambda^2-\omega_0^2=\omega_0^2(\alpha^2-1)\]`},
+{h:'Régime apériodique ($\\alpha\\gt1$)',m:R`\[R\gt2\sqrt{L/C},\qquad r_{1,2}=-\lambda\pm\sqrt{\lambda^2-\omega_0^2}\]\[u_c=E\left(\frac{r_2}{r_1-r_2}e^{r_1t}-\frac{r_1}{r_1-r_2}e^{r_2t}+1\right)\]\[i=CE\frac{\omega_0^2}{\omega}e^{-\alpha\omega_0t}\sinh\omega t,\quad\omega=\omega_0\sqrt{\alpha^2-1}\]`},
+{h:'Régime critique ($\\alpha=1$)',m:R`\[R_c=2\sqrt{L/C},\qquad u_c=E\left[1-(\lambda t+1)e^{-\lambda t}\right],\qquad i=CE\omega_0^2\,t\,e^{-\omega_0t}\]<p>Retour le plus rapide à l'équilibre sans oscillation.</p>`},
+{h:'Régime pseudo-périodique ($\\alpha\\lt1$)',m:R`\[R\lt2\sqrt{L/C},\qquad \omega=\omega_0\sqrt{1-\alpha^2},\qquad r_{1,2}=-\lambda\pm j\omega\]\[u_c=E\left[1-e^{-\lambda t}\left(\cos\omega t+\frac\lambda\omega\sin\omega t\right)\right],\qquad i=CE\frac{\omega^2+\lambda^2}{\omega}e^{-\lambda t}\sin\omega t\]`},
+{h:'Bilan énergétique (RLC)',m:R`\[P_g=Ei=P_J+\frac{d\mathcal E_{magn}}{dt}+\frac{d\mathcal E_{elect}}{dt},\quad P_J=Ri^2,\ \mathcal E_{magn}=\tfrac12Li^2,\ \mathcal E_{elect}=\tfrac12Cu_c^2\]`},
+{h:'Analogie électro-mécanique',m:R`<table><tr><th>Électrique</th><th>Mécanique</th></tr><tr><td>Charge $q$ (ou $u_c$)</td><td>Position $x$</td></tr><tr><td>Intensité $i$</td><td>Vitesse $v$</td></tr><tr><td>Inductance $L$</td><td>Masse $m$</td></tr><tr><td>Résistance $R$</td><td>Frottement $f$</td></tr><tr><td>Capacité $C$</td><td>Inverse de la raideur $1/k$</td></tr><tr><td>$\omega_0=1/\sqrt{LC}$</td><td>$\omega_0=\sqrt{k/m}$</td></tr><tr><td>$\lambda=R/2L$</td><td>$\lambda=f/2m$</td></tr><tr><td>$\mathcal E_{magn}=\tfrac12Li^2$</td><td>$\mathcal E_c=\tfrac12mv^2$</td></tr><tr><td>$\mathcal E_{elect}=\tfrac12q^2/C$</td><td>$\mathcal E_p=\tfrac12kx^2$</td></tr><tr><td>$P_J=Ri^2$</td><td>$P_f=fv^2$</td></tr></table>`}
+],
+tests:[
+{q:R`Établis l'équation différentielle de la charge d'un condensateur à travers une résistance et résous-la.`,a:R`<p>Maille : $E=u_R+u_c=Ri+u_c$ avec $i=C\dfrac{du_c}{dt}$, donc $RC\dfrac{du_c}{dt}+u_c=E$.</p><p>Avec $u_c(0)=0$ : $u_c=E(1-e^{-t/\tau})$, $\tau=RC$, puis $i=\dfrac ERe^{-t/\tau}$.</p>`},
+{q:R`$R=10$ kΩ et $C=100$ µF. Calcule $\tau$, $u_c(\tau)$ en fonction de $E$, et le temps pour atteindre 99 % de $E$.`,a:R`<p>$\tau=10^4\times10^{-4}=1$ s. $u_c(\tau)=E(1-e^{-1})\approx0{,}63E$.</p><p>99 % : $e^{-t/\tau}=0{,}01$, donc $t=\tau\ln100\approx4{,}6$ s.</p>`},
+{q:R`Condensateur chargé sous $U_0$, branché sur une résistance $R$ à $t=0$. Donne $u_c(t)$, $i(t)$ et le bilan d'énergie.`,a:R`<p>$RC\dfrac{du_c}{dt}+u_c=0$, donc $u_c=U_0e^{-t/\tau}$ et $i=-C\dfrac{du_c}{dt}=\dfrac{U_0}Re^{-t/\tau}$.</p><p>Toute l'énergie $\tfrac12CU_0^2$ est dissipée dans $R$ : $-\dfrac{d\mathcal E_{elect}}{dt}=P_J$.</p>`},
+{q:R`Bilan d'énergie de la charge RC : quelle fraction de l'énergie fournie par le générateur est stockée dans $C$ ?`,a:R`<p>Le générateur fournit $Eq=CE^2$. Le condensateur stocke $\tfrac12CE^2$ et $R$ dissipe $\tfrac12CE^2$ : la moitié est stockée, l'autre moitié est perdue, quelle que soit $R$.</p>`},
+{q:R`Un condensateur chargé sous $U_0$ est branché à $t=0$ sur $E$ en série avec $R$. Donne $i(t)$.`,a:R`<p>$RC\dfrac{du}{dt}+u=E$ avec $u(0)=U_0$ : $u=E+(U_0-E)e^{-t/\tau}$.</p><p>$i=C\dfrac{du}{dt}=\dfrac{E-U_0}{R}e^{-t/\tau}$.</p>`},
+{q:R`Un condensateur $C$ chargé sous $E$ est relié à $t=0$ à un circuit $(R,C')$ avec $C'$ déchargé. Calcule la variation d'énergie.`,a:R`<p>Charge conservée : tension finale $u_\infty=\dfrac{CE}{C+C'}$. Énergie finale $\tfrac12(C+C')u_\infty^2=\dfrac{C^2E^2}{2(C+C')}$, initiale $\tfrac12CE^2$.</p><p>$\Delta\mathcal E=-\dfrac12\dfrac{CC'}{C+C'}E^2$, indépendante de $R$. C'est l'énergie dissipée par effet Joule dans $R$.</p>`},
+{q:R`Circuit RL soumis à un échelon $E$ : établis $i(t)$ et $u_L(t)$, puis donne les états initial et final.`,a:R`<p>$E=Ri+L\dfrac{di}{dt}$, donc $\tau\dfrac{di}{dt}+i=\dfrac ER$ avec $\tau=\dfrac LR$ et $i(0)=0$ : $i=\dfrac ER(1-e^{-t/\tau})$ et $u_L=Ee^{-t/\tau}$.</p><p>Initial : $i=0$, $u_L=E$. Final : $i=E/R$, $u_L=0$.</p>`},
+{q:R`Pourquoi une rupture brutale du courant dans une bobine peut-elle provoquer une surtension ?`,a:R`<p>Le courant ne peut pas être discontinu. Si l'on ouvre le circuit, $\dfrac{di}{dt}$ devient très grand en valeur absolue et $u_L=L\dfrac{di}{dt}$ aussi. Un condensateur en parallèle sur l'interrupteur limite cette surtension.</p>`},
+{q:R`Circuit RLC série alimenté par un échelon. Donne l'équation de $u_c$, puis $\omega_0$, $\alpha$, $Q$ et les trois régimes.`,a:R`<p>$LC\dfrac{d^2u_c}{dt^2}+RC\dfrac{du_c}{dt}+u_c=E$, $\omega_0=\dfrac1{\sqrt{LC}}$, $\alpha=\dfrac R2\sqrt{\dfrac CL}$, $Q=\dfrac1{2\alpha}=\dfrac{L\omega_0}R$.</p><p>$\alpha\gt1$ apériodique, $\alpha=1$ critique ($R_c=2\sqrt{L/C}$), $\alpha\lt1$ pseudo-périodique.</p>`},
+{q:R`$L=0{,}1$ H, $C=1$ µF, $R=100\ \Omega$. Calcule $\omega_0$, $R_c$, $Q$, $\alpha$, $\omega$ et dis quel est le régime.`,a:R`<p>$\omega_0=1/\sqrt{10^{-7}}\approx3162$ rad·s$^{-1}$ et $R_c=2\sqrt{L/C}=2\sqrt{10^5}\approx632\ \Omega$.</p><p>$Q=\dfrac{L\omega_0}R=3{,}16$ et $\alpha=\dfrac1{2Q}=0{,}158$. Comme $R\lt R_c$, le régime est pseudo-périodique, avec $\omega=\omega_0\sqrt{1-\alpha^2}\approx3122$ rad·s$^{-1}$.</p>`},
+{q:R`Donne les valeurs de $u_R$, $u_L$, $u_c$ et $i$ à $t=0^+$ et en régime final pour un échelon $E$ sur un RLC série.`,a:R`<p>À $t=0^+$ : $u_c=0$, $i=0$, donc $u_R=0$ et $u_L=E$. En régime final : $i=0$, $u_R=0$, $u_L=0$ et $u_c=E$.</p>`},
+{q:R`Un circuit $(R,L)$ série est commuté avec un condensateur $C$ en parallèle sur l'interrupteur. À quelle condition le courant décroît-il sans oscillation à l'ouverture ?`,a:R`<p>Il faut le régime apériodique (ou critique) : $Q=\dfrac1R\sqrt{\dfrac LC}\le\dfrac12$, soit $C\ge\dfrac{4L}{R^2}$.</p>`},
+{q:R`Écris l'analogie entre l'oscillateur RLC et l'oscillateur mécanique amorti.`,a:R`<p>$L\ddot q+R\dot q+\dfrac qC=E$ et $m\ddot x+f\dot x+kx=F$. Correspondance : $q\leftrightarrow x$, $i\leftrightarrow v$, $L\leftrightarrow m$, $R\leftrightarrow f$, $1/C\leftrightarrow k$. Alors $\omega_0=\sqrt{k/m}$, $\lambda=f/2m$ et $Q=m\omega_0/f$.</p>`}
+]},
+
+{id:'e4b',n:'4B',t:'Résonance du circuit RLC série',src:'Polycopié · chap. 4 (4.5 à 4.7) · tension, intensité, phase, bande passante',
+fiche:[
+{h:'Équation en régime forcé',m:R`\[LC\frac{d^2u_c}{dt^2}+RC\frac{du_c}{dt}+u_c=E_0\cos\omega t\]<p>Régime permanent : $u_c=U_0\cos(\omega t+\phi)$, à la pulsation $\omega$ du générateur. Notation complexe : $\cx{u}_2=\cx{U}_0e^{j\omega t}$ et $u_2=\mathrm{Re}(\cx{u}_2)$.</p>`},
+{h:'Amplitude complexe',m:R`\[\cx U_0=\frac{E_0}{1-LC\omega^2+jRC\omega}=\frac{E_0}{1-x^2+2j\alpha x},\qquad x=\frac\omega{\omega_0}\]`},
+{h:'Amplitude et phase de $u_c$',m:R`\[U_0(x)=\frac{E_0}{\sqrt{(1-x^2)^2+4\alpha^2x^2}},\qquad \phi(x)=-\frac\pi2+\arctan\frac{1-x^2}{2\alpha x}\]<p>$U_0(0)=E_0$, $U_0(1)=QE_0$. $\phi$ passe de $0$ ($x=0$) à $-\pi/2$ ($x=1$) puis $-\pi$ ($x\to\infty$).</p>`},
+{h:'Résonance de tension',m:R`<p>Il y a résonance si $\alpha\lt\dfrac1{\sqrt2}$, soit $Q\gt\dfrac1{\sqrt2}$ ($\alpha\gt0{,}7$ : $U_0$ décroît sans maximum).</p>\[x_{max}=\sqrt{1-2\alpha^2},\qquad U_{max}=\frac{E_0}{2\alpha\sqrt{1-\alpha^2}}\]<p>$x_{max}\to1$ quand $\alpha\to0$ : $\omega_{max}\to\omega_0$ par valeurs inférieures.</p>`},
+{h:'À la pulsation propre',m:R`\[u_c(t)=\frac{E_0}R\sqrt{\frac LC}\,\sin\omega_0t=QE_0\sin\omega_0t\]<p>$u_c$ est en retard de $\pi/2$ sur $e(t)$.</p>`},
+{h:'Résonance d\'intensité',m:R`\[\cx I_0=\frac{E_0/R}{1+jQ\left(x-\frac1x\right)},\qquad I_0(x)=\frac{E_0/R}{\sqrt{1+Q^2\left(x-\frac1x\right)^2}},\qquad \phi'(x)=\arctan\left[Q\left(\frac1x-x\right)\right]\]<p>$I_{max}=\dfrac{E_0}{R}$ pour $\omega=\omega_0$, quel que soit $Q$. À la résonance, $i$ et $e$ sont en phase ($\phi'=0$). $\phi'$ va de $+\pi/2$ à $-\pi/2$.</p>`},
+{h:'Bande passante',m:R`<p>Pulsations de coupure : $I_0=I_{max}/\sqrt2$, soit $x^2\pm\dfrac xQ-1=0$.</p>\[\omega_{1,2}=\frac{\omega_0}{2Q}\left[\sqrt{1+4Q^2}\mp1\right],\qquad \Delta\omega=\omega_2-\omega_1=\frac{\omega_0}Q=\frac RL,\qquad \omega_1\omega_2=\omega_0^2\]<p>$Q$ grand : bande étroite, résonance aiguë. $Q$ petit : résonance floue.</p>`},
+{h:'Analogie en régime forcé',m:R`<p>$m\ddot X+f\dot X+kX=F_0\cos\omega t$ correspond à $E_0\leftrightarrow F_0/k$ : $X_0=\dfrac{F_0/k}{\sqrt{(1-x^2)^2+4\alpha^2x^2}}$, même phase que $u_c$. $\alpha=\dfrac f{2m\omega_0}$ et $Q=\dfrac{m\omega_0}f$.</p>`}
+],
+tests:[
+{q:R`Établis l'amplitude complexe de $u_c$ d'un RLC série soumis à $e(t)=E_0\cos\omega t$.`,a:R`<p>Équation : $LC\,\ddot u_c+RC\,\dot u_c+u_c=E_0\cos\omega t$. En complexes, $\dfrac d{dt}\to j\omega$ : $\cx U_0(1-LC\omega^2+jRC\omega)=E_0$.</p><p>Avec $x=\omega/\omega_0$ et $2\alpha=RC\omega_0$ : $\cx U_0=\dfrac{E_0}{1-x^2+2j\alpha x}$.</p>`},
+{q:R`Déduis $U_0(x)$ et $\phi(x)$.`,a:R`<p>$U_0=|\cx U_0|=\dfrac{E_0}{\sqrt{(1-x^2)^2+4\alpha^2x^2}}$ et $\phi=\arg\cx U_0=-\arg(1-x^2+2j\alpha x)=-\pi/2+\arctan\dfrac{1-x^2}{2\alpha x}$.</p>`},
+{q:R`Donne les valeurs de $U_0$ et $\phi$ pour $x=0$, $x=1$ et $x\to\infty$.`,a:R`<p>$x=0$ : $U_0=E_0$, $\phi=0$. $x=1$ : $U_0=QE_0$, $\phi=-\pi/2$. $x\to\infty$ : $U_0\to0$, $\phi\to-\pi$.</p>`},
+{q:R`À quelle condition y a-t-il résonance de tension, pour quelle pulsation et quelle amplitude ? Démonstration rapide.`,a:R`<p>On pose $f(x)=(1-x^2)^2+4\alpha^2x^2$ : $f'(x)=4x(x^2-1+2\alpha^2)$. Elle s'annule en $x=\sqrt{1-2\alpha^2}$, possible si $\alpha\lt\dfrac1{\sqrt2}$.</p><p>$U_{max}=\dfrac{E_0}{2\alpha\sqrt{1-\alpha^2}}$.</p>`},
+{q:R`$Q=5$ : calcule $x_{max}$ et $U_{max}/E_0$.`,a:R`<p>$\alpha=\dfrac1{2Q}=0{,}1$, $x_{max}=\sqrt{1-0{,}02}\approx0{,}99$ et $U_{max}=\dfrac{E_0}{0{,}2\times\sqrt{0{,}99}}\approx5{,}03\,E_0$, proche de $QE_0$.</p>`},
+{q:R`Que valent $u_c(t)$ et le déphasage avec $e(t)$ pour $\omega=\omega_0$ ?`,a:R`<p>$\cx U_0=\dfrac{E_0}{2j\alpha}=-jQE_0$, donc $u_c=QE_0\sin\omega_0t=\dfrac{E_0}R\sqrt{\dfrac LC}\sin\omega_0t$. $u_c$ est en retard de $\pi/2$ sur $e$.</p>`},
+{q:R`Établis l'expression de l'intensité $I_0(x)$ et donne sa valeur maximale.`,a:R`<p>$\cx I=jC\omega\,\cx U_0$, ce qui donne $\cx I_0=\dfrac{E_0/R}{1+jQ\left(x-\frac1x\right)}$ et $I_0=\dfrac{E_0/R}{\sqrt{1+Q^2(x-1/x)^2}}$.</p><p>Maximum pour $x=1$ : $I_{max}=E_0/R$, avec $i$ et $e$ en phase.</p>`},
+{q:R`Définis et calcule la bande passante d'un RLC série.`,a:R`<p>Bande passante $\Delta\omega=\omega_2-\omega_1$ où $I_0=I_{max}/\sqrt2$. On résout $x^2\pm x/Q-1=0$ : $\omega_{1,2}=\dfrac{\omega_0}{2Q}[\sqrt{1+4Q^2}\mp1]$.</p><p>Donc $\Delta\omega=\dfrac{\omega_0}Q=\dfrac RL$ et $\omega_1\omega_2=\omega_0^2$.</p>`},
+{q:R`$R=10\ \Omega$, $L=0{,}1$ H, $C=1$ µF. Calcule $f_0$, $Q$, $\Delta\omega$, $\Delta f$ et $\omega_{1,2}$.`,a:R`<p>$\omega_0\approx3162$ rad·s$^{-1}$ donc $f_0\approx503$ Hz. $Q=\dfrac{L\omega_0}R\approx31{,}6$.</p><p>$\Delta\omega=R/L=100$ rad·s$^{-1}$, $\Delta f\approx15{,}9$ Hz. $\omega_1\approx3112$ et $\omega_2\approx3212$ rad·s$^{-1}$.</p>`},
+{q:R`Circuit bouchon : bobine $(r,L)$ en parallèle avec $C$, $f_0=1$ MHz, $Q=200$, $r=2\ \Omega$. Calcule $L$, $C$, $Z_0$ à la résonance et, pour $E=10$ mV, les courants $I_L$, $I_C$ et $I$.`,a:R`<p>$L=\dfrac{rQ}{2\pi f_0}\approx64$ µH et $C=\dfrac1{2\pi f_0rQ}\approx400$ pF.</p><p>$r\ll L\omega_0$ donc $Z_0\simeq rQ^2=80$ kΩ.</p><p>$I_L\approx\dfrac E{L\omega_0}=\dfrac{10\ \text{mV}}{400\ \Omega}=25$ µA, $I_C=C\omega_0E=25$ µA, $I=E/Z_0=125$ nA. Les courants dans les branches sont $Q$ fois plus grands que $I$ : le circuit bloque le passage du courant, d'où le nom « bouchon ».</p>`}
+]},
+
+{id:'e5',n:'5',t:'Notation complexe et régime sinusoïdal forcé',src:'Polycopié · chap. 5 · impédances, lois, puissance, facteur de puissance',
+fiche:[
+{h:'Notation complexe',m:R`<p>Régime sinusoïdal forcé : $u$ et $i$ sont sinusoïdales de pulsation $\omega$ imposée par le générateur.</p>\[\cx u=U_0e^{j(\omega t+\varphi)},\quad \cx i=I_0e^{j(\omega t+\varphi')},\quad \frac d{dt}\to j\omega\]<p>L'équation différentielle devient une relation algébrique entre $\cx u$ et $\cx i$.</p>`},
+{h:'Impédance et admittance',m:R`\[\Z=\frac{\cx u}{\cx i}\ (\Omega),\qquad \Y=\frac1\Z=\frac{\cx i}{\cx u}\ (\mathrm S)\quad\text{(conv. récepteur)}\]`},
+{h:'Résistance, condensateur, bobine',m:R`<table><tr><th></th><th>R</th><th>C</th><th>L</th></tr><tr><td>Impédance $\Z$</td><td>$R$</td><td>$\dfrac1{jC\omega}=-\dfrac j{C\omega}$</td><td>$jL\omega$</td></tr><tr><td>Admittance $\Y$</td><td>$G=1/R$</td><td>$jC\omega$</td><td>$\dfrac1{jL\omega}$</td></tr><tr><td>Déphasage $\phi$</td><td>0</td><td>$-\pi/2$</td><td>$+\pi/2$</td></tr></table>`},
+{h:'Loi d\'Ohm et déphasage',m:R`\[\cx u=\Z\,\cx i,\qquad U_0=Z\,I_0,\quad Z=|\Z|\]\[\phi=\varphi-\varphi'=\arg\Z=-\arg\Y\]<p>$\phi$ est l'avance de phase de $u$ sur $i$.</p>`},
+{h:'Lois de Kirchhoff en complexes',m:R`\[\sum_{arrivant}\cx i_k=\sum_{sortant}\cx i_l,\qquad \sum_{maille}\cx u_k=0\]\[\Z_{eq}=\sum\Z_k\ (\text{série}),\qquad \Y_{eq}=\sum\Y_k\ (\text{parallèle})\]`},
+{h:'Diviseurs',m:R`\[\cx u_k=\frac{\Z_k}{\sum\Z_k}\,\cx u,\qquad \cx i_k=\frac{\Y_k}{\sum\Y_k}\,\cx i\]`},
+{h:'Théorème de Millman',m:R`\[\cx V_N=\frac{\sum_k\cx V_{A_k}/\Z_k}{\sum_k1/\Z_k}\]<p>Loi des nœuds exprimée avec les potentiels complexes.</p>`},
+{h:'Puissance instantanée et moyenne',m:R`\[p(t)=u\,i=\tfrac12U_0I_0\left[\cos(2\omega t+\varphi+\varphi')+\cos(\varphi-\varphi')\right]\]\[\mathcal P=\langle p\rangle=\tfrac12U_0I_0\cos\phi\]<p>$p(t)$ oscille à la pulsation $2\omega$, de période $T/2$.</p>`},
+{h:'Valeurs efficaces',m:R`\[g_{eff}^2=\langle g^2\rangle=\frac1T\int_0^Tg(t)^2dt,\qquad U_{eff}=\frac{U_0}{\sqrt2},\quad I_{eff}=\frac{I_0}{\sqrt2}\]<p>Définies uniquement pour des grandeurs réelles.</p>`},
+{h:'Facteur de puissance',m:R`\[\mathcal P=U_{eff}I_{eff}\cos\phi,\qquad \text{facteur de puissance}=\cos\phi\]<p>Résistance pure : 1. Condensateur pur : 0. Bobine pure : 0.</p>`},
+{h:'Relever le $\\cos\\phi$',m:R`<p>Moteur $(R,L)$ : $\cos\phi=\dfrac R{\sqrt{R^2+L^2\omega^2}}$. On place un condensateur en parallèle pour que $\Y_{eq}$ soit réelle ($\phi=0$) :</p>\[C=\frac L{R^2+L^2\omega^2}\]<p>Le courant en ligne est alors le plus faible, ce qui réduit les pertes Joule.</p>`}
+],
+tests:[
+{q:R`Définis l'impédance et l'admittance complexes. Donne celles de $R$, $L$ et $C$.`,a:R`<p>$\Z=\cx u/\cx i$ (Ω) et $\Y=1/\Z$ (S). $\Z_R=R$, $\Z_L=jL\omega$, $\Z_C=\dfrac1{jC\omega}$. Les admittances en sont les inverses : $G$, $\dfrac1{jL\omega}$ et $jC\omega$.</p>`},
+{q:R`Établis $\Z_C=\dfrac1{jC\omega}$ à partir de $i=C\dfrac{du}{dt}$.`,a:R`<p>En complexes, $\cx i=jC\omega\,\cx u$. Donc $\Z_C=\dfrac{\cx u}{\cx i}=\dfrac1{jC\omega}=-\dfrac j{C\omega}$.</p>`},
+{q:R`Que représente l'argument de $\Z$ ? Donne-le pour $R$, $L$, $C$.`,a:R`<p>$\arg\Z=\phi=\varphi-\varphi'$ est l'avance de phase de $u$ sur $i$. Résistance : 0. Bobine : $+\pi/2$ ($u$ en avance). Condensateur : $-\pi/2$ ($u$ en retard).</p>`},
+{q:R`Relie les amplitudes $U_0$ et $I_0$ aux impédances.`,a:R`<p>$|\cx u|=|\Z|\,|\cx i|$, donc $U_0=Z\,I_0$ avec $Z=|\Z|$, et $I_0=Y\,U_0$.</p>`},
+{q:R`Calcule l'impédance de $R$ en parallèle avec $C$.`,a:R`<p>$\Y=\dfrac1R+jC\omega=\dfrac{1+jRC\omega}R$, donc $\Z=\dfrac R{1+jRC\omega}$.</p>`},
+{q:R`Écris les diviseurs de tension et de courant avec deux impédances.`,a:R`<p>$\cx u_1=\dfrac{\Z_1}{\Z_1+\Z_2}\cx u$ (série) et $\cx i_1=\dfrac{\Y_1}{\Y_1+\Y_2}\cx i=\dfrac{\Z_2}{\Z_1+\Z_2}\cx i$ (parallèle).</p>`},
+{q:R`Écris l'impédance d'un RLC série. Pour quelle pulsation est-elle réelle ?`,a:R`<p>$\Z=R+jL\omega+\dfrac1{jC\omega}=R+j\left(L\omega-\dfrac1{C\omega}\right)$. Elle est réelle pour $L\omega=\dfrac1{C\omega}$, soit $\omega=\omega_0=\dfrac1{\sqrt{LC}}$ : $i$ et $u$ sont alors en phase.</p>`},
+{q:R`Établis la puissance moyenne reçue par un dipôle : $\mathcal P=\tfrac12U_0I_0\cos\phi$.`,a:R`<p>$p=U_0I_0\cos(\omega t+\varphi)\cos(\omega t+\varphi')=\tfrac12U_0I_0[\cos(2\omega t+\varphi+\varphi')+\cos(\varphi-\varphi')]$.</p><p>La moyenne du premier cosinus est nulle, il reste $\mathcal P=\tfrac12U_0I_0\cos\phi$ avec $\phi=\varphi-\varphi'$.</p>`},
+{q:R`Une tension efficace vaut 220 V. Quelle est son amplitude ? Définis la valeur efficace.`,a:R`<p>$U_0=220\sqrt2\approx311$ V. Valeur efficace : racine de la moyenne du carré, $g_{eff}^2=\dfrac1T\int_0^Tg^2dt$, égale à $g_0/\sqrt2$ pour une grandeur sinusoïdale.</p>`},
+{q:R`Montre que le facteur de puissance vaut 1 pour une résistance, 0 pour un condensateur et 0 pour une bobine pure.`,a:R`<p>$\phi=\arg\Z$. Résistance : $\phi=0$, $\cos\phi=1$. Condensateur : $\phi=-\pi/2$, $\cos\phi=0$. Bobine : $\phi=+\pi/2$, $\cos\phi=0$. Un condensateur ou une bobine pure n'absorbe aucune puissance moyenne.</p>`},
+{q:R`Un moteur $L=1$ H, $R=10\ \Omega$ est alimenté en 220 V, 50 Hz. Calcule son facteur de puissance, puis la capacité à placer en parallèle pour le ramener à 1.`,a:R`<p>$L\omega=2\pi\times50\approx314\ \Omega$ et $\cos\phi=\dfrac R{\sqrt{R^2+L^2\omega^2}}\approx0{,}032$.</p><p>$\Y_{eq}=jC\omega+\dfrac1{R+jL\omega}$ est réelle si $C=\dfrac{L}{R^2+L^2\omega^2}\approx1{,}01\cdot10^{-5}$ F, soit environ 10 µF.</p>`},
+{q:R`Branche $(R,L_1)$ alimentée directement par une source de valeur efficace $E_0=220$ V, 50 Hz, avec $R$ variable. Calcule $R$ qui maximise la puissance, $P_{max}$, et $L_1$ pour $R=12\ \Omega$.`,a:R`<p>$P=\dfrac{RE_0^2}{R^2+(L_1\omega)^2}$ est maximale pour $R_0=L_1\omega$, avec $P_{max}=\dfrac{E_0^2}{2R_0}$.</p><p>Pour $R_0=12\ \Omega$ : $L_1=\dfrac{12}{2\pi\times50}\approx38$ mH et $P_{max}=\dfrac{220^2}{24}\approx2017$ W.</p>`}
+]}
+];
+
+const KEY='electro-prepa1-v1';
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+const main=document.getElementById('main'),nav=document.getElementById('nav');
+let html='',navh='';
+CH.forEach(c=>{
+  navh+=`<a href="#${c.id}"><span>${c.n}</span>${c.t}</a>`;
+  html+=`<section class="ch" id="${c.id}"><div class="chh"><span class="num">CH. ${c.n}</span><h2>${c.t}</h2></div><p class="src">${c.src}</p>
+  <div class="fiche"><h3>Fiche de formules</h3><div class="grid">${c.fiche.map(f=>`<div class="f"><div class="fh">${f.h}</div><div class="fm">${f.m}</div></div>`).join('')}</div></div>
+  <h3>Auto-test · ${c.tests.length} questions</h3><div>${c.tests.map((t,i)=>{const id=c.id+'-'+(i+1);return `<div class="t" data-id="${id}"><div class="qh"><span class="qn">Q${i+1}</span><div class="q">${t.q}<span class="tag"></span><div><button class="rev" aria-expanded="false">Voir la réponse</button></div><div class="ans" hidden>${t.a}<div class="mark"><button class="btn" data-v="ok">Je savais</button><button class="btn" data-v="redo">À revoir</button></div></div></div></div></div>`}).join('')}</div></section>`;
+});
+nav.innerHTML=navh;main.innerHTML=html;
+
+const total=CH.reduce((n,c)=>n+c.tests.length,0);
+function paint(){
+  let ok=0,redo=0;
+  document.querySelectorAll('.t').forEach(el=>{
+    const s=S[el.dataset.id];
+    if(s){el.dataset.s=s;el.querySelector('.tag').textContent=s==='ok'?'su':'à revoir'}else{delete el.dataset.s}
+    if(s==='ok')ok++;if(s==='redo')redo++;
+  });
+  document.getElementById('ptxt').textContent=`${ok} sues · ${redo} à revoir · ${total-ok-redo} pas encore vues sur ${total}`;
+  document.getElementById('pa').style.width=(100*ok/total)+'%';
+  document.getElementById('pb').style.width=(100*redo/total)+'%';
+}
+main.addEventListener('click',e=>{
+  const rev=e.target.closest('.rev');
+  if(rev){const ans=rev.closest('.q').querySelector('.ans');const open=ans.hidden;ans.hidden=!open;rev.setAttribute('aria-expanded',open);rev.textContent=open?'Masquer la réponse':'Voir la réponse';return}
+  const b=e.target.closest('.mark .btn');
+  if(b){const id=b.closest('.t').dataset.id;S[id]=b.dataset.v;save();paint()}
+});
+const bTest=document.getElementById('bTest'),bRedo=document.getElementById('bRedo');
+bTest.onclick=()=>{const on=document.body.classList.toggle('testmode');bTest.setAttribute('aria-pressed',on)};
+bRedo.onclick=()=>{const on=document.body.classList.toggle('only-redo');bRedo.setAttribute('aria-pressed',on)};
+document.getElementById('bReset').onclick=()=>{S={};save();paint()};
+paint();
+if(window.MathJax&&MathJax.startup&&MathJax.startup.promise){MathJax.startup.promise.then(()=>MathJax.typesetPromise([main,document.querySelector('.note')])).catch(()=>{})}
+</script>
+
+</body></html>

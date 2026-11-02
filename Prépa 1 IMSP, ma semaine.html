@@ -1,0 +1,323 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Prépa 1 IMSP, ma semaine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: bandeau titre, trois onglets (emploi du temps, étude, méthode). Grille horaire alignée sur desktop, cartes par jour sur téléphone. */
+:root{
+  --bg:#F3F5F8;--panel:#FFFFFF;--ink:#14202C;--muted:#58646F;--line:#D8DEE5;--accent:#1D3F8F;--accent-ink:#FFFFFF;--soft:#E9EEF6;--lunch:#E3E7EC;--today:#FFF3C4;
+  --meca:#2F6FDB;--electro:#1E8E5A;--alg:#5A47C9;--analyse:#B86F08;--sii:#0E8A8F;--logique:#C2416C;--archi:#5B6B7C;--psycho:#A8552B;--ue:#6F7A2E;
+  --sans:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;--disp:'Schibsted Grotesk','Figtree',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E141B;--panel:#161F29;--ink:#E7ECF1;--muted:#9AA7B3;--line:#2A3541;--accent:#9DB8F5;--accent-ink:#0E141B;--soft:#1B2633;--lunch:#1D2732;--today:#3A3412;
+  --meca:#7FA8F5;--electro:#5CCB93;--alg:#AFA5F5;--analyse:#F0B14F;--sii:#53CDD2;--logique:#F08DAB;--archi:#A9B6C4;--psycho:#E59A72;--ue:#BBC76A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E141B;--panel:#161F29;--ink:#E7ECF1;--muted:#9AA7B3;--line:#2A3541;--accent:#9DB8F5;--accent-ink:#0E141B;--soft:#1B2633;--lunch:#1D2732;--today:#3A3412;
+  --meca:#7FA8F5;--electro:#5CCB93;--alg:#AFA5F5;--analyse:#F0B14F;--sii:#53CDD2;--logique:#F08DAB;--archi:#A9B6C4;--psycho:#E59A72;--ue:#BBC76A;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:20px 48px}
+.wrap{max-width:1040px;margin-inline:auto}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,6vw,44px);line-height:1.08;margin:6px 0 8px;text-wrap:balance}
+h2{font-family:var(--disp);font-size:20px;margin:0 0 4px;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:64ch}
+.now{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.now b{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.now span{min-width:0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-16px;padding:10px 16px;border-bottom:1px solid var(--line);margin-top:16px}
+nav.tabs .row{max-width:1040px;margin-inline:auto;display:flex;gap:6px;overflow-x:auto}
+nav.tabs a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:500;white-space:nowrap}
+nav.tabs a[aria-current="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.pane{display:none;padding-top:20px}
+section.pane.on{display:block}
+
+/* grille */
+.grid{display:grid;grid-template-columns:56px repeat(5,minmax(0,1fr));grid-template-rows:34px repeat(4,46px) 36px repeat(4,46px);gap:4px;font-size:13.5px}
+.gh{display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:600;border-radius:6px;background:var(--panel);border:1px solid var(--line)}
+.gh.today{background:var(--today);border-color:var(--analyse)}
+.hr{display:flex;align-items:flex-start;justify-content:flex-end;padding-right:6px;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:3px}
+.blk{--h:var(--accent);background:var(--panel);background:color-mix(in srgb,var(--h) 13%,var(--panel));border:1px solid var(--line);border-left:5px solid var(--h);border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
+.blk.today{box-shadow:0 0 0 2px var(--analyse)}
+.blk .n{font-family:var(--disp);font-weight:600;line-height:1.2}
+.blk .p{color:var(--muted);font-size:12.5px}
+.blk .t{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:auto}
+.lunch{grid-column:1/-1;grid-row:6;background:var(--lunch);border-radius:6px;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--muted);font-size:13px}
+.lunch b{font-family:var(--mono);font-weight:500}
+.desk{display:block}.mob{display:none}
+.c-meca{--h:var(--meca)}.c-electro{--h:var(--electro)}.c-alg{--h:var(--alg)}.c-analyse{--h:var(--analyse)}.c-sii{--h:var(--sii)}.c-logique{--h:var(--logique)}.c-archi{--h:var(--archi)}.c-psycho{--h:var(--psycho)}.c-ue{--h:var(--ue)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--h);margin-right:6px}
+.note{margin-top:14px;font-size:13px;color:var(--muted);max-width:70ch}
+.dcard{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.dcard.today{border-color:var(--analyse);box-shadow:0 0 0 2px var(--analyse)}
+.dcard h3{font-family:var(--disp);font-size:17px;margin:0;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.dcard h3 small{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--muted)}
+.mobwrap{display:grid;gap:10px}
+
+/* étude */
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px}
+.prog{flex:1 1 240px;min-width:0}
+.prog .pt{font-size:13px;color:var(--muted);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.track{height:8px;background:var(--soft);border-radius:999px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent);transition:width .25s}
+button{font:inherit;cursor:pointer}
+.ghost{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font-size:13.5px}
+.ghost:hover{border-color:var(--accent)}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.sl{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-left:5px solid var(--h,var(--accent));border-radius:6px;padding:8px 10px;background:var(--panel);background:color-mix(in srgb,var(--h,var(--accent)) 9%,var(--panel));cursor:pointer;min-width:0}
+.sl input{margin-top:3px;width:17px;height:17px;flex:none;accent-color:var(--accent)}
+.sl .b{min-width:0;overflow-wrap:anywhere}
+.sl .tm{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.sl .tt{font-weight:600;line-height:1.3}
+.sl .dd{font-size:13px;color:var(--muted)}
+.sl.done{opacity:.6}.sl.done .tt{text-decoration:line-through}
+.fixed{font-size:12.5px;color:var(--muted)}
+.fixed b{font-weight:600;color:var(--ink)}
+
+/* méthode */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-block:12px 22px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.step .k{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.step h3{font-family:var(--disp);margin:2px 0 6px;font-size:17px}
+.step p{margin:0;font-size:14px}
+.step .d{margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td .dot{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--h);margin-right:7px}
+td a{color:var(--accent)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-top:22px}
+.rules div{border:1px dashed var(--line);border-radius:8px;padding:10px 14px;font-size:14px;background:var(--panel)}
+.rules b{display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+
+@media (max-width:780px){.desk{display:none}.mob{display:block}}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">IMSP · Classes préparatoires (MPSI &amp; PCSI) · 2026–2027</div>
+  <h1>Prépa 1, ma semaine</h1>
+  <p class="lead">Emploi du temps officiel (en vigueur depuis le lundi 28 septembre 2026) et un planning d'apprentissage après cours, calé sur tes horaires.</p>
+  <div class="now" id="now" aria-live="polite"></div>
+</header>
+
+<nav class="tabs"><div class="row" id="tabs">
+  <a href="#edt">Emploi du temps</a><a href="#etude">Planning d'étude</a><a href="#methode">Méthode après cours</a>
+</div></nav>
+
+<section class="pane" id="p-edt">
+  <h2>Cours de la semaine</h2>
+  <p class="lead" style="margin-bottom:14px">Cours de 8h à 12h le matin, pause déjeuner de 12h à 14h, cours de 14h à 18h l'après-midi.</p>
+  <div class="desk"><div class="grid" id="grid"></div></div>
+  <div class="mob"><div class="mobwrap" id="mob"></div></div>
+  <div class="legend" id="legend"></div>
+  <p class="note">Le jour en cours est entouré en jaune. Fait à Dangbo le 14 septembre 2026, signé du Directeur-Adjoint, Pr Vincent MONWANOU. Pour le mercredi après-midi, le tableau indique « UE Libres » puis « Soirée des clubs » à la place du nom d'enseignant.</p>
+</section>
+
+<section class="pane" id="p-etude">
+  <h2>Mon planning d'étude</h2>
+  <p class="lead" style="margin-bottom:14px">Chaque cours est revu le soir même, rappelé le lendemain matin, puis retravaillé en exercices le samedi. Coche chaque bloc quand il est fait.</p>
+  <div class="bar">
+    <div class="prog"><div class="pt" id="pt"></div><div class="track"><div class="fill" id="fill"></div></div></div>
+    <button class="ghost" id="reset" type="button">Nouvelle semaine (tout décocher)</button>
+  </div>
+  <div class="days" id="days"></div>
+  <p class="note">Les horaires sont des propositions. Si un soir est chargé (club, transport, fatigue), glisse le bloc au lendemain et garde le rappel du matin, qui ne prend que 15 minutes.</p>
+</section>
+
+<section class="pane" id="p-methode">
+  <h2>Quoi faire après chaque cours</h2>
+  <p class="lead">Quatre passages espacés valent mieux qu'une longue relecture. Chacun se fait sans regarder le cours d'abord.</p>
+  <div class="steps">
+    <div class="step"><div class="k">Jour même</div><h3>Reconstruire</h3><p>Le soir, relis tes notes, complète-les, puis refais la fiche de formules ou de définitions de mémoire. Souligne ce qui a bloqué.</p><div class="d">30 à 60 min</div></div>
+    <div class="step"><div class="k">Lendemain matin</div><h3>Rappel actif</h3><p>Sans notes, écris les 5 idées clés du cours d'hier sur une feuille, puis compare. Les trous disent quoi relire.</p><div class="d">15 min</div></div>
+    <div class="step"><div class="k">Samedi</div><h3>Exercices</h3><p>Fais les exercices du cours sans ouvrir la correction. Cherche 10 minutes, puis corrige et recopie ce que tu avais raté dans ton carnet d'erreurs.</p><div class="d">45 à 90 min par matière</div></div>
+    <div class="step"><div class="k">Une semaine après</div><h3>Auto-test</h3><p>Refais l'auto-test ou les questions « à revoir ». Une réponse ratée deux fois revient dans le prochain rappel du matin.</p><div class="d">20 à 30 min</div></div>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr><th>Matière</th><th>Le soir même</th><th>Le samedi</th><th>Outils prêts</th></tr></thead>
+    <tbody id="mt"></tbody>
+  </table></div>
+
+  <div class="rules">
+    <div><b>Carnet d'erreurs</b>Une page par matière : l'énoncé en une ligne, ton erreur, la bonne méthode. Relis-le chaque dimanche.</div>
+    <div><b>Séances de 50 minutes</b>50 minutes de travail, 10 minutes de pause sans écran. Après deux séances, change de matière.</div>
+    <div><b>Dimanche, 30 minutes</b>Regarde la semaine qui vient, repère les cours difficiles et planifie les exercices à rendre.</div>
+  </div>
+</section>
+</div>
+
+<script>
+const D=['Lundi','Mardi','Mercredi','Jeudi','Vendredi'];
+const C={
+  meca:{n:'Mécanique du point',c:'meca'},electro:{n:'Électrocinétique',c:'electro'},alg:{n:'Structures algébriques',c:'alg'},
+  analyse:{n:'Analyse 1',c:'analyse'},sii:{n:'SII',c:'sii'},logique:{n:'Logique et théorie des ensembles',c:'logique'},
+  archi:{n:"Architecture de l'ordinateur",c:'archi'},psycho:{n:"Psychologie éducative et théories de l'apprentissage",c:'psycho'},ue:{n:'UE Libres',c:'ue'}
+};
+// jour 0..4, début, fin, matière, enseignant
+const COURS=[
+ [0,8,12,'sii','O. Hounnan'],[0,14,18,'meca','Kpossa'],
+ [1,8,12,'logique','J. Odjoumani'],[1,14,18,'psycho','L. Affolabi'],
+ [2,8,12,'archi','H. Soude'],[2,14,18,'ue','Soirée des clubs'],
+ [3,8,12,'electro','J. Hounguevou'],[3,14,18,'analyse','A. Gbaguidi / J. Odjoumani'],
+ [4,8,12,'alg','A. Dossavi-Yovo'],[4,14,18,'meca','Kpossa']
+];
+const h2=h=>h+'h';
+function row(h){return h<=12?h-8+2:h-14+7}
+function blk(c,today,st){
+  const m=C[c[3]];
+  return `<div class="blk c-${m.c}${today?' today':''}"${st?` style="${st}"`:''}><div class="n">${m.n}</div><div class="p">${c[4]}</div><div class="t">${h2(c[1])} – ${h2(c[2])}</div></div>`;
+}
+const todayIdx=(()=>{const d=new Date().getDay();return d>=1&&d<=5?d-1:-1})();
+// grille desktop
+(function(){
+  let g='<div></div>';
+  D.forEach((d,i)=>{g+=`<div class="gh${i===todayIdx?' today':''}" style="grid-column:${i+2};grid-row:1">${d}</div>`});
+  [8,9,10,11].forEach((h,i)=>{g+=`<div class="hr" style="grid-column:1;grid-row:${i+2}">${h2(h)}</div>`});
+  [14,15,16,17].forEach((h,i)=>{g+=`<div class="hr" style="grid-column:1;grid-row:${i+7}">${h2(h)}</div>`});
+  g+=`<div class="lunch"><b>12h – 14h</b> Pause déjeuner</div>`;
+  COURS.forEach(c=>{
+    const r1=row(c[1]),r2=c[2]===12?6:11;
+    g+=blk(c,c[0]===todayIdx,`grid-column:${c[0]+2};grid-row:${r1}/${r2}`);
+  });
+  document.getElementById('grid').innerHTML=g;
+})();
+// cartes mobile
+(function(){
+  let h='';
+  D.forEach((d,i)=>{
+    h+=`<div class="dcard${i===todayIdx?' today':''}"><h3>${d}<small>8h – 18h</small></h3>`;
+    COURS.filter(c=>c[0]===i).sort((a,b)=>a[1]-b[1]).forEach((c,k)=>{
+      h+=blk(c,false);
+      if(k===0)h+=`<div class="fixed" style="text-align:center">12h – 14h · pause déjeuner</div>`;
+    });
+    h+='</div>';
+  });
+  document.getElementById('mob').innerHTML=h;
+})();
+document.getElementById('legend').innerHTML=Object.values(C).map(m=>`<span class="c-${m.c}"><i></i>${m.n}</span>`).join('');
+
+// bandeau « maintenant »
+function nowLine(){
+  const el=document.getElementById('now');
+  const d=new Date(),dow=d.getDay(),hr=d.getHours()+d.getMinutes()/60;
+  const fmt=c=>`${C[c[3]].n} · ${h2(c[1])}–${h2(c[2])}`;
+  let cur=null,nxt=null;
+  if(dow>=1&&dow<=5){
+    const L=COURS.filter(c=>c[0]===dow-1).sort((a,b)=>a[1]-b[1]);
+    cur=L.find(c=>hr>=c[1]&&hr<c[2]);
+    nxt=L.find(c=>c[1]>hr);
+  }
+  let t='';
+  if(cur)t=`<b>En cours</b><span>${fmt(cur)}</span>`+(nxt?`<b>Ensuite</b><span>${fmt(nxt)}</span>`:'');
+  else if(nxt)t=`<b>Aujourd'hui</b><span>Prochain cours : ${fmt(nxt)}</span>`;
+  else{
+    let k=(dow>=1&&dow<=4)?dow:0; // jour suivant (index) ; vendredi soir, week-end → lundi
+    const first=COURS.filter(c=>c[0]===k).sort((a,b)=>a[1]-b[1])[0];
+    t=`<b>Prochain cours</b><span>${D[k]} · ${fmt(first)}</span>`;
+  }
+  el.innerHTML=t;
+}
+nowLine();
+
+// planning d'étude
+const P=[
+ {d:'Lundi',cours:'SII · Mécanique',s:[
+  ['7h30','7h45','alg','Rappel du vendredi : Structures algébriques','5 idées clés, sans notes'],
+  ['19h30','20h15','meca','Mécanique du point : relire et refaire la fiche','Cours du jour, formules de mémoire, 3 questions cachées'],
+  ['20h15','20h45','sii','SII : compléter les notes','Schéma du système, vocabulaire, flux']]},
+ {d:'Mardi',cours:'Logique · Psychologie',s:[
+  ['7h30','7h45','meca','Rappel express : Mécanique (lundi)','5 idées clés, sans notes'],
+  ['19h30','20h15','logique','Logique et ensembles : reprendre les définitions','Refaire les démonstrations du cours'],
+  ['20h15','20h45','psycho','Psychologie éducative : fiche de 5 lignes','Idées principales et un exemple']]},
+ {d:'Mercredi',cours:'Architecture · UE libres · clubs',s:[
+  ['7h30','7h45','logique','Rappel express : Logique (mardi)','Écrire 5 définitions de mémoire'],
+  ['19h30','20h15','archi',"Architecture de l'ordinateur : schémas et vocabulaire","Redessiner le schéma vu en cours"],
+  ['20h15','20h45','meca','Mécanique : un exercice de rattrapage','Un exercice, 10 minutes de recherche avant correction']]},
+ {d:'Jeudi',cours:'Électrocinétique · Analyse 1',s:[
+  ['7h30','7h45','archi','Rappel express : Architecture (mercredi)','5 idées clés, sans notes'],
+  ['19h30','20h30','electro','Électrocinétique : fiche et lois','Lois, impédances, un circuit refait de A à Z'],
+  ['20h30','21h15','analyse','Analyse 1 : définitions et théorèmes','Énoncés de mémoire, puis un exemple chacun']]},
+ {d:'Vendredi',cours:'Structures algébriques · Mécanique',s:[
+  ['7h30','7h45','electro','Rappel express : Électrocinétique et Analyse (jeudi)','3 idées clés par cours'],
+  ['19h30','20h30','alg','Structures algébriques : fiche et propositions','Démonstrations à refaire, un exercice corrigé'],
+  ['20h30','21h00','meca','Mécanique du point : relire les notes du jour','Repères, bilan des forces, schéma']]},
+ {d:'Samedi',cours:'Jour des exercices',s:[
+  ['8h30','10h00','alg','Exercices : Structures algébriques','Sans correction pendant 10 minutes par exercice'],
+  ['10h15','11h45','meca','Exercices : Mécanique du point','Même méthode, puis carnet d\'erreurs'],
+  ['15h00','16h00','electro','Exercices : Électrocinétique','Un circuit complet, unités vérifiées'],
+  ['16h15','17h15','analyse','Exercices : Analyse 1','Limites, suites ou fonctions selon le cours'],
+  ['17h15','17h45','logique','SII, Logique, Architecture : questions à revoir','Un tour rapide des trois cours']]},
+ {d:'Dimanche',cours:'Bilan et préparation',s:[
+  ['18h00','18h30','alg','Carnet d\'erreurs : relire la semaine','Une page par matière, 5 minutes chacune'],
+  ['18h30','19h00','meca','Regarder la semaine qui vient','Cours difficiles, exercices à rendre, matériel']]}
+];
+const KEY='prepa1-edt-v1';
+let state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+let total=0;
+(function(){
+  let h='';
+  P.forEach((day,di)=>{
+    h+=`<div class="dcard${di===(new Date().getDay()+6)%7?' today':''}"><h3>${day.d}</h3><div class="fixed"><b>Cours :</b> ${day.cours}</div>`;
+    day.s.forEach((s,si)=>{
+      total++;
+      const id=di+'-'+si,m=C[s[2]];
+      h+=`<label class="sl c-${m.c}" data-id="${id}"><input type="checkbox" id="cb-${id}"><span class="b"><span class="tm">${s[0]} – ${s[1]}</span><br><span class="tt">${s[3]}</span><br><span class="dd">${s[4]}</span></span></label>`;
+    });
+    h+='</div>';
+  });
+  document.getElementById('days').innerHTML=h;
+})();
+function refresh(){
+  let n=0;
+  document.querySelectorAll('.sl').forEach(l=>{
+    const on=!!state[l.dataset.id];
+    l.classList.toggle('done',on);l.querySelector('input').checked=on;if(on)n++;
+  });
+  document.getElementById('pt').textContent=n+' blocs faits sur '+total;
+  document.getElementById('fill').style.width=(total?100*n/total:0)+'%';
+}
+document.getElementById('days').addEventListener('change',e=>{
+  const l=e.target.closest('.sl');if(!l)return;
+  state[l.dataset.id]=e.target.checked;save();refresh();
+});
+document.getElementById('reset').addEventListener('click',()=>{state={};save();refresh()});
+refresh();
+
+// tableau méthode
+const ART='https://claude.ai/artifact/';
+const M=[
+ ['meca','Refaire schémas et bilan des forces, formules de mémoire, unités.','Exercices complets, repère et schéma d\'abord.',[ 'NsB1rw1WAhWWXH1ESJWy9N','Fiche + auto-test']],
+ ['electro','Relire les lois, redessiner les circuits, écrire les impédances.','Un circuit résolu en entier, résultat vérifié par les unités.',[ 'EQEwq9B8s5MFf47yQCEvFE','Fiche + auto-test']],
+ ['alg','Refaire les démonstrations clés (sous-groupe, Bézout, division).','Exercices du chapitre 1, puis les questions des chapitres 2 et 3.',[ 'AAka6hNgpK4WJgdfg2Jbta','Fiche + corrections détaillées']],
+ ['analyse','Énoncés de mémoire, puis un exemple et un contre-exemple.','Limites, continuité, suites : un exercice type par notion.',null],
+ ['logique','Définitions et tables de vérité de mémoire.','Démonstrations par contraposée, récurrence, double inclusion.',null],
+ ['sii','Redessiner le schéma du système, nommer les flux (matière, énergie, information).','Reprendre l\'analyse d\'un système complet.',null],
+ ['archi','Schéma de la machine, vocabulaire, conversions de base.','Quelques conversions et un schéma de mémoire.',null],
+ ['psycho','Fiche de 5 lignes : idée, auteur, exemple.','Relire les fiches de la semaine à voix haute.',null]
+];
+document.getElementById('mt').innerHTML=M.map(r=>{
+  const m=C[r[0]];
+  return `<tr class="c-${m.c}"><td><span class="dot"></span>${m.n}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]?`<a href="${ART+r[3][0]}" target="_blank" rel="noopener">${r[3][1]}</a>`:'à créer si tu veux'}</td></tr>`;
+}).join('');
+
+// onglets
+const panes={edt:'p-edt',etude:'p-etude',methode:'p-methode'};
+function route(){
+  let k=(location.hash||'#edt').slice(1);if(!panes[k])k='edt';
+  Object.keys(panes).forEach(x=>document.getElementById(panes[x]).classList.toggle('on',x===k));
+  document.querySelectorAll('#tabs a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+k?'true':'false'));
+}
+window.addEventListener('hashchange',route);route();
+</script>
+
+</body></html>
